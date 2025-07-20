@@ -1,0 +1,6 @@
+# SpecStory explanation file
+.specstory/.what-is-this.md
+node_modules
+
+# ClaudPoint checkpoint system
+.checkpoints/

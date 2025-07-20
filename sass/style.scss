@@ -1,0 +1,37 @@
+@use "./global" as *;
+@use "./base/reset";
+@use "./base/base";
+@use "./base/common";
+@use "./base/header";
+@use "./base/staff";
+@use "./base/about";
+@use "./base/sns";
+@use "./base/service";
+@use "./base/front-page";
+@use "./base/bottom-nav";
+@use "./base/footer";
+@use "./base/privacy";
+@use "./base/personal";
+@use "./base/philosophy";
+@use "./base/recruit";
+@use "./base/news";
+@use "./base/contact";
+@use "./base/sakura-yells";
+
+
+// * {
+//     outline: 2px solid blue; /* これがポイント！ */
+//   }
+
+// no-scrollクラスの追加（スクロール防止用）
+body.no-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
+

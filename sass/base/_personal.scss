@@ -1,0 +1,111 @@
+/* 個人情報の利用目的ページのスタイル */
+@use "../global" as *;
+
+.personal {
+  padding: 120px 0 120px;
+  background-color: #FBFBF1;
+  position: relative;
+}
+
+.personal__title {
+  // Use of personal information
+  color: #00293C;
+  font-size: 80px;
+  font-family: Barlow;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 80px;
+  word-wrap: break-word;
+  @include mq(md) {
+    font-size: 46px;
+    line-height: 46px;
+  }
+}
+
+.personal__japanese-title {
+  // 個人情報の利用目的
+  color: #00293C;
+  font-size: 20px;
+  font-family: Albert Sans;
+  font-weight: 600;
+  line-height: 22px;
+  word-wrap: break-word;
+  margin-bottom: 20px;
+  @include mq(md) {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+.personal__introduction {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #E8F0F0;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  @include mq(md) {
+    max-width: 500px;
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+.personal__content {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.personal__text {
+  color: #000000;
+  font-size: 18px;
+  font-family: Albert Sans;
+  font-weight: 400;
+  line-height: 22px;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+  @include mq(md) {
+    font-size: 14px;
+  }
+}
+
+.personal__text a {
+  color: #0062FF;
+  
+}
+
+.personal__list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+.personal__list-item {
+  color: #000000;
+  font-size: 18px;
+  font-family: Albert Sans;
+  font-weight: 400;
+  line-height: 22px;
+  word-wrap: break-word;
+  position: relative;
+  padding-left: 0;
+  margin-bottom: 5px;
+  @include mq(md) {
+    font-size: 14px;
+  }
+}
+
+.personal__section-title {
+  color: #00293C;
+  font-size: 20px;
+  font-family: Albert Sans;
+  font-weight: 600;
+  line-height: 30px;
+  word-wrap: break-word;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  @include mq(md) {
+    font-size: 18px;
+  }
+}

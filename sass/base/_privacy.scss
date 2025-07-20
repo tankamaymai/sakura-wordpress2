@@ -1,0 +1,244 @@
+/* プライバシーポリシーページのスタイル */
+@use "../global" as *;
+
+.privacy {
+  padding: 120px 0 120px;
+  background-color: #E8F0F0;
+  position: relative;
+}
+
+
+
+.privacy__title {
+  // PRIVACY POLICY
+  color: #00293C;
+  font-size: 80px;
+  font-family: Barlow;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 80px;
+  word-wrap: break-word;
+  @include mq(md) {
+    font-size: 46px;
+    line-height: 46px;
+  }
+}
+
+.privacy__introduction {
+  width: 100%;
+  margin: 0 auto;
+  background-color: $white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 60px;
+  margin-bottom: 40px;
+  @include mq(md) {
+    max-width:500px;
+    width:100%;
+    padding: 10px;
+  }
+  &:last-child{
+    margin-top: 20px;
+  }
+}
+.privacy__introduction p {
+// 当社は、個人情報取扱事業者である企業の果たすべき責任として、また上記に掲げる当社企業理念の追求を志し、個人情報の保護に関する法律、その他規範を遵守するための諸規定を以下のように定めます。<br/><br/>当社が社会的に信頼される企業であり続けるよう、上記理念にもとづいたより良い社会実現へ貢献し続けるよう、当社社員全員が理解し、徹底し、個人情報保護の実現を図るための継続的な努力を行なうことを、ここに宣言します。
+color: $black;
+ font-size: 16px;
+ font-family: Albert Sans;
+ font-weight: 400;
+ line-height: 20px;
+ word-wrap: break-word
+}
+.privacy__english-title {
+// プライバシーポリシー
+color: #00293C;
+ font-size: 18px;
+ font-family: Albert Sans;
+ font-weight: 600;
+ line-height: 22px;
+ word-wrap: break-word;
+ @include mq(md) {
+  font-size: 16px;
+  line-height: 20px;
+ }
+}
+
+.privacy__company-info {
+  margin-bottom: 30px;
+}
+
+.privacy__company-info p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.privacy__section {
+  margin-bottom: 40px;
+}
+
+.privacy__section-title {
+  // （1）当社の名称・住所・代表者の氏名<br/>
+color: #00293C;
+font-size: 18px;
+font-family: $base-font;
+font-weight: 600;
+line-height: 30px;
+word-wrap: break-word;
+border-bottom: 2px solid #1E656D;
+}
+
+.privacy__section-content {
+  padding: 10px 0;
+}
+
+.privacy__section-content p {
+font-size: 16px;
+font-family: $base-font;
+font-weight: 400;
+line-height: 24px;
+word-wrap: break-word;
+}
+.privacy-section-text-area a{
+color: #0062FF;
+ font-size: 16px;
+ font-family: $base-font;
+ font-weight: 400;
+ text-decoration: underline;
+ line-height: 20px;
+ word-wrap: break-word
+}
+
+.privacy__subsection-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 20px 0 10px;
+}
+.privacy__subsection-title p{
+  font-size: 16px;
+  font-weight: 600;
+  margin: 20px 0 10px;
+}
+
+.privacy__list {
+  list-style-type: none;
+  padding-left: 5px;
+  margin-bottom: 15px;
+}
+
+.privacy__list li {
+  font-size: 16px;
+  line-height: 1.7;
+  position: relative;
+  padding-left: 15px;
+  margin-bottom: 5px;
+}
+
+.privacy__list li:before {
+  content: "・";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.privacy__contact {
+  background-color: $white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+.privacy__contact-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.7;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.privacy__contact p{
+color: black;
+font-size: 16px;
+font-family: Albert Sans;
+font-weight: 400;
+line-height: 20px;
+word-wrap: break-word;
+display: flex;
+justify-content: center;
+@include mq(md) {
+justify-content: left;
+}
+}
+
+.privacy__footer {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.privacy__footer-name {
+  font-size: 16px;
+  font-family: $base-font;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.privacy__footer-name span {
+  font-weight: 300;
+}
+
+
+/* レスポンシブスタイル */
+@include mq(md) {
+  .privacy {
+    padding: 80px 0 140px;
+  }
+
+  
+  .privacy__company-info p {
+    font-size: 14px;
+  }
+  
+  .privacy__introduction p {
+    font-size: 14px;
+  }
+  
+  .privacy__philosophy p {
+    font-size: 14px;
+  }
+  
+  .privacy__section-title {
+    font-size: 18px;
+  }
+  
+  .privacy__section-content p {
+    font-size: 14px;
+  }
+  
+  .privacy__subsection-title {
+    font-size: 16px;
+  }
+  
+  .privacy__list li {
+    font-size: 14px;
+  }
+  
+  .privacy__contact-title {
+    font-size: 20px;
+  }
+  
+  // レスポンシブ：個人情報の利用目的ページ
+  .personal-info {
+    &__section-title {
+      font-size: 18px;
+    }
+    
+    &__section-content p {
+      font-size: 14px;
+    }
+    
+    &__list li {
+      font-size: 14px;
+    }
+  }
+}
+

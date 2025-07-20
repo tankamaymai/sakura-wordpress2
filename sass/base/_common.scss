@@ -1,0 +1,123 @@
+@use "../global" as *;
+@use "sass:math";
+
+/*16px＝1rem*/
+@function rem($px) {
+    @return math.div($px, 16) * 1rem;
+}
+
+
+.section-title {
+
+  font-family: Barlow;
+  font-size: 80px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 80px; /* 100% */
+  text-transform: uppercase;
+  @include mq(md) {
+    font-size: 44px;
+    line-height: 44px;
+  }
+}
+
+.section-subtitle {
+  font-family: Barlow;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120.09%; /* 26.42px */
+  @include mq(md) {
+    font-size: 18px;
+    line-height: 21px;
+  }
+}
+
+
+
+
+.text {
+  color: #00293C;
+  font-family: "Albert Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 28px; /* 155.556% */
+}
+
+.inner {
+  max-width: rem(1200);
+  margin: 0 auto;
+  padding: 0 rem(25);
+  @include mq(xl2) {
+    margin-left: rem(300);
+  }
+
+  @include mq("md3") {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @include mq("md") {
+    padding: 0 rem(15);
+    margin-left: 0;
+  }
+}
+
+
+
+.sp-show {
+  display: none;
+  @include mq("sp") {
+    display: block;
+  }
+}
+
+.sp-none{
+    display: block;
+    @include mq("sp") {
+        display: none;
+    }
+}
+
+.sp2-show {
+  display: none;
+  @include mq("sp2") {
+    display: block;
+  }
+}
+
+.sp2-none{
+    display: block;
+    @include mq("sp2") {
+        display: none;
+    }
+}
+
+.md-show {
+  display: none;
+  @include mq("md") {
+    display: block;
+  }
+}
+
+.md-none{
+    display: block;
+    @include mq("md") {
+        display: none;
+    }
+}
+
+.md3-none{
+    display: block;
+    @include mq("md3") {
+        display: none;
+    }
+}
+
+.md3-show{
+    display: none;
+    @include mq("md3") {
+        display: block;
+    }
+}

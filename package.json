@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "locomotive-scroll": "^4.1.4",
+    "scrolltrigger": "^1.0.1"
+  },
+  "scripts": {
+    "sass": "sass sass/style.scss css/style.css --style compressed",
+    "sass:watch": "sass sass/style.scss css/style.css --watch --style compressed",
+    "sass:dev": "sass sass/style.scss css/style.css --style expanded --source-map",
+    "sass:privacy": "sass sass/base/_privacy.scss css/privacy.css --style compressed",
+    "sass:news": "sass sass/base/_news.scss css/news.css --style compressed",
+    "sass:all": "npm run sass && npm run sass:privacy && npm run sass:news"
+  }
+}

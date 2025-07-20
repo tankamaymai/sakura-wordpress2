@@ -1,0 +1,157 @@
+<?php get_header(); ?>
+<main>
+
+    <div class="privacy">
+        <div class="privacy__inner inner">
+            <h2 class="privacy__title">PRIVACY&nbsp;<br class="sp-show">POLICY</h2>
+            <div class="privacy__english-title">プライバシーポリシー</div>
+
+            <div class="privacy__introduction">
+                <p>当社は、個人情報取扱事業者である企業の果たすべき責任として、また上記に掲げる当社企業理念の追求を志し、個人情報の保護に関する法律、その他規範を遵守するための諸規定を以下のように定めます。</p>
+
+                <p>当社が社会的に信頼される企業であり続けるよう、上記理念にもとづいたより良い社会実現へ貢献し続けるよう、当社社員全員が理解し、徹底し、個人情報保護の実現を図るための継続的な努力を行なうことを、ここに宣言します。</p>
+            </div>
+            
+            <div class="privacy__section">
+                <h2 class="privacy__section-title">（1）当社の名称・住所・代表者の氏名</h2>
+                <div class="privacy__section-content">
+                    <p>株式会社さくら事務所<br>
+                    〒150-0031 東京都渋谷区桜丘町29-24 桜丘リージェンシー101<br>
+                    代表取締役 大西 倫加</p>
+                </div>
+            </div>
+            
+            <div class="privacy__section">
+                <h2 class="privacy__section-title">（2）個人情報の適切な収集、利用および提供</h2>
+                <div class="privacy__section-content">
+                    <p>当社では、個人情報保護の重要性を認識し、当社の事業活動に必要な範囲内で、個人情報の収集、利用および提供、委託などを適切な手段によって行ないます。
+                    また、当社は、個人情報の利用目的の公表、通知、明示を行い（本プライバシーポリシーによる公表を含む。）、個人情報の利用目的の達成に必要な範囲内で、適正に個人情報を利用いたします。</p>
+                </div>
+                <div class="privacy-section-text-area">
+                    <a href="">※個人情報の利用目的はこちらをご覧ください。</a>
+                </div>
+            </div>
+            
+            <div class="privacy__section">
+                <h2 class="privacy__section-title">（3）個人情報の第三者提供について</h2>
+                <div class="privacy__section-content">
+                    <p>当社は、以下のいずれかに該当する場合を除きお預かりした個人情報を第三者に提供いたしません。</p>
+                    <ul class="privacy__list">
+                        <li>お客様から事前に同意をいただいた場合</li>
+                        <li>利用目的の達成に必要な範囲内で外部委託した場合</li>
+                        <li>法令に基づき提供を求められた場合</li>
+                        <li>人の生命、身体又は財産の保護のために必要な場合であって、お客様の同意を得ることが困難である場合</li>
+                        <li>国又は地方公共団体などが法令の定める事務を実施する上で、協力する必要がある場合であって、お客様の同意を得ることにより当該事務の遂行に支障を及ぼす恐れがある場合</li>
+                        <li>個人情報の利用目的に記載した共同利用者に対して提供する場合</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="privacy__section">
+                <h2 class="privacy__section-title">（4）個人情報の厳重かつ適正な管理</h2>
+                <div class="privacy__section-content">
+                    <p>当社では、個人情報は適正かつ慎重に管理し、個人情報への不正アクセス、紛失改ざん、漏洩などを防止するため、最大の注意と、必要かつ適切な安全管理措置を講じます。個人データの安全管理措置の主な内容は以下のとおりです。</p>
+                    
+                    <h3 class="privacy__subsection-title">1．基本方針</h3>
+                    <p>個人データの適正な取扱いの確保のため「関係法令・ガイドライン等の遵守」、「質問及び苦情処理の窓口」等についての本プライバシーポリシー及び個人情報の利用目的を策定しています。</p>
+                    
+                    <h3 class="privacy__subsection-title">2．規律の整備</h3>
+                    <p>個人データの取得、利用、保存等を行う場合の基本的な取扱方法を整備</p>
+                    
+                    <h3 class="privacy__subsection-title">3．組織的安全管理措置</h3>
+                    <ul class="privacy__list">
+                        <li>整備した取扱方法に従って個人データが取り扱われていることを責任者が確認</li>
+                        <li>従業者から責任者に対する報告連絡体制を整備</li>
+                    </ul>
+                    
+                    <h3 class="privacy__subsection-title">4．人的安全管理措置</h3>
+                    <ul class="privacy__list">
+                        <li>個人データの取扱いに関する留意事項について、従業者に定期的な研修を実施</li>
+                        <li>個人データについての秘密保持に関する事項を就業規則に記載</li>
+                    </ul>
+                    
+                    <h3 class="privacy__subsection-title">5．物理的安全管理措置</h3>
+                    <ul class="privacy__list">
+                        <li>個人データを取り扱うことのできる従業者及び本人以外が容易に個人データを閲覧できないような措置を実施</li>
+                        <li>個人データを取り扱う機器、電子媒体及び書類等の盗難又は紛失等を防止するための措置を講じるとともに、事業所内の移動を含め、当該機器、電子媒体等を持ち運ぶ場合、容易に個人データが判明しないよう措置を実施</li>
+                    </ul>
+                    
+                    <h3 class="privacy__subsection-title">6．技術的安全管理措置</h3>
+                    <ul class="privacy__list">
+                        <li>個人データを取り扱うことのできる機器及び当該機器を取り扱う従業者を明確化し、個人データへの不要なアクセスを防止</li>
+                        <li>個人データを取り扱う機器を外部からの不正アクセス又は不正ソフトウェアから保護する仕組みを導入</li>
+                    </ul>
+                    
+                    <p>万一、個人情報に関する事故発生の場合には、迅速かつ適切に対応致します。</p>
+                </div>
+            </div>
+            
+            <div class="privacy__section">
+                <h2 class="privacy__section-title">（5）個人情報の開示、訂正、利用停止等</h2>
+                <div class="privacy__section-content">
+                    <p>当社では、ご本人の個人情報の開示、訂正等（訂正、追加、削除）、利用停止等（利用停止、消去）のご請求があった場合、ご本人であることを確認させていただいた上で、当社業務に支障のない範囲で対応致します。
+                    ご要望にお応えできない場合は、ご本人に理由を説明致します。具体的な請求手続きについては、下記 お問合せ先までご連絡ください。</p>
+                </div>
+            </div>
+            
+            <div class="privacy__section">
+                <h2 class="privacy__section-title">（6）個人情報保護に関するルール</h2>
+                <div class="privacy__section-content">
+                    <p>当社では、社員等に対し適正な個人情報の取扱いについて、周知徹底を図るとともに、万一の個人情報に関する事故に対しては、厳格なる態度で望みます。
+                    また個人情報を取り巻くリスクを把握し、不正アクセス等をはじめとする個人情報流出の予防、是正に関する適切な情報セキュリティ対策を講じます。</p>
+                    <p>業務委託についても、より個人情報の保護に配慮したものに見直し・改善を図ります。
+                    業務委託契約を締結する際には、業務委託の相手としての適格性を十分審査すると同時に、契約書の内容についても、より個人情報の保護に配慮したものとします。</p>
+                </div>
+            </div>
+            
+            <div class="privacy__section">
+                <h2 class="privacy__section-title">（7）個人情報保護に関する活動の継続的改善</h2>
+                <div class="privacy__section-content">
+                    <p>当社では、個人情報保護に関する上記活動について、定期的な見直しを行い、より一層の個人情報保護のために継続的な改善に取り組みます。
+                    当社の個人情報の取扱いについてのお問い合わせは、下記お問い合わせ先へご連絡ください。
+                    適切に対処致します。</p>
+                </div>
+            </div>
+            
+            <div class="privacy__section">
+                <h2 class="privacy__section-title">（8）Cookieの使用について</h2>
+                <div class="privacy__section-content">
+                    <p>当サイトでは、お客様の利便性を高めること、各サービスの利用状況等の調査・分析を行うことを目的として、Cookieクッキーを利用しています。Cookieとは当サイトを訪問したお客様の端末に保存される小さなファイルであり、お客様が利用するインターネット閲覧ソフト（ブラウザ）がウェブサイト側と情報をやり取りするために用いられます。Cookieを利用することで、ウェブサイト側ではお客様のブラウザを識別することができるようになります。ただし、Cookieにより取得される情報には、お客様個人を特定できる情報は含まれておりません。</p>
+                    <p>お客様は、ご使用のブラウザの設定を変更することにより、Cookieの使用を拒否することができます。ただし、Cookieの使用を拒否すると、当社のウェブサイトの一部の機能が利用できなくなる場合がございますので、あらかじめご了承ください。</p>
+                </div>
+            </div>
+            
+            <div class="privacy__section">
+                <h2 class="privacy__section-title">（9）Googleアナリティクスについて</h2>
+                <div class="privacy__section-content">
+                    <p>当サイトで上記理由により使用する「Googleアナリティクス」の利用規約は、GoogleアナリティクスのWEBサイトを、Google社のプライバシーポリシーは同社のWEBサイトをご確認ください。</p>
+                    <p>・Googleアナリティクス 利用規約</p>
+                    <p>・Googleプライバシーポリシー</p>
+                    
+                    <h3 class="privacy__subsection-title">■Googleアナリティクスへのデータ送信をご希望されない場合</h3>
+                    <p>Googleアナリティクスは Cookie等の仕組みにより閲覧者の興味・関心などの情報を収集し、Google社が活用しています。ご自身のデータがGoogleアナリティクスで使用されることをご希望されない場合は、以下のGoogle社が提供する『Googleアナリティクス オプトアウト アドオン』ページで詳細をご確認のうえ、ダウンロードページよりツールをインストールしてご利用ください。</p>
+                    <p>・Google アナリティクス オプトアウト アドオン</p>
+                    <p>なお、Googleアナリティクスの仕組みに関して当社では対応いたしかねますため、Google社のWEBサイト等をご確認くださいますようお願いいたします。</p>
+                </div>
+            </div>
+            
+            <div class="privacy__section">
+                <h2 class="privacy__section-title">（10）SATORIについて</h2>
+                <div class="privacy__section-content">
+                    <p>当サイトはお客様の利便性を高めるため、SATORI株式会社が提供するサービス「SATORI」を利用しています。「SATORI」はCookieまたはその類似技術を利用してお客様のアクセス履歴を取得・蓄積しておりますが、この取得・蓄積を停止されたい場合、SATORI株式会社が提供する以下の「オプトアウトページ」よりオプトアウトを行ってください。</p>
+                    <p>なお、オプトアウトがなされた場合は、当社がウェブサイト上で提供するサービスの一部を利用できなくなる場合がございますので、ご了承ください。</p>
+                    <p>・SATORI オプトアウトページ</p>
+                </div>
+            </div>
+            
+            <div class="privacy__contact">
+                <h2 class="privacy__contact-title">株式会社さくら事務所　東京本社　<br>プライバシーポリシー問合せデスク</h2>
+                <p>〒150-0031　<br>東京都渋谷区桜丘町29-24 桜丘リージェンシー101<br>
+                https://www.sakurajimusyo.com/<br>
+                Tel:050-1745-3309<br>
+                受付時間　10:00～18:00</p>
+            </div>
+        </div>
+    </div>
+</main>
+<?php get_footer(); ?>

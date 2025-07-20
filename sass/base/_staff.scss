@@ -1,0 +1,753 @@
+@use "../global" as *;
+@use "sass:math";
+
+/*16px＝1rem*/
+@function rem($px) {
+  @return math.div($px, 16) * 1rem;
+}
+
+
+.staff-hero{
+  width: 100vw;
+  height: 756px;
+  background-image: url(../images/member-mv.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  @include mq("md"){
+    height: 300px;
+  }
+}
+
+.staff-hero__title{
+  // OUR MEMBERS
+color: #1E656D;
+font-size: rem(80);
+font-family: $second-font;
+font-weight: 800;
+line-height: 96.07px;
+word-wrap: break-word;
+text-shadow: 0px 1px 8px rgba(252, 231, 153, 1.00);
+
+@include mq("md"){
+  font-size: rem(46);
+  line-height: 55.24px;
+}
+}
+.staff-hero__subtitle{
+color: #F1F3CE;
+ font-size: rem(40);
+ font-family: $base-font;
+ font-weight: 600;
+ line-height: 48.04px;
+ word-wrap: break-word;
+ text-shadow: 0px 1px 4px rgba(0, 0, 0, 1.00);
+ text-align: center;
+ @include mq("md"){
+  font-size: rem(18);
+  line-height: 21.6px;
+ }
+}
+.staff-hero__inner{
+  height: 100%;
+}
+.staff-hero__content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  @include mq("md"){
+    width: 100%;
+    height: 100%;
+  }
+}
+.staff-list{
+  width: 100%;
+  height: auto;
+background-image: url(../images/members-bg-img.webp);
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+  padding-top: 159px;
+  padding-bottom: 220px;
+  @include mq("md"){
+    padding-top: 72px;
+    padding-bottom: 100px;
+  }
+}
+.staff-list__text{
+// この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。
+color: #202020;
+ font-size: 24px;
+ font-family: Hiragino Kaku Gothic ProN;
+ font-weight: 300;
+ word-wrap: break-word;
+ @include mq("md"){
+  font-size: rem(16);
+  line-height: 24px;
+ }
+}
+
+.staff__search{
+  max-width: 290px;
+  width: 100%;
+  height: 56px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-top: 40px;
+  overflow: hidden;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+}
+
+.staff__search-form {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  
+  @include mq("md") {
+  }
+}
+
+.staff__search-category {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid #555;
+    border-bottom: 2px solid #555;
+    transform: translateY(-50%) rotate(45deg);
+    pointer-events: none;
+  }
+  
+  @include mq("md") {
+    width: 100%;
+    height: 56px;
+  }
+}
+
+.staff__search-select {
+  width: 100%;
+  height: 100%;
+  padding: 0 16px;
+  background-color: transparent;
+  border: none;
+  font-size: rem(16);
+  color: #333;
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  
+  &:focus {
+    outline: none;
+  }
+  
+  option {
+    font-size: rem(14);
+  }
+}
+
+.staff__search-button {
+  width: 56px;
+  height: 100%;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  object-fit: cover;  
+  padding: 0;
+  
+  &:hover {
+    background-color: darken(#fff, 10%);
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.staff-list__container{
+margin-top: 63px;
+}
+.staff-list__items{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  @include mq("md"){
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.staff-list__item-img{
+  width:100%;
+  height: auto;
+  aspect-ratio: 233 / 256;
+  border-radius: 10px;
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+}
+.staff-list__item-text-wrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px;
+}
+.staff-list__item-text{
+ // 執行役員
+color: black;
+font-size: 12px;
+font-family: $base-font;
+font-weight: 300;
+line-height: 18px;
+word-wrap: break-word
+}
+
+.staff-list__item-furigana{
+ // ふりがな
+color: #666;
+font-size: 10px;
+font-family: $base-font;
+font-weight: 300;
+line-height: 15px;
+word-wrap: break-word;
+margin-top: 5px;
+@include mq("md"){
+  font-size: 9px;
+  line-height: 13px;
+}
+}
+
+.staff-list__item-name a{
+  // 田村 啓
+color: black;
+font-size: 18px;
+font-family: $base-font;
+font-weight: 800;
+line-height: 27px;
+word-wrap: break-word;
+margin-top: 2px;
+}
+
+
+
+// スタッフ詳細ページ
+.staff-single__hero{
+  padding-top: 50px;
+  padding-bottom: 100px;
+  background-image: url(../images/sns/sns-item-bg.webp);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.staff-single__wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: end;
+gap: 44px;
+@include mq("md"){
+  flex-direction: column;
+  gap: 20px;
+}
+}
+
+.staff-single__hero-text-wrapper{
+  flex: 1;
+}
+.staff-single__hero-img{
+max-width: 250px;
+width: 100%;
+height: auto;
+aspect-ratio: 420 / 527;
+margin-top: 40px;
+border-radius: 10px;
+img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.staff-single__hero-title-position{
+  // 執行役員
+color: black;
+font-size: 20px;
+font-family: $base-font;
+font-weight: 300;
+line-height: 30px;
+word-wrap: break-word
+}
+}
+.staff-single__hero-title-furigana{
+// ふりがな
+color: #666;
+font-size: 14px;
+font-family: $base-font;
+font-weight: 300;
+line-height: 20px;
+word-wrap: break-word;
+margin-top: 10px;
+@include mq("md"){
+  font-size: 12px;
+  line-height: 18px;
+}
+}
+
+.staff-single__hero-title{
+// 田村 啓
+color: black;
+ font-size: 32px;
+ font-family: $base-font;
+ font-weight: 800;
+ line-height: 48px;
+ word-wrap: break-word;
+ margin-top: 5px;
+}
+
+.staff-single__hero-text-title{
+  color: black;
+font-size: 18px;
+font-family: $base-font;
+font-weight: 600;
+line-height: 30px;
+word-wrap: break-word
+}
+.staff-single__hero-text-text{
+  color: black;
+font-size: 18px;
+font-family: $base-font;
+font-weight: 300;
+line-height: 30px;
+padding-top: 20px;
+}
+
+.staff-single__history {
+  background-color: $dark-blue;
+  padding-top: 120px;
+  padding-bottom: 160px;
+  border-radius: 10px;
+  @include mq("md") {
+    margin-top: 60px;
+    padding-top: 80px;
+    padding-bottom: 100px;
+  }
+}
+
+.staff-single__history-large-title{
+  // MY HISTORY
+color: #F1F3CE;
+font-size: 80px;
+font-family: $base-font;
+font-weight: 800;
+line-height: 96px;
+word-wrap: break-word;
+@include mq("md"){
+  font-size: rem(46);
+  line-height: 55.24px;
+}
+}
+.staff-single__history-title{
+  // その方のヒストリー
+color: #F62A00;
+font-size: 22px;
+font-family: $base-font;
+font-weight: 800;
+line-height: 26.40px;
+word-wrap: break-word;
+margin-top: 20px;
+@include mq("md"){
+  font-size: rem(18);
+  line-height: 21.6px;
+}
+}
+.staff-single__history-wrapper{
+  margin-top: 48px;
+}
+.staff-single__history-item{
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  margin-top: 78px;
+  @include mq("sp2"){
+   gap: 17px;
+   align-items: start;
+  }
+}
+
+.staff-single__history-item-img{
+ max-width: 30px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  z-index: 2;
+  
+  &::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: calc(158/30 * 100%);
+    border-left: 2px dotted $white;
+    display: block;
+    z-index: 1;
+    @include mq("sp2"){
+      height: calc(200/30 * 100%);
+    }
+  }
+ 
+  .staff-single__history-item:nth-child(2) & {
+    &::after {
+      height: calc(200/30 * 100%);
+      @include mq("sp2"){
+        height: calc(250/30 * 100%);
+      }
+    }
+  }
+  
+  .staff-single__history-item:last-child & {
+    &::after {
+      display: none;
+    }
+  }
+
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+.staff-single__history-item-text{
+color: $white;
+ font-size: 22px;
+ font-family: $base-font;
+ font-weight: 600;
+ line-height: 34px;
+ word-wrap: break-word;
+ background-color: #1E656D;
+ padding: 20px 27px;
+ border-radius: 10px;
+
+ @include mq("md"){
+  font-size: rem(16);
+  line-height: 24px;
+ }
+}
+
+// ストーリー
+.staff-single__story{
+  margin-top: -50px;
+  background-color: #F1F3CE;
+  padding-top: 150px;
+  padding-bottom: 160px;
+  position: relative;
+  z-index: -1;
+  @include mq("md"){
+    padding-top: 150px;
+    padding-bottom: 100px;
+  }
+}
+
+.staff-single__story-large-title{
+  // MY HISTORY
+color: #F62A00;
+font-size: 80px;
+font-family: $base-font;
+font-weight: 800;
+line-height: 96px;
+word-wrap: break-word;
+@include mq("md"){
+  font-size: rem(46);
+  line-height: 55.24px;
+  text-align: center;
+}
+}
+.staff-single__story-title{
+  // その方のヒストリー
+color: #00293C;
+font-size: 22px;
+font-family: $base-font;
+font-weight: 800;
+line-height: 26.40px;
+word-wrap: break-word;
+margin-top: 20px;
+@include mq("md"){
+  font-size: rem(18);
+  line-height: 21.6px;
+  text-align: center;
+}
+}
+
+.staff-single__story-item-text{
+color: $black;
+font-size: 18px;
+font-family: $base-font;
+font-weight: 500;
+line-height: 30px;
+word-wrap: break-word;
+margin-top: 70px;
+@include mq("md"){
+  font-size: rem(16);
+  line-height: 24px;
+}
+
+}
+.staff-single__story-item-img{
+  max-width: 339px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 110px;
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+}
+
+.staff-single__story-large-title--reason{
+  margin-top: 128px;
+}
+
+// SNS
+
+.staff-single__sns{
+  margin-top: 120px;
+  padding-bottom: 167px;
+  @include mq("md"){
+    margin-top: 100px;
+    padding-bottom: 100px;
+  }
+}
+.staff-single__large-title{
+// SNS
+color: $black;
+ font-size: 80px;
+ font-family: $base-font;
+ font-weight: 800;
+ line-height: 96px;
+ word-wrap: break-word;
+ @include mq("md"){
+  font-size: rem(46);
+  line-height: 55.24px;
+  
+ }
+}
+
+.staff-single__sns-wrapper{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 100px;
+  margin-top: 80px;
+  @include mq("md"){
+    gap: 20px;
+    flex-direction: column;
+    align-items: start;
+  }
+}
+
+.staff-single__sns-item a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.staff-single__sns-item-img{
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+  
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+.staff-single__sns-item-text{
+color: $black;
+font-size: 20px;
+font-family: $second-font;
+font-weight: 600;
+line-height: 30px;
+word-wrap: break-word
+}
+
+.staff-single__sns-no-items{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  @include mq("md"){
+    padding: 20px 10px;
+  }
+}
+
+.staff-single__sns-no-items-text{
+  color: #666;
+  font-size: 16px;
+  font-family: $base-font;
+  font-weight: 400;
+  line-height: 24px;
+  font-style: italic;
+  @include mq("md"){
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+// インタビュー
+.staff-single__interview{
+  background-color: #1E656D;
+  margin-top: 200px;
+  padding-top: 120px;
+  padding-bottom: 160px;
+  border-radius: 10px;
+  margin-bottom: -30px;
+  @include mq("md") {
+    margin-top: 60px;
+    padding-top: 80px;
+    padding-bottom: 100px;
+  }
+}
+.staff-single__large-title{
+  // INTERVIEW
+color: $light-beige;
+font-size: 80px;
+font-family: $base-font;
+font-weight: 800;
+line-height: 96px;
+word-wrap: break-word;
+@include mq("md"){
+  font-size: rem(46);
+  line-height: 55.24px;
+}
+}
+
+.staff-single__interview-wrapper{
+  margin-top: 89px;
+}
+
+.staff-single__interview-item{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  border-top: 1px solid $light-beige;
+  padding: 30px 24px;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  &::after{
+    content: "";
+    display: block;
+    width: 50px;
+    height: 50px;
+    background:url(../images/interview-arrow.svg) no-repeat center center;
+    background-size: contain;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    @include mq("lg"){
+      top: auto;
+      bottom: 0;
+    }
+    @include mq("md"){
+      width: 30px;
+      height: 30px;
+    }
+  }
+  @include mq("md"){
+    gap: 15px;
+    padding: 15px 0;
+  }
+}
+.staff-single__interview-item-img{
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 307 / 182;
+  border-radius: 5px;
+  @include mq("lg"){
+    max-width: 250px;
+  }
+  @include mq("md"){
+    max-width: 150px;
+  }
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+}
+.staff-single__interview-item-texts{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 33px;
+  @include mq("md"){
+    gap: 7px;
+  }
+
+}
+.staff-single__interview-item-text-title{
+// インタビュー記事01
+color: white;
+ font-size: 30px;
+ font-family: Albert Sans;
+ font-weight: 600;
+ line-height: 36px;
+ word-wrap: break-word;
+ @include mq("md"){
+  font-size: rem(16);
+  line-height: 24px;
+ }
+}
+.staff-single__interview-item-text-date{
+  // 2025.01.01
+color: white;
+font-size: 22px;
+font-family: Albert Sans;
+font-weight: 300;
+line-height: 26.40px;
+word-wrap: break-word;
+@include mq("md"){
+  font-size: rem(16);
+  line-height: 19.2px;
+}
+}

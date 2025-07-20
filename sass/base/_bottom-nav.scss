@@ -1,0 +1,396 @@
+@use "../global/colors" as *;
+@use "../global/responsive" as *;
+@use "sass:math";
+@use "../global/font" as *;
+
+/*16px＝1rem*/
+@function rem($px) {
+    @return math.div($px, 16) * 1rem;
+}
+
+// 下部ナビゲーションバー（SP表示用）
+.bottom-nav {
+    display: none; // デフォルトでは非表示
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: rem(60);
+    background-color: $white;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001; // global-navより上に表示
+    
+    // タブレットサイズで表示（sp2より大きく、md3以下）
+    @include mq(md3) {
+        display: flex;
+    }
+}
+
+.bottom-nav__list {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.bottom-nav__item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    // バナーが存在しない場合（2つのアイテムのみ）の調整
+    // 具体的な調整は必要に応じて追加
+}
+
+.bottom-nav__item:not(:last-child) {
+    border-right: 1.5px solid #000;
+}
+
+.bottom-nav__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    padding: rem(5) 0;
+    color: #333;
+}
+
+.bottom-nav__link:hover {
+    background-color: #f5f5f5;
+}
+
+.bottom-nav__text {
+    font-size: rem(16);
+    font-weight: 500;
+    text-align: center;
+    font-family: $base-font;
+}
+.bottom-nav__img{
+    width: 100%;
+    max-height: 60px;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+// メニューボタン用のスタイル
+.menu-button {
+    background-color: $white; 
+    color: $black;
+    position: relative;
+    z-index: 1000; // global-navより上に表示
+    transition: all 0.3s ease;
+    
+    .bottom-nav__text {
+        font-size: rem(16);
+        font-weight: 500;
+        text-align: center;
+        transition: all 0.3s ease;
+        font-family: $second-font;
+    }
+    
+    // アクティブ時（バツボタン）
+    &.active {
+        background-color: rgba(0, 0, 0, 0.8); // アクティブ時は黒背景
+        
+        .bottom-nav__text {
+            color: $white; // テキストを白色に
+            font-size: 2.5rem; // バツ文字を大きくして見やすく
+            font-weight: 300; // バツ文字を細く
+        }
+    }
+}
+
+// グローバルナビゲーション（SP表示用）
+.global-nav {
+    // PCサイズでは非表示
+    display: none;
+    @include mq(md3) {
+        display: block;
+    
+    position: fixed;
+    bottom: 60px; // bottom-navの上に配置
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px); // bottom-navの高さ分を引く
+    background-color: rgba(255, 255, 255, 0.95); // 背景色を白に変更
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    transform: translateY(100%); // 初期状態は下に隠す
+    transition: transform 0.4s ease;
+}
+    @include mq(md) {
+        display: flex; // SPサイズで表示構造を維持
+    }
+    
+    &.active {
+        transform: translateY(0); // アクティブ時は表示
+    }
+    
+    &__inner {
+        padding: 20px 20px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+    }
+    
+    &__header {
+        padding: 0px 0 10px 0;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: left;
+        width: 100%;
+        align-items: center;
+    }
+    
+    &__logo {
+        width: 120px;
+        
+        &-link {
+            display: block;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+        
+        img {
+            width: 100%;
+            height: auto;
+            // ロゴの色はデフォルト（黒）
+        }
+    }
+    
+    &__close {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        background: none;
+        border: none;
+        cursor: pointer;
+        
+
+    }
+    
+    &__menu {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        max-height: calc(100vh - 140px);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        max-width: 400px;
+        flex-shrink: 0;
+        padding-top: 10px;
+    }
+    
+    // サブメニューのスタイル
+    &__submenu {
+        display: none;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    &__submenu-item {
+        // border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+        
+        &:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+    }
+    
+    &__submenu-link {
+        display: block;
+        padding: 15px 0;
+        color: #000000;
+        text-decoration: none;
+        font-family: "Hiragino Kaku Gothic StdN", sans-serif;
+        font-size: rem(16);
+        font-weight: 600;
+        line-height: 1.4;
+        transition: opacity 0.2s ease;
+        text-align: center;
+        
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+    
+    &__item {
+        position: relative;
+        padding-bottom: 8px;
+        border-bottom: 0.2px solid rgba(0, 0, 0, 0.2);
+        
+        &:last-child {
+            border-bottom: none;
+        }
+        
+        &--has-submenu {
+            .global-nav__link {
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            // サブメニューが開いているときの設定
+            &.is-open {
+                // 親要素はそのまま
+                .global-nav__submenu {
+                    position: fixed !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    width: 100vw !important;
+                    height: 100vh !important;
+                    z-index: 9999 !important;
+                    background-color: rgba(255, 255, 255, 1) !important;
+                    display: block !important;
+                    padding: 40px 20px !important;
+                    margin: 0 !important;
+                    overflow-y: auto !important;
+                }
+            }
+        }
+    }
+    
+    &__arrow {
+        font-size: 20px;
+        font-weight: bold;
+        color: #000000;
+        transition: transform 0.3s ease;
+        
+        .global-nav__item.is-open & {
+            transform: rotate(90deg);
+        }
+    }
+    
+    &__link {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        transition: opacity 0.3s ease;
+        &:hover {
+            opacity: 0.7;
+        }
+        
+        > div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+        }
+    }
+    
+    &__text-ja {
+        font-family: "Hiragino Kaku Gothic StdN", sans-serif;
+        font-size: rem(16);
+        font-weight: 800;
+        line-height: 1.3;
+        color: #000000; // 文字色を黒に変更
+        margin-bottom: 0;
+        text-align: center;
+    }
+    
+    &__text-en {
+        font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+        font-size: rem(16);
+        font-weight: 300;
+        line-height: 1.5;
+        color: rgba(0, 0, 0, 0.8); // 文字色を黒（やや薄め）に変更
+    }
+    
+    &__footer {
+        padding-top: 20px;
+        border-top: 0.2px solid rgba(0, 0, 0, 0.2); // ボーダー色を黒ベースに変更
+    }
+    
+    &__sns {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    &__sns-link {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.1); // 背景色を黒ベースに変更
+        transition: background-color 0.3s ease;
+        
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.2); // ホバー時も黒ベースに変更
+        }
+        
+        svg {
+            width: 20px;
+            height: 20px;
+            fill: #000000; // SVGの色を黒に変更
+        }
+    }
+
+    // サブメニューの戻るボタン
+    &__back-button {
+        display: flex !important;
+        align-items: center;
+        padding: 15px 0;
+        color: #000000 !important;
+        text-decoration: none;
+        font-family: "Hiragino Kaku Gothic StdN", sans-serif;
+        font-size: rem(16) !important;
+        font-weight: 600;
+        line-height: 1.4;
+        border-bottom: 1px solid rgba(0, 0, 0, 1);
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+        background: none !important;
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+        
+        &:hover {
+            opacity: 0.7;
+        }
+        
+        &::before {
+            content: '<';
+            margin-right: 8px;
+            font-size: rem(18);
+            font-weight: bold;
+            color: #000000 !important;
+        }
+    }
+}
+
+// スクロール防止用
+body.no-scroll {
+    overflow: hidden;
+}

@@ -1,0 +1,364 @@
+/* 個人情報の利用目的ページのスタイル */
+@use "../global" as *;
+
+.philosophy {
+  padding: 60px 0; /* パディングを調整 */
+  background: url(../images/philosophy-mv-img.webp) no-repeat center center / cover;
+  position: relative;
+  overflow: hidden; /* エンドロールのために追加 */
+  min-height: 100vh; /* 最小高さを画面高さに設定 */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 水平中央寄せも追加 */
+  flex-direction: column;
+
+  @include mq(md) {
+    padding: 30px 0; /* モバイルでもパディングを調整 */
+    background: url(../images/philosophy-mv.webp) no-repeat center center / cover;
+    min-height: 100vh;
+  }
+}
+
+/* 画像拡大アニメーション背景 */
+.philosophy-circle-bg {
+  position: absolute;
+  top: 20%;
+  left: 60vw;
+  width: 20px; /* 初期サイズを20pxに変更 */
+  height: 20px; /* 初期サイズを20pxに変更 */
+  background-image: url(../images/star-img.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* エンドロールテキストより下に配置 */
+  opacity: 1; /* 初期状態で表示 */
+}
+
+.philosophy__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  z-index: 3; /* 円形背景より上に配置 */
+
+}
+
+.philosophy-mv__title{
+  color: #FFF084;
+text-align: left;
+font-family: "Albert Sans";
+font-size: 18px;
+font-style: normal;
+font-weight: 900;
+line-height: 38px; /* 211.111% */
+
+}
+
+.philosophy-mv__content-text{
+  color: #FFF;
+text-align: center;
+text-shadow: 0px 1px 4px #000;
+font-family: "Albert Sans";
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: 32px; /* 177.778% */
+}
+
+/* philosophy-mv-bottom GSAPアニメーション用 */
+.philosophy-mv-bottom {
+  text-align: center;
+  /* GSAPで初期状態とアニメーションを制御するため、CSS transitionは削除 */
+}
+
+.philosophy-content{
+  padding-top: 120px;
+  padding-bottom: 120px;
+  /* GSAPで初期状態とアニメーションを制御するため、CSS transitionは削除 */
+  
+  @include mq(md) {
+    padding-top: 70px;
+    padding-bottom: 100px;
+  }
+}
+
+
+.philosophy-content-header-title-en {
+  font-family: $base-font;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.2;
+  color: $dark-blue;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  @include mq(md) {
+    font-size: 20px;
+    text-align: left;
+  }
+
+  @include mq(sp) {
+      font-size: 18px;
+  }
+}
+
+.philosophy-content-header-title {
+  color: $second-font;
+text-align: center;
+font-family: $base-font;
+font-size: 32px;
+font-style: normal;
+font-weight: 900;
+line-height: 42px; /* 210% */
+margin-top: 146px;
+@include mq(md) {
+  font-size: 20px;
+  line-height: 32px;
+  margin-top: 30%;
+  text-align: left;
+}
+}
+.philosophy-content-text{
+  font-family: #463125;
+  font-weight: 800;
+  font-size: 50px;
+  line-height: 2;
+  text-transform: uppercase;
+  color: $dark-blue;
+
+  margin-bottom: 10px;
+
+  @include mq(md) {
+      font-size: 30px;
+  }
+
+  @include mq(sp2) {
+      font-size: 20px;
+  }
+}
+.philosophy-content-image{
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  margin-top: 55px;
+
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @include mq(md) {
+    margin-top: 55px;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    aspect-ratio: 393/346;
+    width: 100vw;
+
+  }
+}
+.philosophy-content-text-bottom{
+  margin-top: 141px;
+  @include mq(md) {
+    margin-top: 30px;
+  }
+}
+.philosophy-content-text-bottom-title{
+  font-family: $second-font;
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: $dark-blue;
+  text-align: center;
+
+  @include mq(sp2) {
+      font-size: 40px;
+  }
+}
+
+.philosophy-content-text-bottom-text{
+  color: $dark-blue;
+font-family: $base-font;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: 28px;
+margin-top: 20px;
+text-align: center;
+
+&:first-child{
+  margin-top: 40px;
+}
+}
+.philosophy-rules{
+  padding-top: 120px;
+  padding-bottom: 60px;
+  background-image: url(../images/rules-bg-pc-img.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  @include mq(md) {
+    padding-top:68px;
+    padding-bottom: 60px;
+    background-image: url(../images/rules-bg-sp-img.webp);
+  }
+}
+
+.philosophy-rules__title{
+  color: #5BC8A5;
+  font-family: Barlow;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 45px; /* 97.826% */
+  text-transform: uppercase;
+  @include mq(md) {
+    font-size: 28px;
+    line-height: 1;
+  }
+}
+.philosophy-rules-title-sub{
+  color: #F1F3CE;
+text-align: left;
+font-family: "Albert Sans";
+font-size: 32px;
+font-style: normal;
+font-weight: 900;
+line-height: 32px; /* 100% */
+padding-top: 40px;
+@include mq(md) {
+  padding-top: 20px;
+}
+}
+
+.philosophy-rules-content{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.philosophy-rules-content-text{
+  color: #F1F3CE;
+text-align: center;
+font-family: "Albert Sans";
+font-size: 30px;
+font-style: normal;
+font-weight: 600;
+line-height: 60px; /* 200% */
+margin-top: 60px;
+@include mq(md) {
+  font-size: 20px;
+  line-height: 40px;
+  margin-top: 30px;
+}
+
+}
+
+.philosophy-rules-content-image{
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/ 1;
+  margin-top: 30px;
+  @include mq(md) { 
+    max-width: 310px;
+  }
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+.philosophy-rules-text-content{
+  padding-top: 120px;
+  padding-bottom: 120px;
+  @include mq(md) {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+}
+.philosophy-rules-text-content-text{
+  color: #00293C;
+font-family: "Albert Sans";
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: 28px; /* 155.556% */
+padding-top: 20px;
+}
+
+/* エンドロールスタイル（アニメーション削除版） */
+.philosophy-endroll {
+  position: relative;
+  text-align: center;
+  color: #FFF;
+  max-width: 800px;
+  z-index: 2;
+  padding: 0 20px;
+  
+  @include mq(md) {
+    width: 100%;
+    max-width: none;
+    padding: 0 5px;
+  }
+}
+
+.philosophy-endroll .endroll-text {
+  margin-bottom: 40px;
+
+  
+  @include mq(md) {
+    margin-bottom: 30px;
+  }
+}
+
+.philosophy-endroll .philosophy-mv__title {
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 50px;
+  text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+  
+  @include mq(md) {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+  
+  @include mq(sp) {
+    font-size: 15px;
+    margin-bottom: 35px;
+  }
+}
+
+.philosophy-endroll .philosophy-mv__content-text {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
+  
+  @include mq(md) {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  @include mq(sp) {
+    font-size: 15px;
+    margin-bottom: 18px;
+  }
+}
+
+.philosophy-endroll .endroll-spacer {
+  font-size: 20px;
+  line-height: 2;
+  margin-top: 60px;
+  opacity: 0.7;
+  
+  @include mq(md) {
+    font-size: 18px;
+    margin-top: 50px;
+  }
+}
+

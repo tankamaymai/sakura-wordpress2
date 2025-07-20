@@ -1,0 +1,217 @@
+@use "../global" as *;
+@use "sass:math";
+@use "sass:color";
+
+// Contact page styles
+.contact {
+  background-color: rgba($light-beige, 0.5);
+  min-height: 100vh;
+  padding: 80px 0;
+
+  &-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  // Hero section
+  &-hero {
+    text-align: left;
+    margin-bottom: 80px;
+  }
+
+  &-title {
+    font-family: $second-font;
+    font-weight: 800;
+    font-size: rem(80);
+    line-height: rem(80);
+    color: $green;
+    text-transform: uppercase;
+    margin-bottom: rem(20);
+    letter-spacing: 0.02em;
+  }
+
+  &-subtitle {
+    font-family: $base-font;
+    font-weight: 600;
+    font-size: rem(18);
+    line-height: rem(22);
+    color: $section-black;
+    margin-bottom: rem(40);
+  }
+
+  &-description {
+    font-family: $base-font;
+    font-weight: 300;
+    font-size: rem(18);
+    line-height: rem(28);
+    color: $black;
+    max-width: 800px;
+  }
+
+  // Services section
+  &-services {
+    max-width: 800px;
+  }
+
+  .service-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: rem(30) 0;
+    border-bottom: 1px solid rgba($section-black, 0.2);
+    position: relative;
+
+    &:first-child {
+      border-top: 1px solid rgba($section-black, 0.2);
+    }
+  }
+
+  .service-title {
+    font-family: $base-font;
+    font-weight: 600;
+    font-size: rem(20);
+    line-height: rem(22);
+    color: $section-black;
+    margin: 0;
+    flex: 1;
+    @include mq(md){
+      font-size: rem(16);
+    }
+  }
+
+  .service-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $section-black;
+    color: $white;
+    border-radius: rem(40);
+    height: rem(50);
+    width: rem(200);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+   
+    cursor: pointer;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: rem(10);
+      transform: translateY(-50%);
+      width: rem(30);
+      height: rem(30);
+      border: 1px solid $white;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    
+    &::before {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: rem(18);
+      transform: translateY(-50%);
+      color: $white;
+      font-size: rem(16);
+      font-weight: bold;
+      z-index: 2;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      background-color: color.adjust($section-black, $lightness: 10%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba($section-black, 0.3);
+      
+      &::before {
+        transform: translateY(-50%) translateX(3px);
+      }
+      
+      &::after {
+        background-color: rgba($white, 0.3);
+        transform: translateY(-50%) translateX(3px);
+      }
+    }
+
+    .button-text {
+      font-family: $base-font;
+      font-weight: 700;
+      font-size: rem(18);
+      line-height: rem(24);
+      margin-right: rem(16);
+      @include mq(md){
+        font-size: rem(12);
+      }
+    }
+
+    .button-icon {
+      font-size: rem(18);
+      transition: transform 0.3s ease;
+      opacity: 0;
+    }
+
+    &:hover .button-icon {
+      transform: translateX(4px);
+    }
+  }
+
+  // Responsive design adjustments for smaller screens
+  @media (max-width: 768px) {
+    padding: 40px 0;
+
+    &-container {
+      padding: 0 20px;
+    }
+
+    &-title {
+      font-size: rem(60);
+      line-height: rem(60);
+      color: #00293C;
+    }
+
+    &-subtitle {
+      font-size: rem(16);
+    }
+
+    &-description {
+      font-size: rem(16);
+      line-height: rem(24);
+    }
+
+    .service-item {
+      align-items: flex-start;
+      gap: rem(20);
+    }
+
+    .service-button {
+      width: 100%;
+      max-width: rem(150);
+      height: rem(40);
+      .button-icon{
+        width: rem(14);
+        height: rem(14);
+      } 
+      &::before{
+        right: rem(10);
+        width: rem(20);
+        height: rem(22);
+      }
+      &::after{
+        width: rem(25);
+        height: rem(25);
+      }
+    }
+
+    .service-title {
+      font-size: rem(16);
+    }
+    .button-text{
+        font-size: rem(14);
+    }
+  }
+}
+
