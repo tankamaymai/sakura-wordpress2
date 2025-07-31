@@ -271,7 +271,7 @@
                         <ul class="header-nav__submenu">
                             <li class="header-nav__submenu-item">
                                 <a href="<?php echo esc_url(home_url("sakura-yells")); ?>"
-                                    class="header-nav__submenu-link">さくらエールズについて</a>
+                                    class="header-nav__submenu-link">SJGコミュニティ</a>
                             </li>
                         </ul>
                     </li>
@@ -412,7 +412,148 @@
             <ul class="header-nav__submenu">
                 <li class="header-nav__submenu-item">
                     <a href="<?php echo esc_url(home_url("sakura-yells")); ?>"
-                        class="header-nav__submenu-link">さくらエールズについて</a>
+                        class="header-nav__submenu-link">SJGコミュニティ</a>
+                </li>
+            </ul>
+        </li>
+        <li class="header-nav__item header-nav__item--has-submenu">
+            <div class="header-nav__link">
+                <span class="header-nav__text-ja">ニュース・プレスリリース</span>
+                <span class="header-nav__text-en">News & Press</span>
+            </div>
+            <ul class="header-nav__submenu">
+                <li class="header-nav__submenu-item">
+                    <a href="<?php echo esc_url(home_url("news")); ?>"
+                        class="header-nav__submenu-link">ニュース一覧</a>
+                </li>
+                        <li class="header-nav__submenu-item">
+                            <a href="<?php echo esc_url(home_url("press_release")); ?>"
+                                class="header-nav__submenu-link">プレスリリース一覧</a>
+                        </li>
+                        <li class="header-nav__submenu-item">
+                            <a href="https://www.sakurajimusyo.com/press/toiawase.php" target="_blank"
+                                class="header-nav__submenu-link">取材お申込み</a>
+                        </li>
+
+            </ul>
+        </li>
+        <li class="header-nav__item header-nav__item--has-submenu">
+            <div href="<?php echo esc_url(home_url("sns")); ?>" class="header-nav__link">
+                <span class="header-nav__text-ja">SNS</span>
+                <span class="header-nav__text-en">SNS</span>
+            </div>
+            <ul class="header-nav__submenu">
+                <li class="header-nav__submenu-item">
+                    <a href="<?php echo esc_url(home_url("sns")); ?>"
+                        class="header-nav__submenu-link">SNS情報</a>
+                </li>
+            </ul>
+        </li>
+        <li class="header-nav__item header-nav__item--has-submenu">
+            <div href="<?php echo esc_url(home_url("contact")); ?>" class="header-nav__link">
+                <span class="header-nav__text-ja">お問い合わせ・無料相談</span>
+                <span class="header-nav__text-en">Contact</span>
+            </div>
+            <ul class="header-nav__submenu">
+                <li class="header-nav__submenu-item">
+                    <a href="<?php echo esc_url(home_url("contact")); ?>"
+                        class="header-nav__submenu-link">お問い合わせ・無料相談</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+</div>
+<div class="midnightHeader gray">
+<nav class="header-nav">
+    <ul class="header-nav__list">
+        <li class="header-logo">
+            <a href="<?php echo esc_url(home_url('/')); ?>" class="header-logo__link">
+                <img src="<?php echo esc_url(get_theme_file_uri('/images/header/header-logo-img.svg')); ?>"
+                    alt="さくら事務所" class="header-logo__image" width="180" height="48" loading="lazy">
+            </a>
+        </li>
+        <li class="header-nav__item header-nav__item--has-submenu">
+            <div class="header-nav__link">
+                <span class="header-nav__text-ja">さくら事務所グループ事業</span>
+                <span class="header-nav__text-en">Business</span>
+            </div>
+            <ul class="header-nav__submenu">
+                <li class="header-nav__submenu-item">
+                    <a href="https://www.sakurajimusyo.com/" target="_blank"
+                        class="header-nav__submenu-link">ホームインスペクション</a>
+                </li>
+                <li class="header-nav__submenu-item">
+                    <a href="https://www.s-mankan.com/" target="_blank"
+                        class="header-nav__submenu-link">マンション管理組合<br>コンサルティング</a>
+                </li>
+                <li class="header-nav__submenu-item">
+                    <a href="https://www.rakuda-f.com/" target="_blank"
+                        class="header-nav__submenu-link">らくだ不動産</a>
+                </li>
+                <li class="header-nav__submenu-item">
+                    <a href="https://www.daichi-risk.com/" target="_blank"
+                        class="header-nav__submenu-link">だいち災害リスク研究所</a>
+                </li>
+            </ul>
+        </li>
+        <li class="header-nav__item header-nav__item--has-submenu">
+            <div class="header-nav__link">
+                <span class="header-nav__text-ja">さくら事務所グループとは</span>
+                <span class="header-nav__text-en">About</span>
+            </div>
+            <ul class="header-nav__submenu">
+                <li class="header-nav__submenu-item">
+                    <a href="<?php echo esc_url(home_url("about/philosophy")); ?>"
+                        class="header-nav__submenu-link">理念、五方良し</a>
+                </li>
+                <li class="header-nav__submenu-item">
+                    <a href="<?php echo esc_url(home_url("about")); ?>"
+                        class="header-nav__submenu-link">会社情報、沿革</a>
+                </li>
+                <li class="header-nav__submenu-item">
+                    <a href="https://www.sakurajimusyo.com/company/story.php" target="_blank"
+                        class="header-nav__submenu-link">創業ものがたり</a>
+                </li>
+            </ul>
+        </li>
+        <li class="header-nav__item header-nav__item--has-submenu">
+            <div class="header-nav__link">
+                <span class="header-nav__text-ja">メンバー</span>
+                <span class="header-nav__text-en">Members</span>
+            </div>
+            <ul class="header-nav__submenu">
+                <li class="header-nav__submenu-item">
+                    <a href="<?php echo esc_url(get_post_type_archive_link('staff')); ?>"
+                        class="header-nav__submenu-link">メンバー紹介</a>
+                </li>
+            </ul>
+        </li>
+        <li class="header-nav__item header-nav__item--has-submenu">
+            <div class="header-nav__link">
+                <span class="header-nav__text-ja">採用情報</span>
+                <span class="header-nav__text-en">Recruitment</span>
+            </div>
+            <ul class="header-nav__submenu">
+                <li class="header-nav__submenu-item">
+                    <a href="<?php echo esc_url(home_url("recruit")); ?>"
+                        class="header-nav__submenu-link">採用情報</a>
+                </li>
+                <li class="header-nav__submenu-item">
+                    <a href="<?php echo esc_url(home_url("recruit-detail")); ?>"
+                        class="header-nav__submenu-link">採用情報詳細</a>
+                </li>
+            </ul>
+        </li>
+        <li class="header-nav__item header-nav__item--has-submenu">
+            <div class="header-nav__link">
+                <span class="header-nav__text-ja">仲間になる</span>
+                <span class="header-nav__text-en">Join Sakura</span>
+            </div>
+            <ul class="header-nav__submenu">
+                <li class="header-nav__submenu-item">
+                    <a href="<?php echo esc_url(home_url("sakura-yells")); ?>"
+                        class="header-nav__submenu-link">SJGコミュニティ</a>
                 </li>
             </ul>
         </li>
@@ -585,7 +726,7 @@
             </li>
             <li class="global-nav__submenu-item">
               <a href="<?php echo esc_url(home_url("sakura-yells")); ?>"
-                 class="global-nav__submenu-link">さくらエールズについて</a>
+                 class="global-nav__submenu-link">SJGコミュニティ</a>
             </li>
           </ul>
         </li>

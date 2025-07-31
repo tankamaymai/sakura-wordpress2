@@ -807,7 +807,7 @@
     </section>
 
     <!-- SNSセクション -->
-    <section class="front-page__section front-page__sns" data-midnight="white">
+    <section class="front-page__section front-page__sns" data-midnight="white2">
         <div class="front-page__sns-inner inner">
             <p class="front-page__section-large-title front-page__sns-large-title">OFFICIAL SNS</p>
             <h2 class="front-page__section-title front-page__sns-title">公式SNS</h2>

@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // 縦ハンバーガーメニューの処理
     const recruitHamburger = document.getElementById('recruit-hamburger');
     const siteHeader = document.querySelector('.site-header');
-    const recruitHeroContent = document.querySelector('.recruit-hero__content');
     
     if (recruitHamburger && siteHeader && isRecruitPage) {
         let isHeaderVisible = false;
@@ -22,18 +21,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 // ヘッダーを非表示
                 siteHeader.classList.remove('is-visible');
                 recruitHamburger.classList.remove('is-active');
-                if (recruitHeroContent) {
-                    recruitHeroContent.classList.remove('inner');
-                }
                 isHeaderVisible = false;
                 console.log('ヘッダーを非表示にしました');
             } else {
                 // ヘッダーを表示
                 siteHeader.classList.add('is-visible');
                 recruitHamburger.classList.add('is-active');
-                if (recruitHeroContent) {
-                    recruitHeroContent.classList.add('inner');
-                }
                 isHeaderVisible = true;
                 console.log('ヘッダーを表示しました');
             }
@@ -50,9 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (isHeaderVisible) {
                 siteHeader.classList.remove('is-visible');
                 recruitHamburger.classList.remove('is-active');
-                if (recruitHeroContent) {
-                    recruitHeroContent.classList.remove('inner');
-                }
                 isHeaderVisible = false;
                 console.log('外部クリックによりヘッダーを非表示にしました');
             }
@@ -63,9 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (e.key === 'Escape' && isHeaderVisible) {
                 siteHeader.classList.remove('is-visible');
                 recruitHamburger.classList.remove('is-active');
-                if (recruitHeroContent) {
-                    recruitHeroContent.classList.remove('inner');
-                }
                 isHeaderVisible = false;
                 console.log('ESCキーによりヘッダーを非表示にしました');
             }
@@ -877,4 +864,172 @@ document.addEventListener('DOMContentLoaded', function() {
     initGenderChartAnimation();
     // 年齢構成棒グラフのアニメーションを初期化
     initBarCharts();
+    // メンバーポップアップを初期化
+    initMemberPopup();
 });
+
+// メンバー詳細ポップアップ機能
+function initMemberPopup() {
+    // メンバーデータの定義
+    const memberData = {
+        'oonishi': {
+            name: '大西 倫加',
+            department: '経営チーム',
+            section: '',
+            image: 'oonishi.webp',
+            profileUrl: '#'
+        },
+        'tamura': {
+            name: '田村 啓',
+            department: 'H＆R Co-creation：',
+            section: '人と資源の共創部',
+            image: 'tamura.webp',
+            profileUrl: '#'
+        },
+        'tamura-ai': {
+            name: '田村 啓',
+            department: 'AIタスクフォース：',
+            section: 'AI:BOU',
+            image: 'tamura.webp',
+            profileUrl: '#'
+        },
+        'tomoda': {
+            name: '友田 雄俊',
+            department: 'マーケティング・',
+            section: 'コミュニケーション部',
+            image: 'tomoda.webp',
+            profileUrl: '#'
+        },
+        'tsuji': {
+            name: '辻 優子',
+            department: 'バックオフィス',
+            section: '',
+            image: 'tsuji.webp',
+            profileUrl: '#'
+        },
+        'nakayama': {
+            name: '中山 夏美',
+            department: 'YouTube・SNS',
+            section: 'マーケティング',
+            image: 'nakayama.webp',
+            profileUrl: '#'
+        },
+        'yokoyama': {
+            name: '横山 芳春',
+            department: 'だいち災害リスク',
+            section: '研究所',
+            image: 'yokoyama.webp',
+            profileUrl: '#'
+        },
+        'yamamoto': {
+            name: '山本 直彌',
+            department: '住まいと暮らし事業部',
+            section: 'マンション管理コンサルティング',
+            image: 'yamamoto.webp',
+            profileUrl: '#'
+        },
+        'yamamoto-rakuda': {
+            name: '山本 直彌',
+            department: 'らくだ不動産',
+            section: '',
+            image: 'yamamoto.webp',
+            profileUrl: '#'
+        },
+        'tomoda-home': {
+            name: '友田 雄俊',
+            department: '住まいと暮らし事業部',
+            section: 'ホームインスペクション',
+            image: 'tomoda.webp',
+            profileUrl: '#'
+        }
+    };
+
+    // DOM要素の取得
+    const popup = document.getElementById('member-popup');
+    const overlay = document.getElementById('member-popup-overlay');
+    const closeBtn = document.getElementById('member-popup-close');
+    const popupImage = document.getElementById('member-popup-image');
+    const popupDepartment = document.getElementById('member-popup-department');
+    const popupSection = document.getElementById('member-popup-section');
+    const popupCaptain = document.getElementById('member-popup-captain');
+    const popupProfileBtn = document.getElementById('member-popup-profile-btn');
+    const ships = document.querySelectorAll('.recruit-fleet__ship[data-member]');
+
+    if (!popup || !ships.length) return;
+
+    // 船カードクリック時の処理
+    ships.forEach(ship => {
+        ship.addEventListener('click', function() {
+            const memberId = this.dataset.member;
+            const member = memberData[memberId];
+            
+            if (member) {
+                // ポップアップにデータを設定
+                const templateDir = window.themeData?.themeUrl || 
+                                 window.location.origin + '/wp-content/themes/sakura-wordpress2';
+                
+                popupImage.src = `${templateDir}/images/${member.image}`;
+                popupImage.alt = member.name;
+                popupDepartment.textContent = member.department;
+                popupSection.textContent = member.section;
+                popupCaptain.textContent = `船長：${member.name}`;
+                popupProfileBtn.href = member.profileUrl;
+                
+                // ポップアップを表示
+                showPopup();
+            }
+        });
+    });
+
+    // ポップアップを表示する関数
+    function showPopup() {
+        popup.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        
+        // フェードインアニメーション
+        popup.style.opacity = '0';
+        popup.style.display = 'flex';
+        
+        requestAnimationFrame(() => {
+            popup.style.transition = 'opacity 0.3s ease';
+            popup.style.opacity = '1';
+        });
+    }
+
+    // ポップアップを非表示にする関数
+    function hidePopup() {
+        popup.style.transition = 'opacity 0.3s ease';
+        popup.style.opacity = '0';
+        
+        setTimeout(() => {
+            popup.classList.remove('show');
+            popup.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 300);
+    }
+
+    // 閉じるボタンクリック時の処理
+    if (closeBtn) {
+        closeBtn.addEventListener('click', hidePopup);
+    }
+
+    // オーバーレイクリック時の処理
+    if (overlay) {
+        overlay.addEventListener('click', hidePopup);
+    }
+
+    // ESCキーで閉じる
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && popup.classList.contains('show')) {
+            hidePopup();
+        }
+    });
+
+    // ポップアップ内容部分をクリックしても閉じないようにする
+    const popupContent = popup.querySelector('.member-popup__content');
+    if (popupContent) {
+        popupContent.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+}

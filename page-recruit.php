@@ -76,12 +76,9 @@
     <!-- 経営チームセクション -->
     <section class="recruit-team md-none">
         <div class="recruit-team-bg">
-            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-team.webp" alt="チーム背景">
+            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-all-img.webp" alt="チーム背景">
         </div>
         <div class="recruit-team__inner">
-            <div class="container">
-                <h2 class="recruit-team__title">経営チーム</h2>
-            </div>
         </div>
     </section>
     <section class="recruit-team-sp md-show">
@@ -105,78 +102,108 @@
         </div>
     </section>
 
-    <!-- 募集CTA -->
-    <section class="recruit-cta">
-        <div class="recruit-cta__inner">
-            <h2 class="recruit-cta__title">
-                第四章のCXO,リーダー候補<br>
-                募集中
-            </h2>
-            <a href="#positions" class="recruit-cta__button">応募する</a>
-        </div>
-    </section>
 
     <!-- 組織構造（船団）セクション -->
     <section class="recruit-fleet">
         <div class="container">
             <h2 class="recruit-fleet__title">さくら事務所グループ"船団"</h2>
             <div class="recruit-fleet__diagram">
-                <div class="recruit-fleet__ship recruit-fleet__ship--management">
-                    <h3>経営チーム</h3>
-                    <p>船長：大西 倫加</p>
+                <div class="recruit-fleet__ship recruit-fleet__ship--management" data-member="oonishi">
+                    <div class="recruit-fleet__ship-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/oonishi.webp" alt="大西 倫加">
+                    </div>
+                    <div class="recruit-fleet__ship-content">
+                        <h3>経営チーム</h3>
+                        <p>船長：大西 倫加</p>
+                    </div>
                 </div>
-                <div class="recruit-fleet__ship recruit-fleet__ship--hr">
-                    <h3>H＆R Co-creation：<br>人と資源の共創部</h3>
-                    <p>船長：田村啓</p>
+                <div class="recruit-fleet__ship recruit-fleet__ship--hr" data-member="tamura">
+                    <div class="recruit-fleet__ship-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/tamura.webp" alt="田村 啓">
+                    </div>
+                    <div class="recruit-fleet__ship-content">
+                        <h3>H＆R Co-creation：<br>人と資源の共創部</h3>
+                        <p>船長：田村 啓</p>
+                    </div>
                 </div>
-                <div class="recruit-fleet__ship recruit-fleet__ship--marketing">
-                    <h3>マーケティング・<br>コミュニケーション部</h3>
-                    <p>船長：友田 雄俊</p>
+                <div class="recruit-fleet__ship recruit-fleet__ship--marketing" data-member="tomoda">
+                    <div class="recruit-fleet__ship-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/tomoda.webp" alt="友田 雄俊">
+                    </div>
+                    <div class="recruit-fleet__ship-content">
+                        <h3>マーケティング・<br>コミュニケーション部</h3>
+                        <p>船長：友田 雄俊</p>
+                    </div>
                 </div>
-                <div class="recruit-fleet__ship recruit-fleet__ship--backoffice">
-                    <h3>バックオフィス</h3>
-                    <p>船長：辻優子</p>
+                <div class="recruit-fleet__ship recruit-fleet__ship--backoffice" data-member="tsuji">
+                    <div class="recruit-fleet__ship-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/tsuji.webp" alt="辻 優子">
+                    </div>
+                    <div class="recruit-fleet__ship-content">
+                        <h3>バックオフィス</h3>
+                        <p>船長：辻 優子</p>
+                    </div>
                 </div>
-                <div class="recruit-fleet__ship recruit-fleet__ship--ai">
-                    <h3>AIタスクフォース：AI:BOU</h3>
-                    <p>船長：田村啓</p>
+                <div class="recruit-fleet__ship recruit-fleet__ship--ai" data-member="tamura-ai">
+                    <div class="recruit-fleet__ship-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/tamura.webp" alt="田村 啓">
+                    </div>
+                    <div class="recruit-fleet__ship-content">
+                        <h3>AIタスクフォース：AI:BOU</h3>
+                        <p>船長：田村 啓</p>
+                    </div>
                 </div>
-                <div class="recruit-fleet__ship recruit-fleet__ship--youtube">
-                    <h3>YouTube・SNSマーケティング</h3>
-                    <p>船長：中山 夏美</p>
+                <div class="recruit-fleet__ship recruit-fleet__ship--youtube" data-member="nakayama">
+                    <div class="recruit-fleet__ship-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/nakayama.webp" alt="中山 夏美">
+                    </div>
+                    <div class="recruit-fleet__ship-content">
+                        <h3>YouTube・SNSマーケティング</h3>
+                        <p>船長：中山 夏美</p>
+                    </div>
                 </div>
-                <div class="recruit-fleet__ship recruit-fleet__ship--daichi">
-                    <h3>だいち災害リスク研究所</h3>
-                    <p>船長：横山 芳春</p>
+                <div class="recruit-fleet__ship recruit-fleet__ship--daichi" data-member="yokoyama">
+                    <div class="recruit-fleet__ship-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/yokoyama.webp" alt="横山 芳春">
+                    </div>
+                    <div class="recruit-fleet__ship-content">
+                        <h3>だいち災害リスク研究所</h3>
+                        <p>船長：横山 芳春</p>
+                    </div>
                 </div>
-                <div class="recruit-fleet__ship recruit-fleet__ship--rakuda">
-                    <h3>らくだ不動産</h3>
-                    <p>船長：大西 倫加</p>
+                <div class="recruit-fleet__ship recruit-fleet__ship--rakuda" data-member="yamamoto-rakuda">
+                    <div class="recruit-fleet__ship-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/yamamoto.webp" alt="山本 直彌">
+                    </div>
+                    <div class="recruit-fleet__ship-content">
+                        <h3>らくだ不動産</h3>
+                        <p>船長：山本 直彌</p>
+                    </div>
                 </div>
-                <div class="recruit-fleet__ship recruit-fleet__ship--home">
-                    <h3>住まいと暮らし事業部</h3>
-                    <p>ホームインスペクション</p>
-                    <p>船長：友田 雄俊</p>
+                <div class="recruit-fleet__ship recruit-fleet__ship--home" data-member="tomoda-home">
+                    <div class="recruit-fleet__ship-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/tomoda.webp" alt="友田 雄俊">
+                    </div>
+                    <div class="recruit-fleet__ship-content">
+                        <h3>住まいと暮らし事業部</h3>
+                        <p>ホームインスペクション</p>
+                        <p>船長：友田 雄俊</p>
+                    </div>
                 </div>
-                <div class="recruit-fleet__ship recruit-fleet__ship--mansion">
-                    <h3>住まいと暮らし事業部</h3>
-                    <p>マンション管理コンサルティング</p>
-                    <p>船長：山本 直彌</p>
+                <div class="recruit-fleet__ship recruit-fleet__ship--mansion" data-member="yamamoto">
+                    <div class="recruit-fleet__ship-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/yamamoto.webp" alt="山本 直彌">
+                    </div>
+                    <div class="recruit-fleet__ship-content">
+                        <h3>住まいと暮らし事業部</h3>
+                        <p>マンション管理コンサルティング</p>
+                        <p>船長：山本 直彌</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 事業部詳細 -->
-    <section class="recruit-department">
-        <div class="container">
-            <div class="recruit-department__card">
-                <h3 class="recruit-department__title">住まいと暮らし事業部</h3>
-                <p class="recruit-department__subtitle">ホームインスペクション</p>
-                <p class="recruit-department__captain">船長：友田 雄俊</p>
-            </div>
-        </div>
-    </section>
 
     <!-- データセクション -->
     <section class="recruit-data">
@@ -185,31 +212,32 @@
 
             <div class="recruit-data__grid">
                 <!-- メンバー構成 -->
-                <div class="recruit-data__item">
-                    <h3>さくら事務所グループメンバーと組織体制</h3>
-                    <div class="recruit-data__chart">
-                        <p class="recruit-data__number"><span>27</span> / <span>134</span></p>
+                <div class="recruit-data__item recruit-data__item--member-count">
+                    <h3>さくら事務所グループ所属メンバー</h3>
+                    <div class="recruit-data__member-display">
+                        <div class="recruit-data__member-number">195</div>
+                        <div class="recruit-data__member-unit">名</div>
                     </div>
                 </div>
 
                 <!-- 正社員/業務委託比率 -->
                 <div class="recruit-data__item">
-                    <h3>正社員/業務委託&emsp;比率</h3>
+                    <h3>正社員／業務委託　比率</h3>
                     <div class="recruit-data__employment-chart">
                         <div class="recruit-data__pie-chart" data-employee="83" data-contractor="17">
-                            <svg class="recruit-data__pie-svg" viewBox="0 0 64 64">
-                                <!-- 業務委託17%（背景全体） -->
+                            <svg class="recruit-data__pie-svg" viewBox="0 0 40 40">
+                                <!-- 正社員17%（背景全体） -->
                                 <circle class="recruit-data__pie-bg" cx="50%" cy="50%" r="15.9154"/>
-                                <!-- 正社員83%（アニメーション対象） -->
+                                <!-- 業務委託83%（アニメーション対象） -->
                                 <circle class="recruit-data__pie-progress" cx="50%" cy="50%" r="15.9154"/>
                             </svg>
                             <div class="recruit-data__pie-labels">
                                 <div class="recruit-data__pie-label-left">
-                                    <span class="recruit-data__pie-label-text">業務委託</span>
+                                    <span class="recruit-data__pie-label-text">正社員</span>
                                     <span class="recruit-data__pie-percentage">17%</span>
                                 </div>
                                 <div class="recruit-data__pie-label-right">
-                                    <span class="recruit-data__pie-label-text">正社員</span>
+                                    <span class="recruit-data__pie-label-text">業務委託</span>
                                     <span class="recruit-data__pie-percentage">83%</span>
                                 </div>
                             </div>
@@ -219,22 +247,10 @@
 
                 <!-- 勤務形態 -->
                 <div class="recruit-data__item recruit-data__item--workstyle">
-                    <h3>フルリモート・ハイブリッド勤務 比率</h3>
+                    <h3>フルリモート・ハイブリッド勤務比率</h3>
                     <div class="recruit-data__employment-chart">
                         <div class="recruit-data__pie-chart recruit-data__pie-chart--workstyle" data-employee="90" data-contractor="10">
-                            <svg class="recruit-data__pie-svg" viewBox="0 0 64 64">
-                                <defs>
-                                    <!-- ハイブリッド用グラデーション（濃い赤 → 透明） -->
-                                    <linearGradient id="workstyle-bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#BA0149;stop-opacity:1" />
-                                        <stop offset="100%" style="stop-color:#BA0149;stop-opacity:0" />
-                                    </linearGradient>
-                                    <!-- フルリモート用グラデーション（ダークグレー → シアン） -->
-                                    <linearGradient id="workstyle-progress-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#061F28;stop-opacity:1" />
-                                        <stop offset="100%" style="stop-color:#00D4FF;stop-opacity:1" />
-                                    </linearGradient>
-                                </defs>
+                            <svg class="recruit-data__pie-svg" viewBox="0 0 40 40">
                                 <!-- ハイブリッド10%（背景全体） -->
                                 <circle class="recruit-data__pie-bg recruit-data__pie-bg--workstyle" cx="50%" cy="50%" r="15.9154"/>
                                 <!-- フルリモート90%（アニメーション対象） -->
@@ -546,5 +562,30 @@
         </div>
     </section>
 </main>
+
+<!-- メンバー詳細ポップアップ -->
+<div class="member-popup" id="member-popup">
+    <div class="member-popup__overlay" id="member-popup-overlay"></div>
+    <div class="member-popup__content">
+        <button class="member-popup__close" id="member-popup-close">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M30 10L10 30M10 10L30 30" stroke="#032130" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+        <div class="member-popup__body">
+            <div class="member-popup__image">
+                <img id="member-popup-image" src="" alt="">
+            </div>
+            <div class="member-popup__info">
+                <h2 id="member-popup-department" class="member-popup__department"></h2>
+                <h3 id="member-popup-section" class="member-popup__section"></h3>
+                <p id="member-popup-captain" class="member-popup__captain"></p>
+                <a href="#" class="member-popup__profile-btn" id="member-popup-profile-btn">
+                    船長プロフィールはこちら
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php get_footer(); ?>
