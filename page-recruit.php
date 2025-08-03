@@ -305,25 +305,25 @@
                     <div class="recruit-data__age-donut-container">
                         <div class="recruit-data__age-donut">
                             <svg class="recruit-data__age-donut-svg" viewBox="0 0 277 277">
-                                <!-- 35-44歳 (19人) - 一番大きいセグメント -->
-                                <path class="recruit-data__age-segment recruit-data__age-segment--1" 
-                                      d="M138.5 0C173.6 4.18567e-07 207.391 13.3271 233.042 37.2871C258.693 61.2471 274.289 94.0525 276.679 129.071L237.989 131.711C236.268 106.498 225.039 82.8779 206.57 65.6267C188.102 48.3755 163.772 38.78 138.5 38.78L138.5 0Z"/>
-                                
-                                <!-- 45-54歳 (18人) -->
-                                <path class="recruit-data__age-segment recruit-data__age-segment--2" 
-                                      d="M276.68 129.093C278.373 153.963 273.323 178.83 262.061 201.069C250.799 223.309 233.744 242.096 212.695 255.45C191.645 268.804 167.382 276.23 142.464 276.943C117.546 277.657 92.8973 271.632 71.1182 259.504L89.9851 225.623C105.666 234.355 123.413 238.693 141.354 238.179C159.295 237.665 176.765 232.319 191.92 222.704C207.076 213.089 219.356 199.562 227.464 183.55C235.572 167.538 239.209 149.634 237.99 131.727L276.68 129.093Z"/>
-                                
-                                <!-- 20-34歳 (13人) -->
-                                <path class="recruit-data__age-segment recruit-data__age-segment--3" 
-                                      d="M71.1258 259.508C50.3679 247.951 32.9322 231.248 20.4946 211.005C8.05702 190.762 1.03588 167.66 0.106099 143.92C-0.823679 120.18 4.36918 96.5997 15.1855 75.4462C26.0018 54.2927 42.0778 36.2773 61.8682 23.1318L83.3251 55.4349C69.076 64.8997 57.5013 77.8708 49.7135 93.1013C41.9258 108.332 38.1869 125.31 38.8564 142.403C39.5258 159.495 44.5811 176.129 53.5361 190.704C62.4912 205.278 75.0449 217.304 89.9905 225.626L71.1258 259.508Z"/>
+                                <!-- 65歳以上 (1人) - 最小セグメント -->
+                                <path class="recruit-data__age-segment recruit-data__age-segment--5" 
+                                      d="M122.947 0.876065C128.048 0.29961 133.177 0.00718003 138.31 0.000130598L138.363 38.7801C134.667 38.7852 130.974 38.9957 127.302 39.4108L122.947 0.876065Z"/>
                                 
                                 <!-- 55-64歳 (4人) -->
                                 <path class="recruit-data__age-segment recruit-data__age-segment--4" 
                                       d="M62.0147 23.0347C80.3372 10.8976 101.285 3.29526 123.127 0.855811L127.431 39.3962C111.705 41.1526 96.6228 46.6263 83.4306 55.365L62.0147 23.0347Z"/>
                                 
-                                <!-- 65歳以上 (1人) -->
-                                <path class="recruit-data__age-segment recruit-data__age-segment--5" 
-                                      d="M122.947 0.876065C128.048 0.29961 133.177 0.00718003 138.31 0.000130598L138.363 38.7801C134.667 38.7852 130.974 38.9957 127.302 39.4108L122.947 0.876065Z"/>
+                                <!-- 35-44歳 (19人) - 最大セグメント -->
+                                <path class="recruit-data__age-segment recruit-data__age-segment--2" 
+                                      d="M138.5 0C173.6 4.18567e-07 207.391 13.3271 233.042 37.2871C258.693 61.2471 274.289 94.0525 276.679 129.071L237.989 131.711C236.268 106.498 225.039 82.8779 206.57 65.6267C188.102 48.3755 163.772 38.78 138.5 38.78L138.5 0Z"/>
+                                
+                                <!-- 45-54歳 (18人) -->
+                                <path class="recruit-data__age-segment recruit-data__age-segment--3" 
+                                      d="M276.68 129.093C278.373 153.963 273.323 178.83 262.061 201.069C250.799 223.309 233.744 242.096 212.695 255.45C191.645 268.804 167.382 276.23 142.464 276.943C117.546 277.657 92.8973 271.632 71.1182 259.504L89.9851 225.623C105.666 234.355 123.413 238.693 141.354 238.179C159.295 237.665 176.765 232.319 191.92 222.704C207.076 213.089 219.356 199.562 227.464 183.55C235.572 167.538 239.209 149.634 237.99 131.727L276.68 129.093Z"/>
+                                
+                                <!-- 20-34歳 (13人) -->
+                                <path class="recruit-data__age-segment recruit-data__age-segment--1" 
+                                      d="M71.1258 259.508C50.3679 247.951 32.9322 231.248 20.4946 211.005C8.05702 190.762 1.03588 167.66 0.106099 143.92C-0.823679 120.18 4.36918 96.5997 15.1855 75.4462C26.0018 54.2927 42.0778 36.2773 61.8682 23.1318L83.3251 55.4349C69.076 64.8997 57.5013 77.8708 49.7135 93.1013C41.9258 108.332 38.1869 125.31 38.8564 142.403C39.5258 159.495 44.5811 176.129 53.5361 190.704C62.4912 205.278 75.0449 217.304 89.9905 225.626L71.1258 259.508Z"/>
                             </svg>
                         </div>
                         
@@ -393,27 +393,27 @@
                                 <span class="recruit-data__age-legend-count">人数</span>
                             </div>
                             <div class="recruit-data__age-legend-item">
-                                <div class="recruit-data__age-legend-indicator recruit-data__age-legend-indicator--1"></div>
+                                <div class="recruit-data__age-legend-indicator recruit-data__age-legend-indicator--expert-1"></div>
                                 <span class="recruit-data__age-legend-age">20-34歳</span>
                                 <span class="recruit-data__age-legend-number">8</span>
                             </div>
                             <div class="recruit-data__age-legend-item">
-                                <div class="recruit-data__age-legend-indicator recruit-data__age-legend-indicator--2"></div>
+                                <div class="recruit-data__age-legend-indicator recruit-data__age-legend-indicator--expert-2"></div>
                                 <span class="recruit-data__age-legend-age">35-44歳</span>
                                 <span class="recruit-data__age-legend-number">23</span>
                             </div>
                             <div class="recruit-data__age-legend-item">
-                                <div class="recruit-data__age-legend-indicator recruit-data__age-legend-indicator--3"></div>
+                                <div class="recruit-data__age-legend-indicator recruit-data__age-legend-indicator--expert-3"></div>
                                 <span class="recruit-data__age-legend-age">45-54歳</span>
                                 <span class="recruit-data__age-legend-number">38</span>
                             </div>
                             <div class="recruit-data__age-legend-item">
-                                <div class="recruit-data__age-legend-indicator recruit-data__age-legend-indicator--4"></div>
+                                <div class="recruit-data__age-legend-indicator recruit-data__age-legend-indicator--expert-4"></div>
                                 <span class="recruit-data__age-legend-age">55-64歳</span>
                                 <span class="recruit-data__age-legend-number">36</span>
                             </div>
                             <div class="recruit-data__age-legend-item">
-                                <div class="recruit-data__age-legend-indicator recruit-data__age-legend-indicator--5"></div>
+                                <div class="recruit-data__age-legend-indicator recruit-data__age-legend-indicator--expert-5"></div>
                                 <span class="recruit-data__age-legend-age">65歳以上</span>
                                 <span class="recruit-data__age-legend-number">13</span>
                             </div>
@@ -622,7 +622,129 @@
             </div>
         </div>
     </section>
+<!-- ユニークな独自採用 -->
+<section class="front-page__section front-page__news" data-midnight="default">
+        <div class="front-page__news-inner inner">
+            <p class="front-page__section-large-title news-large-title">NEWS</p>
+            <h2 class="front-page__section-title news-title">ニュース</h2>
 
+            <div class="news-text">
+            さくら事務所グループに関する情報をお届けします。
+            </div>
+
+            <!-- Swiperコンテナ -->
+            <div class="front-page__news-swiper swiper">
+                <div class="swiper-wrapper front-page__news-items">
+                    <?php
+                    // 最新の投稿を10件取得
+                    $news_query = new WP_Query(array(
+                        'post_type' => 'post',
+                        'posts_per_page' => 10,
+                        'post_status' => 'publish',
+                        'orderby' => 'date',
+                        'order' => 'DESC'
+                    ));
+                    
+                    $news_posts = array(); // 投稿データを格納する配列
+                    
+                    if ($news_query->have_posts()) :
+                        // 投稿データを配列に格納
+                        while ($news_query->have_posts()) : $news_query->the_post();
+                            $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+                            if (!$thumbnail_url) {
+                                $thumbnail_url = get_theme_file_uri('/images/no-image.png');
+                            }
+                            
+                            $news_posts[] = array(
+                                'id' => get_the_ID(),
+                                'title' => get_the_title(),
+                                'permalink' => get_permalink(),
+                                'thumbnail' => $thumbnail_url
+                            );
+                        endwhile;
+                        wp_reset_postdata();
+                        
+                        // 投稿数が少ない場合（5件未満）は複製してSwiperが正常に動作するようにする
+                        $original_count = count($news_posts);
+                        if ($original_count > 0 && $original_count < 5) {
+                            // 元の投稿を2回複製して最低15件にする
+                            for ($i = 0; $i < 2; $i++) {
+                                $news_posts = array_merge($news_posts, $news_posts);
+                                if (count($news_posts) >= 15) break;
+                            }
+                        } elseif ($original_count > 10) {
+                            // 投稿数が10件を超える場合は10件に制限
+                            $news_posts = array_slice($news_posts, 0, 10);
+                        }
+                        
+                        // 投稿を表示
+                        foreach ($news_posts as $post_data) :
+                    ?>
+                    <!-- ニュースアイテム -->
+                    <div class="swiper-slide front-page__news-item">
+                        <div class="front-page__news-item-image-wrapper">
+                            <img src="<?php echo esc_url($post_data['thumbnail']); ?>"
+                                alt="<?php echo esc_attr($post_data['title']); ?>" class="front-page__news-item-image">
+                        </div>
+                        <div class="front-page__news-item-content">
+                            <h4 class="front-page__news-item-title"><?php echo esc_html($post_data['title']); ?></h4>
+                            <a href="<?php echo esc_url($post_data['permalink']); ?>" class="front-page__news-item-more">
+                                <span>詳しく見る</span>
+                                <svg width="18" height="19" viewBox="0 0 18 19" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M0.180664 9.11267C0.180664 4.19206 4.1696 0.203125 9.09021 0.203125C14.0108 0.203125 17.9998 4.19206 17.9998 9.11267C17.9998 14.0333 14.0108 18.0222 9.09021 18.0222C4.1696 18.0222 0.180664 14.0333 0.180664 9.11267Z"
+                                        fill="#F62A00" />
+                                    <path
+                                        d="M11.7556 9.48734C11.9509 9.29208 11.9509 8.9755 11.7556 8.78024L8.57361 5.59826C8.37835 5.40299 8.06177 5.40299 7.86651 5.59826C7.67124 5.79352 7.67124 6.1101 7.86651 6.30536L10.6949 9.13379L7.86651 11.9622C7.67124 12.1575 7.67124 12.4741 7.86651 12.6693C8.06177 12.8646 8.37835 12.8646 8.57361 12.6693L11.7556 9.48734ZM4 9.63379H11.402V8.63379H4V9.63379Z"
+                                        fill="black" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <?php 
+                        endforeach;
+                    else: 
+                    ?>
+                    <!-- 投稿が見つからない場合のデフォルト表示（複製してSwiperが動作するように） -->
+                    <?php for ($i = 0; $i < 6; $i++) : ?>
+                    <div class="swiper-slide front-page__news-item">
+                        <div class="front-page__news-item-image-wrapper">
+                            <img src="<?php echo esc_url(get_theme_file_uri('/images/no-image.png')); ?>"
+                                alt="ニュースはまだありません" class="front-page__news-item-image">
+                        </div>
+                        <div class="front-page__news-item-content">
+                            <h4 class="front-page__news-item-title">ニュースはまだありません</h4>
+                            <a href="#" class="front-page__news-item-more">
+                                <span>詳しく見る</span>
+                                <svg width="18" height="19" viewBox="0 0 18 19" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M0.180664 9.11267C0.180664 4.19206 4.1696 0.203125 9.09021 0.203125C14.0108 0.203125 17.9998 4.19206 17.9998 9.11267C17.9998 14.0333 14.0108 18.0222 9.09021 18.0222C4.1696 18.0222 0.180664 14.0333 0.180664 9.11267Z"
+                                        fill="#F62A00" />
+                                    <path
+                                        d="M11.7556 9.48734C11.9509 9.29208 11.9509 8.9755 11.7556 8.78024L8.57361 5.59826C8.37835 5.40299 8.06177 5.40299 7.86651 5.59826C7.67124 5.79352 7.67124 6.1101 7.86651 6.30536L10.6949 9.13379L7.86651 11.9622C7.67124 12.1575 7.67124 12.4741 7.86651 12.6693C8.06177 12.8646 8.37835 12.8646 8.57361 12.6693L11.7556 9.48734ZM4 9.63379H11.402V8.63379H4V9.63379Z"
+                                        fill="black" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <?php endfor; ?>
+                    <?php endif; ?>
+                        </div>
+
+                <!-- ナビゲーション -->
+                <div class="swiper-button-next front-page__news-next"></div>
+                <div class="swiper-button-prev front-page__news-prev"></div>
+            </div>
+
+            <!-- ニュース一覧へのリンク -->
+            <div class="front-page__news-more">
+                <a href="<?php echo esc_url(home_url('news')); ?>" class="front-page__news-more-button">ニュース一覧</a>
+            </div>
+
+        </div>
+    </section>
     <!-- SNS情報 -->
     <section class="recruit-sns">
         <div class="container">

@@ -1923,7 +1923,7 @@ aspect-ratio: 461 / 96;
 .recruit-data__age-donut-svg {
   width: 100%;
   height: 100%;
-  transform: rotate(-90deg);
+  transform: rotate(0deg);
 }
 
 .recruit-data__age-segment {
@@ -1934,17 +1934,17 @@ aspect-ratio: 461 / 96;
   }
 }
 
-// 年代別セグメントの色設定
+// 年代別セグメントの色設定（20-34歳から右回りの順）
 .recruit-data__age-segment--1 {
-  fill: #05D6D0; // 35-44歳 - シアン（一番大きい）
+  fill: #006360; // 20-34歳 - シアン
 }
 
 .recruit-data__age-segment--2 {
-  fill: #009185; // 45-54歳 - グリーン
+  fill: #05D6D0; // 35-44歳 - グリーン
 }
 
 .recruit-data__age-segment--3 {
-  fill: #006360; // 20-34歳 - ダークグリーン  
+  fill: #009185; // 45-54歳 - ダークグリーン
 }
 
 .recruit-data__age-segment--4 {
@@ -1955,7 +1955,7 @@ aspect-ratio: 461 / 96;
   fill: #F8D9A6; // 65歳以上 - ライトオレンジ
 }
 
-// 専門家年齢構成用のセグメント色設定
+// 専門家年齢構成用のセグメント色設定（20-34歳から右回りの順）
 .recruit-data__age-segment--expert-1 {
   fill: #05D6D0; // 20-34歳 - シアン
 }
@@ -2035,7 +2035,7 @@ aspect-ratio: 461 / 96;
   }
 }
 
-// 年代別インジケーターの色設定（セグメントと同じ色）
+// 事業運営メンバー年齢構成用インジケーターの色設定（20-34歳から右回りの順）
 .recruit-data__age-legend-indicator--1 {
   background-color: #05D6D0; // 20-34歳 - シアン
 }
@@ -2053,6 +2053,27 @@ aspect-ratio: 461 / 96;
 }
 
 .recruit-data__age-legend-indicator--5 {
+  background-color: #F8D9A6; // 65歳以上 - ライトオレンジ
+}
+
+// 専門家年齢構成用インジケーターの色設定（専門家用セグメントと同じ色）
+.recruit-data__age-legend-indicator--expert-1 {
+  background-color: #05D6D0; // 20-34歳 - シアン
+}
+
+.recruit-data__age-legend-indicator--expert-2 {
+  background-color: #009185; // 35-44歳 - グリーン
+}
+
+.recruit-data__age-legend-indicator--expert-3 {
+  background-color: #006360; // 45-54歳 - ダークグリーン（専門家の最大セグメント）
+}
+
+.recruit-data__age-legend-indicator--expert-4 {
+  background-color: #F1F3CE; // 55-64歳 - クリーム
+}
+
+.recruit-data__age-legend-indicator--expert-5 {
   background-color: #F8D9A6; // 65歳以上 - ライトオレンジ
 }
 
