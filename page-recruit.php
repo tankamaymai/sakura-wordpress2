@@ -444,49 +444,54 @@
     <!-- 多様な働き方 -->
     <section class="recruit-workstyle">
 
-            <h2 class="recruit-workstyle__title">多様な働き方</h2>
+            <h2 class="recruit-workstyle__title">さくら事務所グループの働き方</h2>
             <div class="recruit-workstyle__cases">
+                <!-- 1 -->
                 <div class="recruit-workstyle__case">
                     <div class="recruit-workstyle__case-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-work1.webp" alt="多様な働き方">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-sakura-img1.webp" alt="多様な働き方">
                     </div>
                     <div class="recruit-workstyle__case-text-top">
-                        <p>地方在住・週3でも、</p>
-                        <p>現場の主力として活躍</p>
+                        <p>【業務委託】</p>
+                        <p>業務委託でコアメンバーに</p>
                     </div>
                   
                 </div>
+                <!-- 2 -->
                 <div class="recruit-workstyle__case">
                     <div class="recruit-workstyle__case-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-work2.webp" alt="多様な働き方">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-sakura-img2.webp" alt="多様な働き方">
                     </div>
-                    <div class="recruit-workstyle__case-text-top recruit-c-white">
-                        <p>子育てと仕事を両立しながら、</p>
-                        <p>キャリアを更新</p>
-                    </div>  
-                   
+                    <div class="recruit-workstyle__case-text-top">
+                        <p>【正社員】</p>
+                        <p>いまの私に必要なことを、</p>
+                        <p>想いのままに</p>
+                    </div>
+                  
                 </div>
+                <!-- 3 -->
                 <div class="recruit-workstyle__case">
                     <div class="recruit-workstyle__case-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-work3.webp" alt="多様な働き方">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-sakura-img3.webp" alt="多様な働き方">
                     </div>
-                    <div class="recruit-workstyle__case-text">
-                        <p>副業スタートから、</p>
-                        <p>いまや中核メンナーに</p>
+                    <div class="recruit-workstyle__case-text-top">
+                        <p>【業務委託】</p>
+                        <p>自分の会社とホームインスペクター、</p>
+                        <p>両方の経験が相互に活きる</p>
                     </div>
-                   
+                  
                 </div>
+                <!-- 4 -->
                 <div class="recruit-workstyle__case">
                     <div class="recruit-workstyle__case-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-work3.webp" alt="多様な働き方">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-sakura-img4.webp" alt="多様な働き方">
                     </div>
-                    <div class="recruit-workstyle__case-text">
-                        <p>リモートで全国の現場を</p>
-                        <p>支える縁の下の力持ち</p>
-                        
-                    </div>
-           
-                    
+                            <div class="recruit-workstyle__case-text-top">
+                                <p>【業務委託】独立して、</p>
+                                <p>本音で顧客と向き合える</p>
+                                <p>マンションの専門家へ</p>
+                            </div>
+                  
                 </div>
             </div>
     </section>
@@ -623,22 +628,21 @@
         </div>
     </section>
 <!-- ユニークな独自採用 -->
-<section class="front-page__section front-page__news" data-midnight="default">
-        <div class="front-page__news-inner inner">
-            <p class="front-page__section-large-title news-large-title">NEWS</p>
-            <h2 class="front-page__section-title news-title">ニュース</h2>
+<section class="front-page__section recruit-unique-recruit" data-midnight="default">
+        <div class="container">
+            <h2 class="recruit-unique-recruit-title">ユニークな独自採用</h2>
 
-            <div class="news-text">
-            さくら事務所グループに関する情報をお届けします。
+            <div class="recruit-unique-recruit-text">
+            文字の大きさ、量、字間、行間等を確認するために入れています。
             </div>
 
             <!-- Swiperコンテナ -->
-            <div class="front-page__news-swiper swiper">
-                <div class="swiper-wrapper front-page__news-items">
+            <div class="recruit-unique-recruit-swiper swiper">
+                <div class="swiper-wrapper recruit-unique-recruit-items">
                     <?php
                     // 最新の投稿を10件取得
                     $news_query = new WP_Query(array(
-                        'post_type' => 'post',
+                        'post_type' => 'unique-recruit',
                         'posts_per_page' => 10,
                         'post_status' => 'publish',
                         'orderby' => 'date',
@@ -681,14 +685,14 @@
                         foreach ($news_posts as $post_data) :
                     ?>
                     <!-- ニュースアイテム -->
-                    <div class="swiper-slide front-page__news-item">
-                        <div class="front-page__news-item-image-wrapper">
+                    <div class="swiper-slide recruit-unique-recruit-item">
+                        <div class="recruit-unique-recruit-item-image-wrapper">
                             <img src="<?php echo esc_url($post_data['thumbnail']); ?>"
-                                alt="<?php echo esc_attr($post_data['title']); ?>" class="front-page__news-item-image">
+                                alt="<?php echo esc_attr($post_data['title']); ?>" class="recruit-unique-recruit-item-image">
                         </div>
-                        <div class="front-page__news-item-content">
-                            <h4 class="front-page__news-item-title"><?php echo esc_html($post_data['title']); ?></h4>
-                            <a href="<?php echo esc_url($post_data['permalink']); ?>" class="front-page__news-item-more">
+                        <div class="recruit-unique-recruit-item-content">
+                            <h4 class="recruit-unique-recruit-item-title"><?php echo esc_html($post_data['title']); ?></h4>
+                            <a href="<?php echo esc_url($post_data['permalink']); ?>" class="recruit-unique-recruit-item-more">
                                 <span>詳しく見る</span>
                                 <svg width="18" height="19" viewBox="0 0 18 19" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -708,25 +712,14 @@
                     ?>
                     <!-- 投稿が見つからない場合のデフォルト表示（複製してSwiperが動作するように） -->
                     <?php for ($i = 0; $i < 6; $i++) : ?>
-                    <div class="swiper-slide front-page__news-item">
-                        <div class="front-page__news-item-image-wrapper">
+                    <div class="swiper-slide recruit-unique-recruit-item">
+                        <div class="recruit-unique-recruit-item-image-wrapper">
                             <img src="<?php echo esc_url(get_theme_file_uri('/images/no-image.png')); ?>"
-                                alt="ニュースはまだありません" class="front-page__news-item-image">
+                                alt="ニュースはまだありません" class="recruit-unique-recruit-item-image">
                         </div>
-                        <div class="front-page__news-item-content">
-                            <h4 class="front-page__news-item-title">ニュースはまだありません</h4>
-                            <a href="#" class="front-page__news-item-more">
-                                <span>詳しく見る</span>
-                                <svg width="18" height="19" viewBox="0 0 18 19" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M0.180664 9.11267C0.180664 4.19206 4.1696 0.203125 9.09021 0.203125C14.0108 0.203125 17.9998 4.19206 17.9998 9.11267C17.9998 14.0333 14.0108 18.0222 9.09021 18.0222C4.1696 18.0222 0.180664 14.0333 0.180664 9.11267Z"
-                                        fill="#F62A00" />
-                                    <path
-                                        d="M11.7556 9.48734C11.9509 9.29208 11.9509 8.9755 11.7556 8.78024L8.57361 5.59826C8.37835 5.40299 8.06177 5.40299 7.86651 5.59826C7.67124 5.79352 7.67124 6.1101 7.86651 6.30536L10.6949 9.13379L7.86651 11.9622C7.67124 12.1575 7.67124 12.4741 7.86651 12.6693C8.06177 12.8646 8.37835 12.8646 8.57361 12.6693L11.7556 9.48734ZM4 9.63379H11.402V8.63379H4V9.63379Z"
-                                        fill="black" />
-                                </svg>
-                            </a>
+                        <div class="recruit-unique-recruit-item-content">
+                            <h4 class="recruit-unique-recruit-item-title">ニュースはまだありません</h4>
+                
                         </div>
                     </div>
                     <?php endfor; ?>
@@ -734,46 +727,51 @@
                         </div>
 
                 <!-- ナビゲーション -->
-                <div class="swiper-button-next front-page__news-next"></div>
-                <div class="swiper-button-prev front-page__news-prev"></div>
+                <div class="swiper-button-next recruit-unique-recruit-next"></div>
+                <div class="swiper-button-prev recruit-unique-recruit-prev"></div>
             </div>
 
-            <!-- ニュース一覧へのリンク -->
-            <div class="front-page__news-more">
-                <a href="<?php echo esc_url(home_url('news')); ?>" class="front-page__news-more-button">ニュース一覧</a>
-            </div>
 
         </div>
     </section>
-    <!-- SNS情報 -->
-    <section class="recruit-sns">
+ <!-- SNSセクション -->
+ <section class="front-page__section recruit-official-sns" data-midnight="default">
         <div class="container">
-            <h2 class="recruit-sns__title">SNS情報</h2>
-            <div class="recruit-sns__list">
-                <div class="recruit-sns__item">
-                    <a href="#" class="recruit-sns__link">
-                        <span class="recruit-sns__icon recruit-sns__icon--x"></span>
-                        <p>@sakura_press</p>
-                    </a>
+            <h2 class="front-page__section-title recruit-official-sns-title">SNS情報</h2>
+
+            <div class="recruit-official-sns-items">
+                <?php 
+                // カスタムフィールドからSNSアイテムを取得
+                $sns_items = get_recruit_page_sns_items();
+                
+                // SNSアイテムを表示
+                foreach ($sns_items as $item) :
+                    // 特殊なケース: テキストが2つある場合（アイテム4など）
+                    $has_text_wrapper = $item['title'] === 'さくら事務所グループ' && strpos($item['text'], '採用') !== false;
+                ?>
+                <div class="recruit-official-sns-item">
+                    <h4 class="recruit-official-sns-item-title"><?php echo esc_html($item['title']); ?></h4>
+                    
+                    <?php if ($has_text_wrapper) : ?>
+                    <div class="recruit-official-sns-item-text-wrapper">
+                        <p class="recruit-official-sns-item-text"><?php echo esc_html($item['text']); ?></p>
+                        <p class="recruit-official-sns-item-text p-20">NOTE</p>
+                    </div>
+                    <?php elseif (!empty($item['text'])) : ?>
+                    <p class="recruit-official-sns-item-text"><?php echo esc_html($item['text']); ?></p>
+                    <?php endif; ?>
+
+                    <div class="recruit-official-sns-item-accounts">
+                        <?php foreach ($item['accounts'] as $account) : ?>
+                        <a href="<?php echo esc_url($account['url']); ?>" class="recruit-official-sns-item-account">
+                            <img src="<?php echo esc_url($account['icon']); ?>"
+                                alt="<?php echo esc_attr($account['name']); ?>" class="recruit-official-sns-item-account-icon">
+                            <span class="recruit-official-sns-item-account-name"><?php echo esc_html($account['name']); ?></span>
+                        </a>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-                <div class="recruit-sns__item">
-                    <a href="#" class="recruit-sns__link">
-                        <span class="recruit-sns__icon recruit-sns__icon--youtube"></span>
-                        <p>採用チャンネル<br>@sakura-group</p>
-                    </a>
-                </div>
-                <div class="recruit-sns__item">
-                    <a href="#" class="recruit-sns__link">
-                        <span class="recruit-sns__icon recruit-sns__icon--instagram"></span>
-                        <p>Sakurajimusyo.group</p>
-                    </a>
-                </div>
-                <div class="recruit-sns__item">
-                    <a href="#" class="recruit-sns__link">
-                        <span class="recruit-sns__icon recruit-sns__icon--facebook"></span>
-                        <p>sakurajimusyo</p>
-                    </a>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>

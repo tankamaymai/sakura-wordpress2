@@ -1,74 +1,4 @@
-// DOM完全読み込み後に実行
-document.addEventListener('DOMContentLoaded', function() {
-    // 採用ページの判定とクラス追加
-    const isRecruitPage = document.querySelector('.recruit'); // main要素にrecruitクラスがあるかチェック
-    if (isRecruitPage) {
-        document.body.classList.add('recruit-page');
-        console.log('採用ページとして認識されました');
-    }
-    
-    // 縦ハンバーガーメニューの処理
-    const recruitHamburger = document.getElementById('recruit-hamburger');
-    const siteHeader = document.querySelector('.site-header');
-    
-    if (recruitHamburger && siteHeader && isRecruitPage) {
-        let isHeaderVisible = false;
-        
-        recruitHamburger.addEventListener('click', function() {
-            console.log('縦ハンバーガーメニューがクリックされました');
-            
-            if (isHeaderVisible) {
-                // ヘッダーを非表示
-                siteHeader.classList.remove('is-visible');
-                recruitHamburger.classList.remove('is-active');
-                isHeaderVisible = false;
-                console.log('ヘッダーを非表示にしました');
-            } else {
-                // ヘッダーを表示
-                siteHeader.classList.add('is-visible');
-                recruitHamburger.classList.add('is-active');
-                isHeaderVisible = true;
-                console.log('ヘッダーを表示しました');
-            }
-        });
-        
-        // ヘッダー以外をクリックしたときにヘッダーを非表示
-        document.addEventListener('click', function(e) {
-            // ヘッダーまたはハンバーガーメニューをクリックした場合は何もしない
-            if (e.target.closest('.site-header') || e.target.closest('.recruit-hamburger')) {
-                return;
-            }
-            
-            // ヘッダーが表示されている場合は非表示にする
-            if (isHeaderVisible) {
-                siteHeader.classList.remove('is-visible');
-                recruitHamburger.classList.remove('is-active');
-                isHeaderVisible = false;
-                console.log('外部クリックによりヘッダーを非表示にしました');
-            }
-        });
-        
-        // ESCキーでヘッダーを非表示
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && isHeaderVisible) {
-                siteHeader.classList.remove('is-visible');
-                recruitHamburger.classList.remove('is-active');
-                isHeaderVisible = false;
-                console.log('ESCキーによりヘッダーを非表示にしました');
-            }
-        });
-    }
 
-    // midnightjsの初期化
-    // セクションごとに異なるヘッダー色を設定
-    $('.site-header').midnight({
-      // セクションのdata属性とヘッダースタイルの対応を設定
-      headerClass: 'midnightHeader',
-      innerClass: 'midnightInner',
-      defaultClass: 'default',
-      sectionSelector: 'midnight-section', // data-midnight属性を持つ要素を選択
-    });   
-});
 
 // メディアクエリ判定関数
 function isMobileSize() {
@@ -110,6 +40,20 @@ document.addEventListener('DOMContentLoaded', function() {
       },
 
     });
+    // ユニーク採用スライダーの初期化
+    const recruitUniqueRecruitSwiper = new Swiper('.recruit-unique-recruit-swiper', {
+        loop: true,
+        slidesPerView: "auto",
+        spaceBetween: 10,
+        loopAdditionalSlides: 1,
+  
+        
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+  
+      });
   
     // サービススライダーの初期化
     const aboutSwiper = new Swiper('.about__contents-swiper', {
@@ -1003,3 +947,76 @@ function initMemberPopup() {
         });
     }
 }
+
+
+// DOM完全読み込み後に実行
+document.addEventListener('DOMContentLoaded', function() {
+    // 採用ページの判定とクラス追加
+    const isRecruitPage = document.querySelector('.recruit'); // main要素にrecruitクラスがあるかチェック
+    if (isRecruitPage) {
+        document.body.classList.add('recruit-page');
+        console.log('採用ページとして認識されました');
+    }
+    
+    // 縦ハンバーガーメニューの処理
+    const recruitHamburger = document.getElementById('recruit-hamburger');
+    const siteHeader = document.querySelector('.site-header');
+    
+    if (recruitHamburger && siteHeader && isRecruitPage) {
+        let isHeaderVisible = false;
+        
+        recruitHamburger.addEventListener('click', function() {
+            console.log('縦ハンバーガーメニューがクリックされました');
+            
+            if (isHeaderVisible) {
+                // ヘッダーを非表示
+                siteHeader.classList.remove('is-visible');
+                recruitHamburger.classList.remove('is-active');
+                isHeaderVisible = false;
+                console.log('ヘッダーを非表示にしました');
+            } else {
+                // ヘッダーを表示
+                siteHeader.classList.add('is-visible');
+                recruitHamburger.classList.add('is-active');
+                isHeaderVisible = true;
+                console.log('ヘッダーを表示しました');
+            }
+        });
+        
+        // ヘッダー以外をクリックしたときにヘッダーを非表示
+        document.addEventListener('click', function(e) {
+            // ヘッダーまたはハンバーガーメニューをクリックした場合は何もしない
+            if (e.target.closest('.site-header') || e.target.closest('.recruit-hamburger')) {
+                return;
+            }
+            
+            // ヘッダーが表示されている場合は非表示にする
+            if (isHeaderVisible) {
+                siteHeader.classList.remove('is-visible');
+                recruitHamburger.classList.remove('is-active');
+                isHeaderVisible = false;
+                console.log('外部クリックによりヘッダーを非表示にしました');
+            }
+        });
+        
+        // ESCキーでヘッダーを非表示
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isHeaderVisible) {
+                siteHeader.classList.remove('is-visible');
+                recruitHamburger.classList.remove('is-active');
+                isHeaderVisible = false;
+                console.log('ESCキーによりヘッダーを非表示にしました');
+            }
+        });
+    }
+
+    // midnightjsの初期化
+    // セクションごとに異なるヘッダー色を設定
+    $('.site-header').midnight({
+      // セクションのdata属性とヘッダースタイルの対応を設定
+      headerClass: 'midnightHeader',
+      innerClass: 'midnightInner',
+      defaultClass: 'default',
+      sectionSelector: 'midnight-section', // data-midnight属性を持つ要素を選択
+    });   
+});

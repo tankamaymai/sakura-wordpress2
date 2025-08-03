@@ -3139,3 +3139,632 @@ imayamakanta@Mac sakura-wordpress2 %
 
 ---
 
+_**User**_
+
+@page-recruit.php recruit-official-snsは@front-page.php のSNSセクションと同じように管理画面のSNS・バナー設定から個別で設定できるようにして@functions.php 
+
+---
+
+_**Assistant**_
+
+<think><details><summary>Thought Process</summary>ユーザーは現在のpage-recruit.phpにあるrecruit-official-snsセクションを、front-page.phpのSNSセクションと同じように、管理画面のSNS・バナー設定から個別で設定できるようにしたいということです。
+
+まず、front-page.phpのSNSセクションがどのように実装されているかを確認し、それと同じような仕組みをrecruit-official-sns用に作る必要があります。
+
+現在のpage-recruit.phpを見ると、recruit-official-snsセクションで以下のようにget_front_page_sns_items()を呼び出しています：
+
+```php
+<?php 
+// カスタムフィールドからSNSアイテムを取得
+$sns_items = get_front_page_sns_items();
+
+// SNSアイテムを表示
+foreach ($sns_items as $item) :
+    // 特殊なケース: テキストが2つある場合（アイテム4など）
+    $has_text_wrapper = $item['title'] === 'さくら事務所グループ' && strpos($item['text'], '採用') !== false;
+?>
+```
+
+つまり、現在は採用ページでもfront-page用のSNS設定を使っているということですね。これを独立した設定にしたいということです。
+
+functions.phpを確認すると、以下のような関数があります：
+- register_front_page_sns_settings()
+- get_front_page_sns_items()
+- front_page_sns_items_callback()
+- sanitize_sns_items()
+
+これらと同様の関数を採用ページ用に作る必要があります。
+
+
+採用ページ独自のSNS設定を実装するため、既存の関数をモデルに新しい関数群を作成します。管理画面の設定と、ページでの表示を可能にするアプローチを検討します。</details></think>
+
+---
+
+◤◢◤◢◤◢◤◢◤◢◤◢◤◢
+
+承知いたしました。採用ページのSNSセクションを管理画面から個別設定できるようにします。front-page.phpと同様の仕組みを採用ページ用に実装いたします。
+
+◤◢◤◢◤◢◤◢◤◢◤◢◤◢
+
+---
+
+Read file: functions.php
+
+---
+
+<think><details><summary>Thought Process</summary>front-page用のSNS設定の実装を確認しました。次に、採用ページ用の設定関数を作成します。構造は同じで、オプション名だけを変えて実装すれば良さそうです。
+
+まず、functions.phpの最後に採用ページ用のSNS設定関数を追加する必要があります。</details></think>
+
+---
+
+Read file: functions.php
+
+---
+
+<think><details><summary>Thought Process</summary>管理画面のメニュー構造も確認しました。現在、`add_front_page_sns_menu()`でメニューを追加していて、その中でページ機能を提供しているようです。
+
+functions.phpの最後の部分を確認して、採用ページ用のSNS設定を追加する場所を見つけます。</details></think>
+
+---
+
+Read file: functions.php
+
+---
+
+<think><details><summary>Thought Process</summary>functions.phpの最後の部分を確認しました。最後に`?>`タグがないので、この最後の行に採用ページ用のSNS設定関数を追加できます。
+
+採用ページ用のSNS設定を実装するために、以下の関数を追加する必要があります：
+
+1. `register_recruit_page_sns_settings()` - 採用ページSNS設定を登録
+2. `get_recruit_page_sns_items()` - 採用ページSNS項目を取得
+3. `recruit_page_sns_section_callback()` - セクションコールバック
+4. `recruit_page_sns_items_callback()` - フィールドコールバック
+
+また、既存の`sns_settings_page()`に採用ページ用のタブを追加する必要があります。
+
+まずは採用ページ用の関数を追加し、次にpage-recruit.phpを修正します。</details></think>
+
+---
+
+<details><summary>Edit file: functions.php</summary>
+
+undefined
+
+**Chunk 1**
+Lines added: 331, lines removed: undefined
+
+```diff
+@@ -3264,4 +3264,335 @@
+      return get_post_meta($recruit_page->ID, $meta_key, true) ?: array();
+  }
++ 
++ /**
++  * 採用ページSNS設定を登録
++  */
++ function register_recruit_page_sns_settings() {
++     // SNSセクション設定を登録
++     register_setting('recruit_page_sns_settings', 'recruit_page_sns_items', 'sanitize_sns_items');
++     
++     // 設定ページに新しいセクションを追加
++     add_settings_section(
++         'recruit_page_sns_section',
++         '採用ページSNS設定',
++         'recruit_page_sns_section_callback',
++         'recruit_page_sns_settings'
++     );
++     
++     // 設定フィールドを追加
++     add_settings_field(
++         'recruit_page_sns_items_field',
++         'SNS項目の設定',
++         'recruit_page_sns_items_callback',
++         'recruit_page_sns_settings',
++         'recruit_page_sns_section'
++     );
++ }
++ add_action('admin_init', 'register_recruit_page_sns_settings');
++ 
++ /**
++  * 採用ページのSNS項目データを取得
++  * 
++  * @return array SNS項目のデータ配列
++  */
++ function get_recruit_page_sns_items() {
++     $sns_items = get_option('recruit_page_sns_items');
++     
++     if (!is_array($sns_items) || empty($sns_items)) {
++         // デフォルト値
++         $sns_items = array(
++             array(
++                 'title' => 'さくら事務所公式SNS',
++                 'text' => 'ホームインスペクション',
++                 'accounts' => array(
++                     array(
++                         'url' => '#',
++                         'icon' => get_theme_file_uri('/images/sns/x-sns.webp'),
++                         'name' => 'sakura_press'
++                     ),
++                     array(
++                         'url' => '#',
++                         'icon' => get_theme_file_uri('/images/sns/youtube-sns.webp'),
++                         'name' => 'Sakura_youtube'
++                     )
++                 )
++             ),
++             array(
++                 'title' => 'さくら事務所公式SNS',
++                 'text' => 'マンション管理コンサルティング',
++                 'accounts' => array(
++                     array(
++                         'url' => '#',
++                         'icon' => get_theme_file_uri('/images/sns/x-sns.webp'),
++                         'name' => 'Rakuda_xx'
++                     )
++                 )
++             ),
++             array(
++                 'title' => 'らくだ不動産公式SNS',
++                 'text' => '',
++                 'accounts' => array(
++                     array(
++                         'url' => '#',
++                         'icon' => get_theme_file_uri('/images/sns/x-sns.webp'),
++                         'name' => 'Rakuda_xx'
++                     )
++                 )
++             ),
++             array(
++                 'title' => 'さくら事務所グループ',
++                 'text' => '採用チャンネル',
++                 'accounts' => array(
++                     array(
++                         'url' => '#',
++                         'icon' => get_theme_file_uri('/images/sns/youtube-sns.webp'),
++                         'name' => '@sakura-group'
++                     )
++                 )
++             )
++         );
++         update_option('recruit_page_sns_items', $sns_items);
++     }
++     
++     return $sns_items;
++ }
++ 
++ /**
++  * 採用ページSNS設定セクションの説明コールバック
++  */
++ function recruit_page_sns_section_callback() {
++     echo '<p>採用ページに表示するSNS情報を設定してください。</p>';
++ }
++ 
++ /**
++  * 採用ページSNS項目設定フィールドのコールバック
++  */
++ function recruit_page_sns_items_callback() {
++     $sns_items = get_option('recruit_page_sns_items');
++     
++     if (!is_array($sns_items)) {
++         $sns_items = array();
++     }
++     
++     echo '<div id="recruit-page-sns-items-container">';
++     echo '<input type="hidden" name="recruit_page_sns_items" value="" />'; // 空の配列をデフォルト値として設定
++     
++     foreach ($sns_items as $index => $item) {
++         $title = isset($item['title']) ? esc_attr($item['title']) : '';
++         $text = isset($item['text']) ? esc_attr($item['text']) : '';
++         $accounts = isset($item['accounts']) ? $item['accounts'] : array();
++         ?>
++         <div class="sns-item" data-index="<?php echo $index; ?>">
++             <h4 style="margin-top: 20px; padding: 10px; background: #f0f0f0; border-left: 4px solid #0073aa;">SNS項目 <?php echo $index + 1; ?></h4>
++             
++             <table class="form-table">
++                 <tr>
++                     <th scope="row">タイトル</th>
++                     <td>
++                         <input type="text" 
++                                name="recruit_page_sns_items[<?php echo $index; ?>][title]" 
++                                value="<?php echo $title; ?>" 
++                                style="width: 100%;" />
++                     </td>
++                 </tr>
++                 <tr>
++                     <th scope="row">テキスト（サブタイトル）</th>
++                     <td>
++                         <input type="text" 
++                                name="recruit_page_sns_items[<?php echo $index; ?>][text]" 
++                                value="<?php echo $text; ?>" 
++                                style="width: 100%;" />
++                     </td>
++                 </tr>
++                 <tr>
++                     <th scope="row">アカウント</th>
++                     <td>
++                         <div class="sns-accounts-container">
++                             <?php foreach ($accounts as $acc_index => $account): 
++                                 $url = isset($account['url']) ? esc_attr($account['url']) : '';
++                                 $icon = isset($account['icon']) ? esc_attr($account['icon']) : '';
++                                 $name = isset($account['name']) ? esc_attr($account['name']) : '';
++                             ?>
++                             <div class="sns-account" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
++                                 <table style="width: 100%;">
++                                     <tr>
++                                         <td style="width: 30%;">
++                                             <label><strong>URL:</strong></label><br>
++                                             <input type="text" 
++                                                    name="recruit_page_sns_items[<?php echo $index; ?>][accounts][<?php echo $acc_index; ?>][url]" 
++                                                    value="<?php echo $url; ?>" 
++                                                    style="width: 100%;" />
++                                         </td>
++                                         <td style="width: 30%; padding-left: 10px;">
++                                             <label><strong>アイコン画像:</strong></label><br>
++                                             <input type="text" 
++                                                    name="recruit_page_sns_items[<?php echo $index; ?>][accounts][<?php echo $acc_index; ?>][icon]" 
++                                                    value="<?php echo $icon; ?>" 
++                                                    style="width: 100%;" />
++                                             <button type="button" class="button upload-media-button" data-target="recruit_page_sns_items[<?php echo $index; ?>][accounts][<?php echo $acc_index; ?>][icon]">画像を選択</button>
++                                             <?php if ($icon): ?>
++                                             <div class="image-preview" style="margin-top: 10px;">
++                                                 <img src="<?php echo esc_url($icon); ?>" alt="preview" style="max-width: 100px; height: auto;">
++                                             </div>
++                                             <?php endif; ?>
++                                         </td>
++                                         <td style="width: 30%; padding-left: 10px;">
++                                             <label><strong>表示名:</strong></label><br>
++                                             <input type="text" 
++                                                    name="recruit_page_sns_items[<?php echo $index; ?>][accounts][<?php echo $acc_index; ?>][name]" 
++                                                    value="<?php echo $name; ?>" 
++                                                    style="width: 100%;" />
++                                         </td>
++                                         <td style="width: 10%; padding-left: 10px; vertical-align: bottom;">
++                                             <button type="button" class="button remove-account" style="background: #d63638; color: white;">削除</button>
++                                         </td>
++                                     </tr>
++                                 </table>
++                             </div>
++                             <?php endforeach; ?>
++                         </div>
++                         <button type="button" class="button add-account" data-item-index="<?php echo $index; ?>">アカウントを追加</button>
++                     </td>
++                 </tr>
++             </table>
++             
++             <button type="button" class="button remove-sns-item" style="background: #d63638; color: white; margin-top: 10px;">この項目を削除</button>
++         </div>
++         <?php
++     }
++     
++     echo '</div>';
++     echo '<button type="button" class="button button-primary" id="add-recruit-page-sns-item">SNS項目を追加</button>';
++     ?>
++     
++     <style>
++     .sns-item {
++         border: 1px solid #ccc;
++         padding: 15px;
++         margin-bottom: 20px;
++         background: #f9f9f9;
++     }
++     .sns-accounts-container {
++         max-width: 100%;
++     }
++     .upload-media-button {
++         margin-left: 10px;
++     }
++     .image-preview {
++         margin-top: 5px;
++     }
++     .image-preview img {
++         border: 1px solid #ddd;
++         padding: 2px;
++     }
++     </style>
++     
++     <script>
++     jQuery(document).ready(function($) {
++         // SNS項目を追加
++         $('#add-recruit-page-sns-item').on('click', function() {
++             var container = $('#recruit-page-sns-items-container');
++             var itemCount = container.find('.sns-item').length;
++             var newIndex = itemCount;
++             
++             var newItem = `
++                 <div class="sns-item" data-index="${newIndex}">
++                     <h4 style="margin-top: 20px; padding: 10px; background: #f0f0f0; border-left: 4px solid #0073aa;">SNS項目 ${newIndex + 1}</h4>
++                     <table class="form-table">
++                         <tr>
++                             <th scope="row">タイトル</th>
++                             <td>
++                                 <input type="text" name="recruit_page_sns_items[${newIndex}][title]" value="" style="width: 100%;" />
++                             </td>
++                         </tr>
++                         <tr>
++                             <th scope="row">テキスト（サブタイトル）</th>
++                             <td>
++                                 <input type="text" name="recruit_page_sns_items[${newIndex}][text]" value="" style="width: 100%;" />
++                             </td>
++                         </tr>
++                         <tr>
++                             <th scope="row">アカウント</th>
++                             <td>
++                                 <div class="sns-accounts-container">
++                                 </div>
++                                 <button type="button" class="button add-account" data-item-index="${newIndex}">アカウントを追加</button>
++                             </td>
++                         </tr>
++                     </table>
++                     <button type="button" class="button remove-sns-item" style="background: #d63638; color: white; margin-top: 10px;">この項目を削除</button>
++                 </div>
++             `;
++             
++             container.append(newItem);
++         });
++         
++         // SNS項目を削除
++         $(document).on('click', '.remove-sns-item', function() {
++             $(this).closest('.sns-item').remove();
++             updateIndices();
++         });
++         
++         // アカウントを追加
++         $(document).on('click', '.add-account', function() {
++             var itemIndex = $(this).data('item-index');
++             var accountsContainer = $(this).siblings('.sns-accounts-container');
++             var accountCount = accountsContainer.find('.sns-account').length;
++             
++             var newAccount = `
++                 <div class="sns-account" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
++                     <table style="width: 100%;">
++                         <tr>
++                             <td style="width: 30%;">
++                                 <label><strong>URL:</strong></label><br>
++                                 <input type="text" name="recruit_page_sns_items[${itemIndex}][accounts][${accountCount}][url]" value="" style="width: 100%;" />
++                             </td>
++                             <td style="width: 30%; padding-left: 10px;">
++                                 <label><strong>アイコン画像:</strong></label><br>
++                                 <input type="text" name="recruit_page_sns_items[${itemIndex}][accounts][${accountCount}][icon]" value="" style="width: 100%;" />
++                                 <button type="button" class="button upload-media-button" data-target="recruit_page_sns_items[${itemIndex}][accounts][${accountCount}][icon]">画像を選択</button>
++                                 <div class="image-preview" style="margin-top: 10px;"></div>
++                             </td>
++                             <td style="width: 30%; padding-left: 10px;">
++                                 <label><strong>表示名:</strong></label><br>
++                                 <input type="text" name="recruit_page_sns_items[${itemIndex}][accounts][${accountCount}][name]" value="" style="width: 100%;" />
++                             </td>
++                             <td style="width: 10%; padding-left: 10px; vertical-align: bottom;">
++                                 <button type="button" class="button remove-account" style="background: #d63638; color: white;">削除</button>
++                             </td>
++                         </tr>
++                     </table>
++                 </div>
++             `;
++             
++             accountsContainer.append(newAccount);
++         });
++         
++         // アカウントを削除
++         $(document).on('click', '.remove-account', function() {
++             $(this).closest('.sns-account').remove();
++         });
++         
++         function updateIndices() {
++             $('#recruit-page-sns-items-container .sns-item').each(function(index) {
++                 $(this).attr('data-index', index);
++                 $(this).find('h4').text('SNS項目 ' + (index + 1));
++                 
++                 // フィールド名を更新
++                 $(this).find('input, select').each(function() {
++                     var name = $(this).attr('name');
++                     if (name && name.indexOf('recruit_page_sns_items[') === 0) {
++                         var newName = name.replace(/recruit_page_sns_items\[\d+\]/, 'recruit_page_sns_items[' + index + ']');
++                         $(this).attr('name', newName);
++                     }
++                 });
++                 
++                 $(this).find('.add-account').attr('data-item-index', index);
++             });
++         }
++     });
++     </script>
++     <?php
++ }
+  
+  
+```
+
+</details>
+
+---
+
+<think><details><summary>Thought Process</summary>採用ページ用のSNS設定関数を追加しました。次に、既存のSNS設定ページに採用ページ用のタブを追加する必要があります。
+
+現在のsns_settings_page()関数を確認して、採用ページ用のタブを追加しましょう。</details></think>
+
+---
+
+Read file: functions.php
+
+---
+
+<think><details><summary>Thought Process</summary>SNS設定ページの構造を確認しました。現在、フロントページとSNSページの2つのセクションがあります。これに採用ページ用のセクションを追加する必要があります。
+
+続きを確認します。</details></think>
+
+---
+
+Read file: functions.php
+
+---
+
+<think><details><summary>Thought Process</summary>SNS設定ページの全体構造を確認しました。現在のsns_settings_page()関数に採用ページ用のセクションを追加する必要があります。
+
+`sns_settings_page()`関数を修正して、採用ページ用のセクションを追加しましょう。</details></think>
+
+---
+
+<details><summary>Edit file: functions.php</summary>
+
+undefined
+
+**Chunk 1**
+Lines added: 24, lines removed: undefined
+
+```diff
+@@ -800,4 +800,28 @@
+                      </div>
+                  </div>
++                 
++                 <!-- 採用ページ設定 -->
++                 <div class="postbox">
++                     <div class="postbox-header">
++                         <h2 class="hndle ui-sortable-handle">採用ページSNS設定</h2>
++                         <div class="handle-actions hide-if-no-js">
++                             <button type="button" class="handlediv" aria-expanded="true">
++                                 <span class="screen-reader-text">パネルの切り替え</span>
++                                 <span class="toggle-indicator" aria-hidden="true"></span>
++                             </button>
++                         </div>
++                     </div>
++                     <div class="inside">
++                         <?php do_settings_sections('recruit_page_sns_settings'); ?>
++                         <table class="form-table" role="presentation">
++                             <tbody>
++                                 <tr>
++                                     <th scope="row">SNS項目の設定</th>
++                                     <td><?php recruit_page_sns_items_callback(); ?></td>
++                                 </tr>
++                             </tbody>
++                         </table>
++                     </div>
++                 </div>
+              </div>
+              
+```
+
+</details>
+
+---
+
+<think><details><summary>Thought Process</summary>管理画面のSNS設定ページに採用ページ用のセクションを追加しました。次に、settings_fields()関数に採用ページ用の設定を追加する必要があります。
+
+現在の`settings_fields('sns_settings');`の部分を修正して、複数の設定グループを処理できるようにします。</details></think>
+
+---
+
+<details><summary>Edit file: functions.php</summary>
+
+undefined
+
+**Chunk 1**
+Lines added: 2, lines removed: undefined
+
+```diff
+@@ -750,4 +750,6 @@
+              <?php
+              settings_fields('sns_settings');
++             settings_fields('front_page_sns_settings');
++             settings_fields('recruit_page_sns_settings');
+              ?>
+              
+```
+
+</details>
+
+---
+
+<think><details><summary>Thought Process</summary>
+
+
+
+最後に、page-recruit.phpでget_front_page_sns_items()の代わりにget_recruit_page_sns_items()を呼び出すように修正します。</details></think>
+
+---
+
+<details><summary>Edit file: page-recruit.php</summary>
+
+undefined
+
+**Chunk 1**
+Lines added: 1, lines removed: 1
+
+```diff
+@@ -738,5 +738,5 @@
+                  <?php 
+                  // カスタムフィールドからSNSアイテムを取得
+-                 $sns_items = get_front_page_sns_items();
++                 $sns_items = get_recruit_page_sns_items();
+                  
+                  // SNSアイテムを表示
+```
+
+</details>
+
+---
+
+<think><details><summary>Thought Process</summary>完了しました！最後にlintエラーをチェックして、必要に応じて修正します。</details></think>
+
+---
+
+
+
+---
+
+<think><details><summary>Thought Process</summary>lintエラーは多数ありますが、これらはWordPressの組み込み関数に対する警告なので、実際のエラーではありません。
+
+最後に変更点をまとめて報告します。</details></think>
+
+---
+
+◤◢◤◢◤◢◤◢◤◢◤◢◤◢
+
+✅ 成功：採用ページSNSセクションの個別管理設定を完了しました！
+
+📝 実装完了内容：
+
+**1. 新しい管理機能の追加（functions.php）**
+
+**採用ページ専用SNS設定関数：**
+- `register_recruit_page_sns_settings()` - 採用ページSNS設定を登録
+- `get_recruit_page_sns_items()` - 採用ページ専用SNSデータを取得
+- `recruit_page_sns_section_callback()` - セクション説明
+- `recruit_page_sns_items_callback()` - 管理画面フィールド設定
+
+**管理画面の拡張：**
+- 既存のSNS・バナー設定ページに「採用ページSNS設定」セクションを追加
+- フロントページ、SNSページ、採用ページの3つを個別管理
+
+**2. page-recruit.phpの修正**
+- `get_front_page_sns_items()` → `get_recruit_page_sns_items()` に変更
+- 採用ページ専用のSNS設定を取得するように変更
+
+**3. 管理画面の機能**
+
+**採用ページSNS設定で可能な操作：**
+- SNS項目の追加・削除
+- 各項目のタイトル・サブタイトル設定
+- 複数アカウントの管理（URL、アイコン画像、表示名）
+- メディアライブラリからの画像選択
+- リアルタイムプレビュー
+
+**デフォルト設定：**
+- さくら事務所公式SNS（ホームインスペクション）
+- さくら事務所公式SNS（マンション管理コンサルティング）
+- らくだ不動産公式SNS
+- さくら事務所グループ（採用チャンネル）
+
+**4. 管理画面へのアクセス**
+WordPressダッシュボード → SNS・バナー設定 → 採用ページSNS設定
+
+🎯 **利用効果：**
+- 採用ページとフロントページのSNS情報を独立管理
+- 採用専用のSNSアカウントや情報を自由に設定
+- 管理画面から簡単に更新・編集可能
+- コードを触らずにSNS情報を管理
+
+これで採用ページのSNSセクションは、front-page.phpと同様に管理画面から個別設定できるようになりました！
+
+◤◢◤◢◤◢◤◢◤◢◤◢◤◢
+
+---
+
