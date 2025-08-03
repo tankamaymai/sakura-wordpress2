@@ -734,47 +734,76 @@
 
         </div>
     </section>
- <!-- SNSセクション -->
- <section class="front-page__section recruit-official-sns" data-midnight="default">
-        <div class="container">
-            <h2 class="front-page__section-title recruit-official-sns-title">SNS情報</h2>
+<!-- SNSセクション -->
+<section class="recruit-official-sns" data-midnight="default">
+    <div class="container">
+        <h2 class="recruit-official-sns-title">SNS情報</h2>
 
-            <div class="recruit-official-sns-items">
-                <?php 
-                // カスタムフィールドからSNSアイテムを取得
-                $sns_items = get_recruit_page_sns_items();
-                
+        <div class="recruit-official-sns-items">
+            <?php 
+            // 採用ページ専用のSNS項目データを取得
+            $sns_items = get_recruit_page_sns_items();
+            
+            if (!empty($sns_items) && is_array($sns_items)) :
                 // SNSアイテムを表示
                 foreach ($sns_items as $item) :
-                    // 特殊なケース: テキストが2つある場合（アイテム4など）
-                    $has_text_wrapper = $item['title'] === 'さくら事務所グループ' && strpos($item['text'], '採用') !== false;
-                ?>
-                <div class="recruit-official-sns-item">
-                    <h4 class="recruit-official-sns-item-title"><?php echo esc_html($item['title']); ?></h4>
+                    // 必要なデータが存在するかチェック
+                    if (!isset($item['title']) || !isset($item['accounts']) || !is_array($item['accounts'])) {
+                        continue;
+                    }
                     
-                    <?php if ($has_text_wrapper) : ?>
-                    <div class="recruit-official-sns-item-text-wrapper">
-                        <p class="recruit-official-sns-item-text"><?php echo esc_html($item['text']); ?></p>
-                        <p class="recruit-official-sns-item-text p-20">NOTE</p>
-                    </div>
-                    <?php elseif (!empty($item['text'])) : ?>
+                    // 特殊なケース: テキストが2つある場合（さくら事務所グループで採用関連）
+                    $has_text_wrapper = (
+                        isset($item['title']) && 
+                        $item['title'] === 'さくら事務所グループ' && 
+                        isset($item['text']) && 
+                        strpos($item['text'], '採用') !== false
+                    );
+            ?>
+            <div class="recruit-official-sns-item">
+                <h4 class="recruit-official-sns-item-title"><?php echo esc_html($item['title']); ?></h4>
+                
+                <?php if ($has_text_wrapper) : ?>
+                <div class="recruit-official-sns-item-text-wrapper">
                     <p class="recruit-official-sns-item-text"><?php echo esc_html($item['text']); ?></p>
-                    <?php endif; ?>
-
-                    <div class="recruit-official-sns-item-accounts">
-                        <?php foreach ($item['accounts'] as $account) : ?>
-                        <a href="<?php echo esc_url($account['url']); ?>" class="recruit-official-sns-item-account">
-                            <img src="<?php echo esc_url($account['icon']); ?>"
-                                alt="<?php echo esc_attr($account['name']); ?>" class="recruit-official-sns-item-account-icon">
-                            <span class="recruit-official-sns-item-account-name"><?php echo esc_html($account['name']); ?></span>
-                        </a>
-                        <?php endforeach; ?>
-                    </div>
+                    <p class="recruit-official-sns-item-text p-20">NOTE</p>
                 </div>
-                <?php endforeach; ?>
+                <?php elseif (!empty($item['text'])) : ?>
+                <p class="recruit-official-sns-item-text"><?php echo esc_html($item['text']); ?></p>
+                <?php endif; ?>
+
+                <div class="recruit-official-sns-item-accounts">
+                    <?php if (!empty($item['accounts'])) : ?>
+                        <?php foreach ($item['accounts'] as $account) : ?>
+                            <?php 
+                            // アカウントデータの検証
+                            if (!isset($account['url']) || !isset($account['icon']) || !isset($account['name'])) {
+                                continue;
+                            }
+                            ?>
+                            <a href="<?php echo esc_url($account['url']); ?>" class="recruit-official-sns-item-account" target="_blank" rel="noopener noreferrer">
+                                <img src="<?php echo esc_url($account['icon']); ?>"
+                                    alt="<?php echo esc_attr($account['name']); ?>" class="recruit-official-sns-item-account-icon">
+                                <span class="recruit-official-sns-item-account-name"><?php echo esc_html($account['name']); ?></span>
+                            </a>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
             </div>
+            <?php 
+                endforeach;
+            else :
+            ?>
+            <!-- SNS項目が設定されていない場合のメッセージ -->
+            <div class="recruit-official-sns-item">
+                <h4 class="recruit-official-sns-item-title">SNS情報</h4>
+                <p class="recruit-official-sns-item-text">SNS情報は管理画面で設定してください。</p>
+                <p><small>WordPressダッシュボード → SNS・バナー設定 → 採用ページSNS設定</small></p>
+            </div>
+            <?php endif; ?>
         </div>
-    </section>
+    </div>
+</section>
 </main>
 
 <!-- メンバー詳細ポップアップ -->

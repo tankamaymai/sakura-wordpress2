@@ -642,30 +642,15 @@ function save_staff_meta($post_id) {
 add_action('save_post_staff', 'save_staff_meta');
 
 /**
- * SNSセクション用のカスタムフィールド設定
+ * SNSセクション用のカスタムフィールド設定（統合されたため無効化）
+ * 注意: この関数は register_sns_settings() に統合されました
  */
+/*
 function register_front_page_sns_settings() {
-    // SNSセクション設定を登録
-    register_setting('front_page_sns_settings', 'front_page_sns_items', 'sanitize_sns_items');
-    
-    // 設定ページに新しいセクションを追加
-    add_settings_section(
-        'front_page_sns_section',
-        'フロントページSNS設定',
-        'front_page_sns_section_callback',
-        'front_page_sns_settings'
-    );
-    
-    // 設定フィールドを追加
-    add_settings_field(
-        'front_page_sns_items_field',
-        'SNS項目の設定',
-        'front_page_sns_items_callback',
-        'front_page_sns_settings',
-        'front_page_sns_section'
-    );
+    // この関数は register_sns_settings() に統合されました
 }
 add_action('admin_init', 'register_front_page_sns_settings');
+*/
 
 /**
  * SNS設定用の管理メニューを追加
@@ -703,6 +688,9 @@ function register_sns_settings() {
     // SNSページ用設定
     register_setting('sns_settings', 'page_sns_items', 'sanitize_sns_items');
     
+    // 採用ページSNS設定
+    register_setting('sns_settings', 'recruit_page_sns_items', 'sanitize_sns_items');
+    
     // フロントページSNSセクション
     add_settings_section(
         'front_page_sns_section',
@@ -716,6 +704,14 @@ function register_sns_settings() {
         'page_sns_section',
         'SNSページ設定',
         'page_sns_section_callback',
+        'sns_settings'
+    );
+    
+    // 採用ページSNSセクション
+    add_settings_section(
+        'recruit_page_sns_section',
+        '採用ページSNS設定',
+        'recruit_page_sns_section_callback',
         'sns_settings'
     );
     
@@ -736,6 +732,15 @@ function register_sns_settings() {
         'sns_settings',
         'page_sns_section'
     );
+    
+    // 採用ページSNS設定フィールド
+    add_settings_field(
+        'recruit_page_sns_items_field',
+        'SNS項目の設定',
+        'recruit_page_sns_items_callback',
+        'sns_settings',
+        'recruit_page_sns_section'
+    );
 }
 add_action('admin_init', 'register_sns_settings');
 
@@ -749,8 +754,6 @@ function sns_settings_page() {
         <form method="post" action="options.php">
             <?php
             settings_fields('sns_settings');
-            settings_fields('front_page_sns_settings');
-            settings_fields('recruit_page_sns_settings');
             ?>
             
             <div class="metabox-holder">
@@ -766,7 +769,6 @@ function sns_settings_page() {
                         </div>
                     </div>
                     <div class="inside">
-                        <?php do_settings_sections('sns_settings_front_page'); ?>
                         <table class="form-table" role="presentation">
                             <tbody>
                                 <tr>
@@ -790,7 +792,6 @@ function sns_settings_page() {
                         </div>
                     </div>
                     <div class="inside">
-                        <?php do_settings_sections('sns_settings_page'); ?>
                         <table class="form-table" role="presentation">
                             <tbody>
                                 <tr>
@@ -814,7 +815,6 @@ function sns_settings_page() {
                         </div>
                     </div>
                     <div class="inside">
-                        <?php do_settings_sections('recruit_page_sns_settings'); ?>
                         <table class="form-table" role="presentation">
                             <tbody>
                                 <tr>
@@ -1841,7 +1841,7 @@ function front_page_sns_items_callback() {
 }
 
 /**
- * フロントページのSNS項目データ得を取
+ * フロントページのSNS項目データを取得
  * 
  * @return array SNS項目のデータ配列
  */
@@ -3291,30 +3291,15 @@ function get_recruit_positions($company, $type) {
 }
 
 /**
- * 採用ページSNS設定を登録
+ * 採用ページSNS設定を登録（統合されたため無効化）
+ * 注意: この関数は register_sns_settings() に統合されました
  */
+/*
 function register_recruit_page_sns_settings() {
-    // SNSセクション設定を登録
-    register_setting('recruit_page_sns_settings', 'recruit_page_sns_items', 'sanitize_sns_items');
-    
-    // 設定ページに新しいセクションを追加
-    add_settings_section(
-        'recruit_page_sns_section',
-        '採用ページSNS設定',
-        'recruit_page_sns_section_callback',
-        'recruit_page_sns_settings'
-    );
-    
-    // 設定フィールドを追加
-    add_settings_field(
-        'recruit_page_sns_items_field',
-        'SNS項目の設定',
-        'recruit_page_sns_items_callback',
-        'recruit_page_sns_settings',
-        'recruit_page_sns_section'
-    );
+    // この関数は register_sns_settings() に統合されました
 }
 add_action('admin_init', 'register_recruit_page_sns_settings');
+*/
 
 /**
  * 採用ページのSNS項目データを取得
@@ -3396,227 +3381,422 @@ function recruit_page_sns_section_callback() {
 function recruit_page_sns_items_callback() {
     $sns_items = get_option('recruit_page_sns_items');
     
-    if (!is_array($sns_items)) {
-        $sns_items = array();
+    if (!is_array($sns_items) || empty($sns_items)) {
+        // デフォルト値の設定
+        $sns_items = array(
+            array(
+                'title' => 'さくら事務所公式SNS',
+                'text' => 'ホームインスペクション',
+                'accounts' => array(
+                    array(
+                        'url' => '#',
+                        'icon' => get_theme_file_uri('/images/sns/x-sns.webp'),
+                        'name' => 'sakura_press'
+                    ),
+                    array(
+                        'url' => '#',
+                        'icon' => get_theme_file_uri('/images/sns/youtube-sns.webp'),
+                        'name' => 'Sakura_youtube'
+                    )
+                )
+            ),
+            array(
+                'title' => 'さくら事務所公式SNS',
+                'text' => 'マンション管理コンサルティング',
+                'accounts' => array(
+                    array(
+                        'url' => '#',
+                        'icon' => get_theme_file_uri('/images/sns/x-sns.webp'),
+                        'name' => 'Rakuda_xx'
+                    )
+                )
+            ),
+            array(
+                'title' => 'らくだ不動産公式SNS',
+                'text' => '',
+                'accounts' => array(
+                    array(
+                        'url' => '#',
+                        'icon' => get_theme_file_uri('/images/sns/x-sns.webp'),
+                        'name' => 'Rakuda_xx'
+                    )
+                )
+            ),
+            array(
+                'title' => 'さくら事務所グループ',
+                'text' => '採用チャンネル',
+                'accounts' => array(
+                    array(
+                        'url' => '#',
+                        'icon' => get_theme_file_uri('/images/sns/youtube-sns.webp'),
+                        'name' => '@sakura-group'
+                    )
+                )
+            )
+        );
+        update_option('recruit_page_sns_items', $sns_items);
     }
     
-    echo '<div id="recruit-page-sns-items-container">';
-    echo '<input type="hidden" name="recruit_page_sns_items" value="" />'; // 空の配列をデフォルト値として設定
+    // 管理画面用のスタイルを追加
+    echo '<style>
+        .sns-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+        }
+        .sns-accounts {
+            margin-top: 10px;
+        }
+        .sns-account {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px dashed #ddd;
+            background: #fff;
+        }
+        .add-account-btn, .add-item-btn {
+            margin-top: 10px;
+        }
+        .remove-btn {
+            color: #bc0b0b;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .media-preview {
+            max-width: 100px;
+            max-height: 100px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            padding: 3px;
+            background: #fff;
+        }
+        .media-buttons {
+            margin-top: 5px;
+            display: flex;
+            gap: 5px;
+        }
+    </style>';
     
+    // WordPressのメディアアップローダーを読み込み
+    wp_enqueue_media();
+    
+    // SNS項目コンテナ
+    echo '<div id="recruit-sns-items-container">';
+    
+    // 各SNS項目のフィールドを表示
     foreach ($sns_items as $index => $item) {
-        $title = isset($item['title']) ? esc_attr($item['title']) : '';
-        $text = isset($item['text']) ? esc_attr($item['text']) : '';
-        $accounts = isset($item['accounts']) ? $item['accounts'] : array();
-        ?>
-        <div class="sns-item" data-index="<?php echo $index; ?>">
-            <h4 style="margin-top: 20px; padding: 10px; background: #f0f0f0; border-left: 4px solid #0073aa;">SNS項目 <?php echo $index + 1; ?></h4>
-            
-            <table class="form-table">
-                <tr>
-                    <th scope="row">タイトル</th>
-                    <td>
-                        <input type="text" 
-                               name="recruit_page_sns_items[<?php echo $index; ?>][title]" 
-                               value="<?php echo $title; ?>" 
-                               style="width: 100%;" />
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">テキスト（サブタイトル）</th>
-                    <td>
-                        <input type="text" 
-                               name="recruit_page_sns_items[<?php echo $index; ?>][text]" 
-                               value="<?php echo $text; ?>" 
-                               style="width: 100%;" />
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">アカウント</th>
-                    <td>
-                        <div class="sns-accounts-container">
-                            <?php foreach ($accounts as $acc_index => $account): 
-                                $url = isset($account['url']) ? esc_attr($account['url']) : '';
-                                $icon = isset($account['icon']) ? esc_attr($account['icon']) : '';
-                                $name = isset($account['name']) ? esc_attr($account['name']) : '';
-                            ?>
-                            <div class="sns-account" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
-                                <table style="width: 100%;">
-                                    <tr>
-                                        <td style="width: 30%;">
-                                            <label><strong>URL:</strong></label><br>
-                                            <input type="text" 
-                                                   name="recruit_page_sns_items[<?php echo $index; ?>][accounts][<?php echo $acc_index; ?>][url]" 
-                                                   value="<?php echo $url; ?>" 
-                                                   style="width: 100%;" />
-                                        </td>
-                                        <td style="width: 30%; padding-left: 10px;">
-                                            <label><strong>アイコン画像:</strong></label><br>
-                                            <input type="text" 
-                                                   name="recruit_page_sns_items[<?php echo $index; ?>][accounts][<?php echo $acc_index; ?>][icon]" 
-                                                   value="<?php echo $icon; ?>" 
-                                                   style="width: 100%;" />
-                                            <button type="button" class="button upload-media-button" data-target="recruit_page_sns_items[<?php echo $index; ?>][accounts][<?php echo $acc_index; ?>][icon]">画像を選択</button>
-                                            <?php if ($icon): ?>
-                                            <div class="image-preview" style="margin-top: 10px;">
-                                                <img src="<?php echo esc_url($icon); ?>" alt="preview" style="max-width: 100px; height: auto;">
-                                            </div>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td style="width: 30%; padding-left: 10px;">
-                                            <label><strong>表示名:</strong></label><br>
-                                            <input type="text" 
-                                                   name="recruit_page_sns_items[<?php echo $index; ?>][accounts][<?php echo $acc_index; ?>][name]" 
-                                                   value="<?php echo $name; ?>" 
-                                                   style="width: 100%;" />
-                                        </td>
-                                        <td style="width: 10%; padding-left: 10px; vertical-align: bottom;">
-                                            <button type="button" class="button remove-account" style="background: #d63638; color: white;">削除</button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <?php endforeach; ?>
-                        </div>
-                        <button type="button" class="button add-account" data-item-index="<?php echo $index; ?>">アカウントを追加</button>
-                    </td>
-                </tr>
-            </table>
-            
-            <button type="button" class="button remove-sns-item" style="background: #d63638; color: white; margin-top: 10px;">この項目を削除</button>
-        </div>
-        <?php
+        echo '<div class="sns-item">';
+        echo '<h4>SNS項目 #' . ($index + 1) . ' <span class="remove-btn" onclick="removeRecruitSnsItem(this)">削除</span></h4>';
+        
+        // タイトルフィールド
+        echo '<div>';
+        echo '<label>タイトル：</label>';
+        echo '<input type="text" name="recruit_page_sns_items[' . $index . '][title]" value="' . esc_attr($item['title']) . '" style="width: 100%;" />';
+        echo '</div>';
+        
+        // テキストフィールド
+        echo '<div>';
+        echo '<label>説明テキスト：</label>';
+        echo '<input type="text" name="recruit_page_sns_items[' . $index . '][text]" value="' . esc_attr($item['text']) . '" style="width: 100%;" />';
+        echo '</div>';
+        
+        // アカウント情報フィールド
+        echo '<div class="sns-accounts">';
+        echo '<h5>アカウント</h5>';
+        
+        if (isset($item['accounts']) && is_array($item['accounts'])) {
+            foreach ($item['accounts'] as $acct_index => $account) {
+                echo '<div class="sns-account">';
+                echo '<h6>アカウント #' . ($acct_index + 1) . ' <span class="remove-btn" onclick="removeRecruitAccount(this)">削除</span></h6>';
+                
+                // URLフィールド
+                echo '<div>';
+                echo '<label>リンクURL：</label>';
+                echo '<input type="text" name="recruit_page_sns_items[' . $index . '][accounts][' . $acct_index . '][url]" value="' . esc_attr($account['url']) . '" style="width: 100%;" />';
+                echo '</div>';
+                
+                // アイコンURLフィールド（メディアアップローダー付き）
+                echo '<div>';
+                echo '<label>アイコン画像：</label>';
+                echo '<input type="text" name="recruit_page_sns_items[' . $index . '][accounts][' . $acct_index . '][icon]" class="icon-url-input" value="' . esc_attr($account['icon']) . '" style="width: 100%;" />';
+                
+                // 画像プレビュー
+                echo '<div class="media-preview-container">';
+                if (!empty($account['icon'])) {
+                    echo '<img src="' . esc_url($account['icon']) . '" class="media-preview" />';
+                }
+                echo '</div>';
+                
+                // メディア選択ボタン
+                echo '<div class="media-buttons">';
+                echo '<button type="button" class="button upload-recruit-icon-button" data-item="' . $index . '" data-account="' . $acct_index . '">メディアから選択</button>';
+                echo '<button type="button" class="button remove-recruit-icon-button" data-item="' . $index . '" data-account="' . $acct_index . '">画像を削除</button>';
+                echo '</div>';
+                echo '</div>';
+                
+                // アカウント名フィールド
+                echo '<div>';
+                echo '<label>アカウント名：</label>';
+                echo '<input type="text" name="recruit_page_sns_items[' . $index . '][accounts][' . $acct_index . '][name]" value="' . esc_attr($account['name']) . '" style="width: 100%;" />';
+                echo '</div>';
+                
+                echo '</div>'; // .sns-account
+            }
+        }
+        
+        // アカウント追加ボタン
+        echo '<button type="button" class="button add-account-btn" onclick="addRecruitAccount(this, ' . $index . ')">アカウントを追加</button>';
+        
+        echo '</div>'; // .sns-accounts
+        echo '</div>'; // .sns-item
     }
     
-    echo '</div>';
-    echo '<button type="button" class="button button-primary" id="add-recruit-page-sns-item">SNS項目を追加</button>';
+    echo '</div>'; // #recruit-sns-items-container
+    
+    // SNS項目追加ボタン
+    echo '<button type="button" class="button button-primary add-item-btn" onclick="addRecruitSnsItem()">新しいSNS項目を追加</button>';
+    
+    // JavaScript for dynamic fields
     ?>
-    
-    <style>
-    .sns-item {
-        border: 1px solid #ccc;
-        padding: 15px;
-        margin-bottom: 20px;
-        background: #f9f9f9;
-    }
-    .sns-accounts-container {
-        max-width: 100%;
-    }
-    .upload-media-button {
-        margin-left: 10px;
-    }
-    .image-preview {
-        margin-top: 5px;
-    }
-    .image-preview img {
-        border: 1px solid #ddd;
-        padding: 2px;
-    }
-    </style>
-    
     <script>
-    jQuery(document).ready(function($) {
-        // SNS項目を追加
-        $('#add-recruit-page-sns-item').on('click', function() {
-            var container = $('#recruit-page-sns-items-container');
-            var itemCount = container.find('.sns-item').length;
-            var newIndex = itemCount;
+        // 新しいアカウントの追加
+        function addRecruitAccount(button, itemIndex) {
+            const accountsContainer = button.parentNode;
+            const accountItems = accountsContainer.querySelectorAll('.sns-account');
+            const newIndex = accountItems.length;
             
-            var newItem = `
-                <div class="sns-item" data-index="${newIndex}">
-                    <h4 style="margin-top: 20px; padding: 10px; background: #f0f0f0; border-left: 4px solid #0073aa;">SNS項目 ${newIndex + 1}</h4>
-                    <table class="form-table">
-                        <tr>
-                            <th scope="row">タイトル</th>
-                            <td>
-                                <input type="text" name="recruit_page_sns_items[${newIndex}][title]" value="" style="width: 100%;" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">テキスト（サブタイトル）</th>
-                            <td>
-                                <input type="text" name="recruit_page_sns_items[${newIndex}][text]" value="" style="width: 100%;" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">アカウント</th>
-                            <td>
-                                <div class="sns-accounts-container">
-                                </div>
-                                <button type="button" class="button add-account" data-item-index="${newIndex}">アカウントを追加</button>
-                            </td>
-                        </tr>
-                    </table>
-                    <button type="button" class="button remove-sns-item" style="background: #d63638; color: white; margin-top: 10px;">この項目を削除</button>
+            const newAccount = document.createElement('div');
+            newAccount.className = 'sns-account';
+            newAccount.innerHTML = `
+                <h6>アカウント #${newIndex + 1} <span class="remove-btn" onclick="removeRecruitAccount(this)">削除</span></h6>
+                <div>
+                    <label>リンクURL：</label>
+                    <input type="text" name="recruit_page_sns_items[${itemIndex}][accounts][${newIndex}][url]" value="#" style="width: 100%;" />
+                </div>
+                <div>
+                    <label>アイコン画像：</label>
+                    <input type="text" name="recruit_page_sns_items[${itemIndex}][accounts][${newIndex}][icon]" class="icon-url-input" value="" style="width: 100%;" />
+                    <div class="media-preview-container"></div>
+                    <div class="media-buttons">
+                        <button type="button" class="button upload-recruit-icon-button" data-item="${itemIndex}" data-account="${newIndex}">メディアから選択</button>
+                        <button type="button" class="button remove-recruit-icon-button" data-item="${itemIndex}" data-account="${newIndex}">画像を削除</button>
+                    </div>
+                </div>
+                <div>
+                    <label>アカウント名：</label>
+                    <input type="text" name="recruit_page_sns_items[${itemIndex}][accounts][${newIndex}][name]" value="" style="width: 100%;" />
                 </div>
             `;
             
-            container.append(newItem);
-        });
-        
-        // SNS項目を削除
-        $(document).on('click', '.remove-sns-item', function() {
-            $(this).closest('.sns-item').remove();
-            updateIndices();
-        });
-        
-        // アカウントを追加
-        $(document).on('click', '.add-account', function() {
-            var itemIndex = $(this).data('item-index');
-            var accountsContainer = $(this).siblings('.sns-accounts-container');
-            var accountCount = accountsContainer.find('.sns-account').length;
+            accountsContainer.insertBefore(newAccount, button);
             
-            var newAccount = `
-                <div class="sns-account" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
-                    <table style="width: 100%;">
-                        <tr>
-                            <td style="width: 30%;">
-                                <label><strong>URL:</strong></label><br>
-                                <input type="text" name="recruit_page_sns_items[${itemIndex}][accounts][${accountCount}][url]" value="" style="width: 100%;" />
-                            </td>
-                            <td style="width: 30%; padding-left: 10px;">
-                                <label><strong>アイコン画像:</strong></label><br>
-                                <input type="text" name="recruit_page_sns_items[${itemIndex}][accounts][${accountCount}][icon]" value="" style="width: 100%;" />
-                                <button type="button" class="button upload-media-button" data-target="recruit_page_sns_items[${itemIndex}][accounts][${accountCount}][icon]">画像を選択</button>
-                                <div class="image-preview" style="margin-top: 10px;"></div>
-                            </td>
-                            <td style="width: 30%; padding-left: 10px;">
-                                <label><strong>表示名:</strong></label><br>
-                                <input type="text" name="recruit_page_sns_items[${itemIndex}][accounts][${accountCount}][name]" value="" style="width: 100%;" />
-                            </td>
-                            <td style="width: 10%; padding-left: 10px; vertical-align: bottom;">
-                                <button type="button" class="button remove-account" style="background: #d63638; color: white;">削除</button>
-                            </td>
-                        </tr>
-                    </table>
+            // 新しく追加されたメディアボタンのイベントリスナーを追加
+            setupRecruitMediaButtons();
+        }
+        
+        // アカウントの削除
+        function removeRecruitAccount(button) {
+            if (confirm('このアカウントを削除してもよろしいですか？')) {
+                const accountDiv = button.closest('.sns-account');
+                accountDiv.parentNode.removeChild(accountDiv);
+                updateRecruitAccountNumbers();
+            }
+        }
+        
+        // 新しいSNS項目の追加
+        function addRecruitSnsItem() {
+            const container = document.getElementById('recruit-sns-items-container');
+            const items = container.querySelectorAll('.sns-item');
+            const newIndex = items.length;
+            
+            const newItem = document.createElement('div');
+            newItem.className = 'sns-item';
+            newItem.innerHTML = `
+                <h4>SNS項目 #${newIndex + 1} <span class="remove-btn" onclick="removeRecruitSnsItem(this)">削除</span></h4>
+                <div>
+                    <label>タイトル：</label>
+                    <input type="text" name="recruit_page_sns_items[${newIndex}][title]" value="" style="width: 100%;" />
+                </div>
+                <div>
+                    <label>説明テキスト：</label>
+                    <input type="text" name="recruit_page_sns_items[${newIndex}][text]" value="" style="width: 100%;" />
+                </div>
+                <div class="sns-accounts">
+                    <h5>アカウント</h5>
+                    <div class="sns-account">
+                        <h6>アカウント #1 <span class="remove-btn" onclick="removeRecruitAccount(this)">削除</span></h6>
+                        <div>
+                            <label>リンクURL：</label>
+                            <input type="text" name="recruit_page_sns_items[${newIndex}][accounts][0][url]" value="#" style="width: 100%;" />
+                        </div>
+                        <div>
+                            <label>アイコン画像：</label>
+                            <input type="text" name="recruit_page_sns_items[${newIndex}][accounts][0][icon]" class="icon-url-input" value="" style="width: 100%;" />
+                            <div class="media-preview-container"></div>
+                            <div class="media-buttons">
+                                <button type="button" class="button upload-recruit-icon-button" data-item="${newIndex}" data-account="0">メディアから選択</button>
+                                <button type="button" class="button remove-recruit-icon-button" data-item="${newIndex}" data-account="0">画像を削除</button>
+                            </div>
+                        </div>
+                        <div>
+                            <label>アカウント名：</label>
+                            <input type="text" name="recruit_page_sns_items[${newIndex}][accounts][0][name]" value="" style="width: 100%;" />
+                        </div>
+                    </div>
+                    <button type="button" class="button add-account-btn" onclick="addRecruitAccount(this, ${newIndex})">アカウントを追加</button>
                 </div>
             `;
             
-            accountsContainer.append(newAccount);
-        });
+            container.appendChild(newItem);
+            
+            // 新しく追加された項目のメディアボタンのイベントリスナーを追加
+            setupRecruitMediaButtons();
+        }
         
-        // アカウントを削除
-        $(document).on('click', '.remove-account', function() {
-            $(this).closest('.sns-account').remove();
-        });
+        // SNS項目の削除
+        function removeRecruitSnsItem(button) {
+            if (confirm('このSNS項目を削除してもよろしいですか？')) {
+                const itemDiv = button.closest('.sns-item');
+                itemDiv.parentNode.removeChild(itemDiv);
+                updateRecruitItemNumbers();
+            }
+        }
         
-        function updateIndices() {
-            $('#recruit-page-sns-items-container .sns-item').each(function(index) {
-                $(this).attr('data-index', index);
-                $(this).find('h4').text('SNS項目 ' + (index + 1));
+        // SNS項目番号の更新
+        function updateRecruitItemNumbers() {
+            const container = document.getElementById('recruit-sns-items-container');
+            const items = container.querySelectorAll('.sns-item');
+            
+            items.forEach((item, index) => {
+                const titleH4 = item.querySelector('h4');
+                titleH4.innerHTML = `SNS項目 #${index + 1} <span class="remove-btn" onclick="removeRecruitSnsItem(this)">削除</span>`;
                 
-                // フィールド名を更新
-                $(this).find('input, select').each(function() {
-                    var name = $(this).attr('name');
-                    if (name && name.indexOf('recruit_page_sns_items[') === 0) {
-                        var newName = name.replace(/recruit_page_sns_items\[\d+\]/, 'recruit_page_sns_items[' + index + ']');
-                        $(this).attr('name', newName);
-                    }
-                });
-                
-                $(this).find('.add-account').attr('data-item-index', index);
+                // 入力フィールド名も更新
+                updateRecruitFieldNames(item, index);
             });
         }
-    });
+        
+        // アカウント番号の更新
+        function updateRecruitAccountNumbers() {
+            const container = document.getElementById('recruit-sns-items-container');
+            const items = container.querySelectorAll('.sns-item');
+            
+            items.forEach((item, itemIndex) => {
+                const accounts = item.querySelectorAll('.sns-account');
+                accounts.forEach((account, acctIndex) => {
+                    const titleH6 = account.querySelector('h6');
+                    titleH6.innerHTML = `アカウント #${acctIndex + 1} <span class="remove-btn" onclick="removeRecruitAccount(this)">削除</span>`;
+                    
+                    // アカウントフィールド名も更新
+                    updateRecruitAccountFieldNames(account, itemIndex, acctIndex);
+                });
+            });
+        }
+        
+        // 項目のフィールド名を更新
+        function updateRecruitFieldNames(item, itemIndex) {
+            const titleInput = item.querySelector('input[name*="[title]"]');
+            const textInput = item.querySelector('input[name*="[text]"]');
+            
+            titleInput.name = `recruit_page_sns_items[${itemIndex}][title]`;
+            textInput.name = `recruit_page_sns_items[${itemIndex}][text]`;
+            
+            // アカウントボタンの関数パラメータも更新
+            const addBtn = item.querySelector('.add-account-btn');
+            addBtn.setAttribute('onclick', `addRecruitAccount(this, ${itemIndex})`);
+            
+            // 各アカウントのフィールド名も更新
+            const accounts = item.querySelectorAll('.sns-account');
+            accounts.forEach((account, acctIndex) => {
+                updateRecruitAccountFieldNames(account, itemIndex, acctIndex);
+            });
+        }
+        
+        // アカウントのフィールド名を更新
+        function updateRecruitAccountFieldNames(account, itemIndex, acctIndex) {
+            const urlInput = account.querySelector('input[name*="[url]"]');
+            const iconInput = account.querySelector('input[name*="[icon]"]');
+            const nameInput = account.querySelector('input[name*="[name]"]');
+            
+            urlInput.name = `recruit_page_sns_items[${itemIndex}][accounts][${acctIndex}][url]`;
+            iconInput.name = `recruit_page_sns_items[${itemIndex}][accounts][${acctIndex}][icon]`;
+            nameInput.name = `recruit_page_sns_items[${itemIndex}][accounts][${acctIndex}][name]`;
+            
+            // メディアボタンのdata属性も更新
+            const uploadBtn = account.querySelector('.upload-recruit-icon-button');
+            const removeBtn = account.querySelector('.remove-recruit-icon-button');
+            
+            if (uploadBtn) {
+                uploadBtn.dataset.item = itemIndex;
+                uploadBtn.dataset.account = acctIndex;
+            }
+            
+            if (removeBtn) {
+                removeBtn.dataset.item = itemIndex;
+                removeBtn.dataset.account = acctIndex;
+            }
+        }
+        
+        // WordPressメディアアップローダーのセットアップ
+        function setupRecruitMediaButtons() {
+            // メディア選択ボタンのイベントリスナー
+            document.querySelectorAll('.upload-recruit-icon-button').forEach(button => {
+                if (!button.hasAttribute('data-initialized')) {
+                    button.addEventListener('click', function() {
+                        const itemIndex = this.getAttribute('data-item');
+                        const acctIndex = this.getAttribute('data-account');
+                        const inputField = document.querySelector(`input[name="recruit_page_sns_items[${itemIndex}][accounts][${acctIndex}][icon]"]`);
+                        const previewContainer = this.closest('div').previousElementSibling;
+                        
+                        // メディアアップローダーの設定
+                        const mediaUploader = wp.media({
+                            title: 'SNSアイコン画像の選択',
+                            button: {
+                                text: '画像を選択'
+                            },
+                            multiple: false
+                        });
+                        
+                        // 選択時の処理
+                        mediaUploader.on('select', function() {
+                            const attachment = mediaUploader.state().get('selection').first().toJSON();
+                            inputField.value = attachment.url;
+                            
+                            // プレビュー画像を更新
+                            previewContainer.innerHTML = `<img src="${attachment.url}" class="media-preview" />`;
+                        });
+                        
+                        // メディアアップローダーを開く
+                        mediaUploader.open();
+                    });
+                    
+                    button.setAttribute('data-initialized', 'true');
+                }
+            });
+            
+            // 画像削除ボタンのイベントリスナー
+            document.querySelectorAll('.remove-recruit-icon-button').forEach(button => {
+                if (!button.hasAttribute('data-initialized')) {
+                    button.addEventListener('click', function() {
+                        const itemIndex = this.getAttribute('data-item');
+                        const acctIndex = this.getAttribute('data-account');
+                        const inputField = document.querySelector(`input[name="recruit_page_sns_items[${itemIndex}][accounts][${acctIndex}][icon]"]`);
+                        const previewContainer = this.closest('div').previousElementSibling;
+                        
+                        // 入力フィールドとプレビューをクリア
+                        inputField.value = '';
+                        previewContainer.innerHTML = '';
+                    });
+                    
+                    button.setAttribute('data-initialized', 'true');
+                }
+            });
+        }
+        
+        // ページ読み込み時にメディアボタンのイベントリスナーを設定
+        document.addEventListener('DOMContentLoaded', function() {
+            setupRecruitMediaButtons();
+        });
     </script>
     <?php
 }
