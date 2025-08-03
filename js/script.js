@@ -787,37 +787,7 @@ function initPieChartAnimation() {
     });
 }
 
-// 年齢構成棒グラフのアニメーション
-function initBarCharts() {
-    const barCharts = document.querySelectorAll('.recruit-data__bar-chart');
-    
-    const barChartObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const bars = entry.target.querySelectorAll('.recruit-data__bar');
-                
-                bars.forEach((bar, index) => {
-                    const value = parseInt(bar.getAttribute('data-value'));
-                    const max = parseInt(bar.getAttribute('data-max'));
-                    const heightPercentage = (value / max) * 100;
-                    
-                    setTimeout(() => {
-                        bar.style.setProperty('--height-percentage', heightPercentage);
-                        bar.classList.add('animate');
-                    }, index * 200);
-                });
-                
-                barChartObserver.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.5
-    });
-    
-    barCharts.forEach(chart => {
-        barChartObserver.observe(chart);
-    });
-}
+
 
 // 男女比円グラフアニメーション
 function initGenderChartAnimation() {

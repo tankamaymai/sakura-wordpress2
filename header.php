@@ -115,10 +115,7 @@
                                 <a href="<?php echo esc_url(home_url("recruit")); ?>"
                                     class="header-nav__submenu-link">採用情報</a>
                             </li>
-                            <li class="header-nav__submenu-item">
-                                <a href="<?php echo esc_url(home_url("recruit-detail")); ?>"
-                                    class="header-nav__submenu-link">採用情報詳細</a>
-                            </li>
+               
                         </ul>
                     </li>
                     <li class="header-nav__item header-nav__item--has-submenu">
@@ -257,10 +254,7 @@
                                 <a href="<?php echo esc_url(home_url("recruit")); ?>"
                                     class="header-nav__submenu-link">採用情報</a>
                             </li>
-                            <li class="header-nav__submenu-item">
-                                <a href="<?php echo esc_url(home_url("recruit-detail")); ?>"
-                                    class="header-nav__submenu-link">採用情報詳細</a>
-                            </li>
+                       
                         </ul>
                     </li>
                     <li class="header-nav__item header-nav__item--has-submenu">
@@ -398,10 +392,7 @@
                     <a href="<?php echo esc_url(home_url("recruit")); ?>"
                         class="header-nav__submenu-link">採用情報</a>
                 </li>
-                <li class="header-nav__submenu-item">
-                    <a href="<?php echo esc_url(home_url("recruit-detail")); ?>"
-                        class="header-nav__submenu-link">採用情報詳細</a>
-                </li>
+         
             </ul>
         </li>
         <li class="header-nav__item header-nav__item--has-submenu">
@@ -539,10 +530,7 @@
                     <a href="<?php echo esc_url(home_url("recruit")); ?>"
                         class="header-nav__submenu-link">採用情報</a>
                 </li>
-                <li class="header-nav__submenu-item">
-                    <a href="<?php echo esc_url(home_url("recruit-detail")); ?>"
-                        class="header-nav__submenu-link">採用情報詳細</a>
-                </li>
+        
             </ul>
         </li>
         <li class="header-nav__item header-nav__item--has-submenu">
@@ -706,10 +694,6 @@
             <li class="global-nav__submenu-item">
               <a href="<?php echo esc_url(home_url("recruit")); ?>"
                  class="global-nav__submenu-link">採用情報</a>
-            </li>
-            <li class="global-nav__submenu-item">
-              <a href="<?php echo esc_url(home_url("recruit-detail")); ?>"
-                 class="global-nav__submenu-link">採用情報詳細</a>
             </li>
           </ul>
         </li>

@@ -3007,3 +3007,260 @@ function get_bottom_nav_banner_settings() {
     );
 }
 
+// 採用情報固定ページのカスタムフィールド
+function add_recruit_positions_meta_box($post_type, $post) {
+    if ($post_type === 'page' && $post && $post->post_name === 'recruit') {
+        add_meta_box(
+            'recruit_positions_meta_box',
+            '採用職種管理',
+            'recruit_positions_meta_box_callback',
+            'page',
+            'normal',
+            'high'
+        );
+    }
+}
+add_action('add_meta_boxes', 'add_recruit_positions_meta_box', 10, 2);
+
+function recruit_positions_meta_box_callback($post) {
+    wp_nonce_field('recruit_positions_meta_box', 'recruit_positions_meta_box_nonce');
+    
+    // メタデータから現在の職種情報を取得
+    $sakura_fulltime = get_post_meta($post->ID, '_recruit_positions_sakura_fulltime', true) ?: array();
+    $sakura_contract = get_post_meta($post->ID, '_recruit_positions_sakura_contract', true) ?: array();
+    $rakuda_fulltime = get_post_meta($post->ID, '_recruit_positions_rakuda_fulltime', true) ?: array();
+    $rakuda_contract = get_post_meta($post->ID, '_recruit_positions_rakuda_contract', true) ?: array();
+    ?>
+    
+    <div class="recruit-positions-admin">
+        <style>
+        .recruit-positions-admin .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 30px 0 15px 0;
+            padding: 10px 0;
+            border-bottom: 2px solid #0073aa;
+        }
+        .recruit-positions-admin .company-section {
+            background: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        .recruit-positions-admin .category-section {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .recruit-positions-admin .position-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        .recruit-positions-admin .position-title {
+            flex: 1;
+        }
+        .recruit-positions-admin .position-url {
+            flex: 1;
+        }
+        .recruit-positions-admin .remove-position {
+            background: #dc3232;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .recruit-positions-admin .add-position {
+            background: #0073aa;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        </style>
+        
+        <!-- さくら事務所セクション -->
+        <div class="company-section">
+            <h2 class="section-title">さくら事務所の採用</h2>
+            
+            <div class="category-section">
+                <h3>正社員募集</h3>
+                <div id="sakura-fulltime-positions">
+                    <?php
+                    if (!empty($sakura_fulltime)) {
+                        foreach ($sakura_fulltime as $index => $position) {
+                            echo '<div class="position-item">';
+                            echo '<input type="text" name="recruit_positions_sakura_fulltime[' . $index . '][title]" value="' . esc_attr($position['title']) . '" placeholder="職種名" class="position-title">';
+                            echo '<input type="url" name="recruit_positions_sakura_fulltime[' . $index . '][url]" value="' . esc_attr($position['url']) . '" placeholder="リンクURL" class="position-url">';
+                            echo '<button type="button" class="remove-position" onclick="this.parentElement.remove()">削除</button>';
+                            echo '</div>';
+                        }
+                    }
+                    ?>
+                </div>
+                <button type="button" class="add-position" onclick="addPosition('sakura-fulltime')">職種を追加</button>
+            </div>
+            
+            <div class="category-section">
+                <h3>複業・業務委託募集</h3>
+                <div id="sakura-contract-positions">
+                    <?php
+                    if (!empty($sakura_contract)) {
+                        foreach ($sakura_contract as $index => $position) {
+                            echo '<div class="position-item">';
+                            echo '<input type="text" name="recruit_positions_sakura_contract[' . $index . '][title]" value="' . esc_attr($position['title']) . '" placeholder="職種名" class="position-title">';
+                            echo '<input type="url" name="recruit_positions_sakura_contract[' . $index . '][url]" value="' . esc_attr($position['url']) . '" placeholder="リンクURL" class="position-url">';
+                            echo '<button type="button" class="remove-position" onclick="this.parentElement.remove()">削除</button>';
+                            echo '</div>';
+                        }
+                    }
+                    ?>
+                </div>
+                <button type="button" class="add-position" onclick="addPosition('sakura-contract')">職種を追加</button>
+            </div>
+        </div>
+        
+        <!-- らくだ不動産セクション -->
+        <div class="company-section">
+            <h2 class="section-title">らくだ不動産の採用</h2>
+            
+            <div class="category-section">
+                <h3>正社員募集</h3>
+                <div id="rakuda-fulltime-positions">
+                    <?php
+                    if (!empty($rakuda_fulltime)) {
+                        foreach ($rakuda_fulltime as $index => $position) {
+                            echo '<div class="position-item">';
+                            echo '<input type="text" name="recruit_positions_rakuda_fulltime[' . $index . '][title]" value="' . esc_attr($position['title']) . '" placeholder="職種名" class="position-title">';
+                            echo '<input type="url" name="recruit_positions_rakuda_fulltime[' . $index . '][url]" value="' . esc_attr($position['url']) . '" placeholder="リンクURL" class="position-url">';
+                            echo '<button type="button" class="remove-position" onclick="this.parentElement.remove()">削除</button>';
+                            echo '</div>';
+                        }
+                    }
+                    ?>
+                </div>
+                <button type="button" class="add-position" onclick="addPosition('rakuda-fulltime')">職種を追加</button>
+            </div>
+            
+            <div class="category-section">
+                <h3>複業・業務委託募集</h3>
+                <div id="rakuda-contract-positions">
+                    <?php
+                    if (!empty($rakuda_contract)) {
+                        foreach ($rakuda_contract as $index => $position) {
+                            echo '<div class="position-item">';
+                            echo '<input type="text" name="recruit_positions_rakuda_contract[' . $index . '][title]" value="' . esc_attr($position['title']) . '" placeholder="職種名" class="position-title">';
+                            echo '<input type="url" name="recruit_positions_rakuda_contract[' . $index . '][url]" value="' . esc_attr($position['url']) . '" placeholder="リンクURL" class="position-url">';
+                            echo '<button type="button" class="remove-position" onclick="this.parentElement.remove()">削除</button>';
+                            echo '</div>';
+                        }
+                    }
+                    ?>
+                </div>
+                <button type="button" class="add-position" onclick="addPosition('rakuda-contract')">職種を追加</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    function addPosition(category) {
+        const container = document.getElementById(category + '-positions');
+        const existingItems = container.querySelectorAll('.position-item');
+        const index = existingItems.length;
+        
+        const fieldPrefix = 'recruit_positions_' + category.replace('-', '_');
+        
+        const positionItem = document.createElement('div');
+        positionItem.className = 'position-item';
+        positionItem.innerHTML = `
+            <input type="text" name="${fieldPrefix}[${index}][title]" value="" placeholder="職種名" class="position-title">
+            <input type="url" name="${fieldPrefix}[${index}][url]" value="" placeholder="リンクURL" class="position-url">
+            <button type="button" class="remove-position" onclick="this.parentElement.remove()">削除</button>
+        `;
+        
+        container.appendChild(positionItem);
+    }
+    </script>
+    <?php
+}
+
+// 採用職種メタデータを保存する関数
+function save_recruit_positions_meta($post_id) {
+    // nonce確認
+    if (!isset($_POST['recruit_positions_meta_box_nonce']) || 
+        !wp_verify_nonce($_POST['recruit_positions_meta_box_nonce'], 'recruit_positions_meta_box')) {
+        return;
+    }
+
+    // 自動保存の場合は実行しない
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    // 権限確認
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    // 採用情報ページかどうか確認
+    $post = get_post($post_id);
+    if (!$post || $post->post_name !== 'recruit' || $post->post_type !== 'page') {
+        return;
+    }
+
+    // メタデータを保存
+    $fields = array(
+        'recruit_positions_sakura_fulltime',
+        'recruit_positions_sakura_contract', 
+        'recruit_positions_rakuda_fulltime',
+        'recruit_positions_rakuda_contract'
+    );
+
+    foreach ($fields as $field) {
+        if (isset($_POST[$field])) {
+            $sanitized_data = sanitize_recruit_positions($_POST[$field]);
+            update_post_meta($post_id, '_' . $field, $sanitized_data);
+        } else {
+            update_post_meta($post_id, '_' . $field, array());
+        }
+    }
+}
+add_action('save_post', 'save_recruit_positions_meta');
+
+function sanitize_recruit_positions($input) {
+    if (!is_array($input)) {
+        return array();
+    }
+    
+    $sanitized = array();
+    foreach ($input as $position) {
+        if (isset($position['title']) && isset($position['url']) && 
+            !empty(trim($position['title'])) && !empty(trim($position['url']))) {
+            $sanitized[] = array(
+                'title' => sanitize_text_field($position['title']),
+                'url' => esc_url_raw($position['url'])
+            );
+        }
+    }
+    
+    return $sanitized;
+}
+
+// 採用職種データを取得する関数（ページメタデータから）
+function get_recruit_positions($company, $type) {
+    // 採用情報ページを取得
+    $recruit_page = get_page_by_path('recruit');
+    if (!$recruit_page) {
+        return array();
+    }
+    
+    $meta_key = '_recruit_positions_' . $company . '_' . $type;
+    return get_post_meta($recruit_page->ID, $meta_key, true) ?: array();
+}
+
