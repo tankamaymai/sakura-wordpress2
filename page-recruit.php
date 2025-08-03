@@ -274,14 +274,17 @@
                 <div class="recruit-data__item recruit-data__item--gender">
                     <h3>事業運営メンバーの男女比</h3>
                     <div class="recruit-data__gender-chart">
+                        <!-- 女性画像（左側） -->
                         <div class="recruit-data__gender-image recruit-data__gender-image--female">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-g-women.webp" alt="女性メンバー">
                         </div>
+                        
+                        <!-- 円グラフ（中央） -->
                         <div class="recruit-data__gender-pie" data-male="40" data-female="60">
                             <svg class="recruit-data__gender-svg" viewBox="0 0 40 40">
-                                <!-- 女性40%（背景全体） -->
+                                <!-- 女性60%（背景全体） -->
                                 <circle class="recruit-data__gender-bg" cx="50%" cy="50%" r="15.9154"/>
-                                <!-- 男性60%（アニメーション対象） -->
+                                <!-- 男性40%（アニメーション対象） -->
                                 <circle class="recruit-data__gender-progress" cx="50%" cy="50%" r="15.9154"/>
                             </svg>
                             <div class="recruit-data__gender-ratio">
@@ -290,6 +293,8 @@
                                 <span class="recruit-data__gender-female">4</span>
                             </div>
                         </div>
+                        
+                        <!-- 男性画像（右側） -->
                         <div class="recruit-data__gender-image recruit-data__gender-image--male">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-g-man.webp" alt="男性メンバー">
                         </div>

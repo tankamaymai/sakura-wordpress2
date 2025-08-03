@@ -7078,7 +7078,6 @@ body.no-scroll {
   font-size: 32px;
   color: #ffffff;
   text-transform: uppercase;
-  margin-bottom: 40px;
 }
 
 .recruit-data__item--member-count {
@@ -7111,6 +7110,7 @@ body.no-scroll {
 
 .recruit-data__item--gender {
   background-color: #00293c;
+  padding: 13px 18px 0 18px;
 }
 .recruit-data__item--gender h3 {
   font-family: "Barlow", "Noto Sans JP", sans-serif;
@@ -7119,7 +7119,6 @@ body.no-scroll {
   font-size: 32px;
   color: #ffffff;
   text-transform: uppercase;
-  margin-bottom: 40px;
   text-align: center;
 }
 @media screen and (max-width: 768px) {
@@ -7433,12 +7432,6 @@ body.no-scroll {
   gap: 40px;
 }
 
-.recruit-data__age-chart {
-  background-color: rgba(168, 251, 231, 0.1);
-  border-radius: 20px;
-  padding: 40px;
-}
-
 .recruit-data__age-chart h3 {
   font-family: "Barlow", "Noto Sans JP", sans-serif;
   font-weight: 700;
@@ -7447,7 +7440,6 @@ body.no-scroll {
   color: #ffffff;
   text-transform: uppercase;
   text-align: center;
-  margin-bottom: 40px;
 }
 
 /* 求める人物像セクション */
@@ -7946,38 +7938,37 @@ body.no-scroll {
 .recruit-data__gender-chart {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: end;
   justify-content: center;
   flex: 1;
-  gap: 30px;
-}
-@media screen and (max-width: 768px) {
-  .recruit-data__gender-chart {
-    flex-direction: column;
-    gap: 20px;
-  }
 }
 
 .recruit-data__gender-pie {
   position: relative;
-  max-width: 562px;
+  max-width: 350px;
   width: 100%;
-  height: 100%;
-  aspect-ratio: 562/292;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+@media screen and (max-width: 768px) {
+  .recruit-data__gender-pie {
+    max-width: 280px;
+    height: 280px;
+  }
 }
 
 .recruit-data__gender-svg {
-  width: 300px;
-  height: 300px;
+  width: 320px;
+  height: 320px;
   transform: rotate(-90deg);
 }
 @media screen and (max-width: 768px) {
   .recruit-data__gender-svg {
-    width: 280px;
-    height: 280px;
+    width: 250px;
+    height: 250px;
   }
 }
 
@@ -8031,9 +8022,10 @@ body.no-scroll {
 /* 男女比画像 */
 .recruit-data__gender-image {
   flex-shrink: 0;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+  max-width: 128px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 128/191;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -8041,25 +8033,41 @@ body.no-scroll {
 }
 @media screen and (max-width: 768px) {
   .recruit-data__gender-image {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
 }
 .recruit-data__gender-image img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .recruit-data__gender-image--female {
-  border: 3px solid #F1F3CE;
+  max-width: 97px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 97/173;
+}
+.recruit-data__gender-image--female img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .recruit-data__gender-image--male {
-  border: 3px solid #05D6D0;
+  max-width: 128px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 128/191;
+}
+.recruit-data__gender-image--male img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 /* 年齢構成棒グラフ */
@@ -8139,29 +8147,28 @@ body.no-scroll {
 .recruit-data__age-chart--donut {
   background-color: #00293c;
   border-radius: 20px;
-  padding: 40px;
+  padding: 13px 18px;
 }
 .recruit-data__age-chart--donut h3 {
   font-family: "Barlow", "Noto Sans JP", sans-serif;
   font-weight: 700;
   font-style: italic;
-  font-size: 26px;
+  font-size: 24px;
   color: #ffffff;
   text-transform: uppercase;
   text-align: center;
-  margin-bottom: 40px;
 }
 @media screen and (max-width: 768px) {
   .recruit-data__age-chart--donut h3 {
     font-size: 20px;
-    margin-bottom: 30px;
   }
 }
 
 .recruit-data__age-donut-container {
   display: flex;
-  align-items: center;
+  align-items: end;
   gap: 80px;
+  margin-top: 30px;
 }
 @media screen and (max-width: 768px) {
   .recruit-data__age-donut-container {
@@ -8236,7 +8243,6 @@ body.no-scroll {
 }
 
 .recruit-data__age-legend {
-  flex: 1;
   color: #ffffff;
 }
 @media screen and (max-width: 768px) {
@@ -8248,13 +8254,10 @@ body.no-scroll {
 .recruit-data__age-legend-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
   font-family: "Albert Sans", "Noto Sans JP", sans-serif;
   font-weight: 500;
   font-size: 24px;
   color: #ffffff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 10px;
 }
 @media screen and (max-width: 768px) {
   .recruit-data__age-legend-header {
@@ -8274,7 +8277,6 @@ body.no-scroll {
 .recruit-data__age-legend-item {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
   font-family: "Albert Sans", "Noto Sans JP", sans-serif;
   font-size: 24px;
   line-height: 36px;
@@ -8323,7 +8325,7 @@ body.no-scroll {
 }
 
 .recruit-data__age-legend-age {
-  color: #ffffff;
+  color: #e2bf77;
   font-weight: 500;
   flex: 1;
 }
@@ -8331,7 +8333,7 @@ body.no-scroll {
 .recruit-data__age-legend-number {
   color: #e2bf77;
   font-weight: 500;
-  margin-left: auto;
+  margin-left: 35px;
 }
 
 /* 採用詳細ページのスタイル */
