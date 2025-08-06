@@ -29,7 +29,9 @@
         <div class="recruit-hero__content-inner">
             <p class="recruit-hero__subtitle">ここまでの<br class="md-show">あらすじ</p>
             <div class="recruit-hero__text">
-                <p>1999年――人と不動産のより幸せな関係を求め、長嶋修は霧深い業界の海へ小舟を漕ぎ出した。中立の旗を掲げたさくら事務所はホームインスペクションの光で暗礁を照らし、仲間を増やしながら内紛という嵐に傷つきつつも乗り越える。バトンを受け継いだ大西倫加は航路をマンション管理・防災・不動産仲介へと広げ、らくだ不動産、BORDER5、だいち災害リスク研究所など新たな船を束ね船団を編成。大西から若手の経営チームにバトンを引継ぎながら、理念の追求と五方良しが体現され続ける"100年企業"へ――。"豊かで美しい社会"を次世代に届けるため、さくら事務所グループの冒険はさらに加速する。次の時代の大海原へ。さくら事務所グループ第四章、ここに開幕。
+                <p>1999年、<br class="md-show">人と不動産のより幸せな関係を目指し、<br class="md-show">
+                長嶋修が中立の旗を掲げて<br class="md-show">さくら事務所を創業。<br class="md-show">国内初のホームインスペクションで<br class="md-show">業界を牽引し、仲間とともに嵐を越えてきた。<br class="md-show">バトンを受け継いだ大西倫加は、<br class="md-show">マンション管理・防災・不動産仲介へと<br class="md-show">航路を広げ、らくだ不動産やBORDER5など<br class="md-show">新たな事業を展開。
+                さらに次世代の経営チームへの継承に向け、<br class="md-show">五方良しと理念を体現する<br class="md-show"><span class="recruit-text-big">“100年企業“</span>を目指して挑戦は続く。<br class="md-show">次世代へ“豊かで美しい社会“を届けるべく、<br class="md-show">さくら事務所グループ第四章が始まる。
                 </p>
             </div>
         </div>
@@ -104,7 +106,7 @@
 
 
     <!-- 組織構造（船団）セクション -->
-    <section class="recruit-fleet">
+    <section class="recruit-fleet md-none">
         <div class="recruit-fleet__inner container">
             <h2 class="recruit-fleet__title">さくら事務所グループ"船団"</h2>
             <div class="recruit-fleet__diagram">
@@ -203,6 +205,193 @@
             </div>
         </div>
     </section>
+
+    <!-- 船団スマホ -->
+    <section class="recruit-fleet-sp md-show">
+        <div class="recruit-fleet-sp__inner">
+            <h2 class="recruit-fleet-sp__title">さくら事務所グループ"船団"</h2>
+            
+            <div class="recruit-fleet-sp__grid">
+                <!-- 第1行 -->
+                <div class="recruit-fleet-sp__row">
+                    <!-- バックオフィス -->
+                    <div class="recruit-fleet-sp__ship" data-member="tsuji">
+                        <div class="recruit-fleet-sp__ship-icon">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
+                        </div>
+                        <div class="recruit-fleet-sp__ship-card">
+                            <div class="recruit-fleet-sp__ship-image">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/tsuji.webp" alt="辻 優子">
+                            </div>
+                            <div class="recruit-fleet-sp__ship-content">
+                                <h3 class="recruit-fleet-sp__ship-title">バックオフィス</h3>
+                                <p class="recruit-fleet-sp__ship-captain">船長：辻 優子</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AIタスクフォース -->
+                    <div class="recruit-fleet-sp__ship" data-member="tamura-ai">
+                        <div class="recruit-fleet-sp__ship-icon">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
+                        </div>
+                        <div class="recruit-fleet-sp__ship-card">
+                            <div class="recruit-fleet-sp__ship-image">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/tamura.webp" alt="田村 啓">
+                            </div>
+                            <div class="recruit-fleet-sp__ship-content">
+                                <h3 class="recruit-fleet-sp__ship-title">AIタスクフォース：AI:BOU</h3>
+                                <p class="recruit-fleet-sp__ship-captain">船長：田村 啓</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 第2行 -->
+                <div class="recruit-fleet-sp__row">
+                    <!-- YouTube・SNSマーケティング -->
+                    <div class="recruit-fleet-sp__ship" data-member="nakayama">
+                        <div class="recruit-fleet-sp__ship-icon">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
+                        </div>
+                        <div class="recruit-fleet-sp__ship-card">
+                            <div class="recruit-fleet-sp__ship-image">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/nakayama.webp" alt="中山 夏美">
+                            </div>
+                            <div class="recruit-fleet-sp__ship-content">
+                                <h3 class="recruit-fleet-sp__ship-title">YouTube・SNS<br>マーケティング</h3>
+                                <p class="recruit-fleet-sp__ship-captain">船長：中山 夏美</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- H&R Co-creation -->
+                    <div class="recruit-fleet-sp__ship" data-member="tamura">
+                        <div class="recruit-fleet-sp__ship-icon">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
+                        </div>
+                        <div class="recruit-fleet-sp__ship-card">
+                            <div class="recruit-fleet-sp__ship-image">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/tamura.webp" alt="田村 啓">
+                            </div>
+                            <div class="recruit-fleet-sp__ship-content">
+                                <h3 class="recruit-fleet-sp__ship-title">H&R Co-creation：<br>人と資源の共創部</h3>
+                                <p class="recruit-fleet-sp__ship-captain">船長：田村 啓</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 第3行 -->
+                <div class="recruit-fleet-sp__row">
+                    <!-- だいち災害リスク研究所 -->
+                    <div class="recruit-fleet-sp__ship" data-member="yokoyama">
+                        <div class="recruit-fleet-sp__ship-icon">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
+                        </div>
+                        <div class="recruit-fleet-sp__ship-card">
+                            <div class="recruit-fleet-sp__ship-image">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/yokoyama.webp" alt="横山 芳春">
+                            </div>
+                            <div class="recruit-fleet-sp__ship-content">
+                                <h3 class="recruit-fleet-sp__ship-title">だいち災害リスク研究所</h3>
+                                <p class="recruit-fleet-sp__ship-captain">船長：横山 芳春</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- マーケティング・コミュニケーション部 -->
+                    <div class="recruit-fleet-sp__ship" data-member="tomoda">
+                        <div class="recruit-fleet-sp__ship-icon">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
+                        </div>
+                        <div class="recruit-fleet-sp__ship-card">
+                            <div class="recruit-fleet-sp__ship-image">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/tomoda.webp" alt="友田 雄俊">
+                            </div>
+                            <div class="recruit-fleet-sp__ship-content">
+                                <h3 class="recruit-fleet-sp__ship-title">マーケティング・<br>コミュニケーション部</h3>
+                                <p class="recruit-fleet-sp__ship-captain">船長：友田 雄俊</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 第4行 -->
+                <div class="recruit-fleet-sp__row">
+                    <!-- らくだ不動産 -->
+                    <div class="recruit-fleet-sp__ship" data-member="yamamoto-rakuda">
+                        <div class="recruit-fleet-sp__ship-icon">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
+                        </div>
+                        <div class="recruit-fleet-sp__ship-card">
+                            <div class="recruit-fleet-sp__ship-image">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/yamamoto.webp" alt="山本 直彌">
+                            </div>
+                            <div class="recruit-fleet-sp__ship-content">
+                                <h3 class="recruit-fleet-sp__ship-title">らくだ不動産</h3>
+                                <p class="recruit-fleet-sp__ship-captain">船長：山本 直彌</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 経営チーム -->
+                    <div class="recruit-fleet-sp__ship" data-member="oonishi">
+                        <div class="recruit-fleet-sp__ship-icon">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
+                        </div>
+                        <div class="recruit-fleet-sp__ship-card">
+                            <div class="recruit-fleet-sp__ship-image">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/oonishi.webp" alt="大西 倫加">
+                            </div>
+                            <div class="recruit-fleet-sp__ship-content">
+                                <h3 class="recruit-fleet-sp__ship-title">経営チーム</h3>
+                                <p class="recruit-fleet-sp__ship-captain">船長：大西 倫加</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 第5行 -->
+                <div class="recruit-fleet-sp__row">
+                    <!-- 住まいと暮らし事業部（マンション管理コンサルティング） -->
+                    <div class="recruit-fleet-sp__ship recruit-fleet-sp__ship--large" data-member="yamamoto">
+                        <div class="recruit-fleet-sp__ship-icon">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
+                        </div>
+                        <div class="recruit-fleet-sp__ship-card recruit-fleet-sp__ship-card--large">
+                            <div class="recruit-fleet-sp__ship-image">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/yamamoto.webp" alt="山本 直彌">
+                            </div>
+                            <div class="recruit-fleet-sp__ship-content">
+                                <h3 class="recruit-fleet-sp__ship-title">住まいと暮らし事業部</h3>
+                                <p class="recruit-fleet-sp__ship-subtitle">マンション管理コンサルティング</p>
+                                <p class="recruit-fleet-sp__ship-captain">船長：山本 直彌</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 住まいと暮らし事業部（ホームインスペクション） -->
+                    <div class="recruit-fleet-sp__ship recruit-fleet-sp__ship--large" data-member="tomoda-home">
+                        <div class="recruit-fleet-sp__ship-icon">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
+                        </div>
+                        <div class="recruit-fleet-sp__ship-card recruit-fleet-sp__ship-card--large">
+                            <div class="recruit-fleet-sp__ship-image">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/tomoda.webp" alt="友田 雄俊">
+                            </div>
+                            <div class="recruit-fleet-sp__ship-content">
+                                <h3 class="recruit-fleet-sp__ship-title">住まいと暮らし事業部</h3>
+                                <p class="recruit-fleet-sp__ship-subtitle">ホームインスペクション</p>
+                                <p class="recruit-fleet-sp__ship-captain">船長：友田 雄俊</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>  
+    
 
 
     <!-- データセクション -->
