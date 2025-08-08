@@ -433,17 +433,17 @@
 /* 縦ハンバーガーメニュー */
 .recruit-hamburger {
   position: fixed;
-  top: 50%;
+  top: 50%; /* 元の位置（画面中央） */
   left: 0px;
-  transform: translateY(-50%);
+  transform: translateY(-50%); /* 元の中央配置 */
   z-index: 1000;
   width: 70px;
-  height: 100vh;
+  height: 100vh; /* 元の高さに戻す */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
- color: #fff;
+  color: #fff;
   border-right: 1px solid #fff;
 
   transition: all 0.3s ease;
@@ -453,9 +453,22 @@
     transform: translateY(-50%) scale(1.05);
   }
   
-  /* アクティブ時（ヘッダー表示中） */
+  /* アクティブ時（×ボタン表示中）- メニューの下に移動 */
   &.is-active {
+    top: auto;
+    bottom: 20px; /* メニューの下に配置 */
+    transform: none;
+    height: 70px; /* コンパクトなサイズ */
     border-right: none;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    background: rgba(0, 0, 0, 0.2);
+    
+    &:hover {
+      transform: scale(1.05);
+      background: rgba(0, 0, 0, 0.3);
+    }
+    
     .recruit-hamburger__icon span {
       background: #fff;
       
