@@ -793,14 +793,177 @@ function initGenderChartAnimation() {
     });
 }
 
+// 年齢構成ドーナツチャートのモーショングラフィック風アニメーション
+function initAgeDonutChartAnimation() {
+    const ageDonutCharts = document.querySelectorAll('.recruit-data__age-donut-svg');
+    console.log('年齢構成ドーナツチャート要素数:', ageDonutCharts.length);
+    
+    if (ageDonutCharts.length === 0) {
+        console.warn('年齢構成ドーナツチャート要素が見つかりません');
+        return;
+    }
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                console.log('年齢構成ドーナツチャートが画面に表示されました');
+                const svg = entry.target;
+                const segments = svg.querySelectorAll('.recruit-data__age-segment');
+                console.log('セグメント数:', segments.length);
+                
+                // SVGにアニメーション準備クラスを追加
+                svg.classList.add('motion-ready');
+                
+                // セグメントを右回り（時計回り）の順序でソート
+                const sortedSegments = Array.from(segments).sort((a, b) => {
+                    const getSegmentOrder = (seg) => {
+                        // HTMLでの配置順序に基づいて右回り（時計回り）で並べ替え
+                        if (seg.classList.contains('recruit-data__age-segment--5')) return 1; // 65歳以上（12時方向）
+                        if (seg.classList.contains('recruit-data__age-segment--4')) return 2; // 55-64歳（2時方向）
+                        if (seg.classList.contains('recruit-data__age-segment--2')) return 3; // 35-44歳（4時方向）
+                        if (seg.classList.contains('recruit-data__age-segment--3')) return 4; // 45-54歳（8時方向）
+                        if (seg.classList.contains('recruit-data__age-segment--1')) return 5; // 20-34歳（10時方向）
+                        // 専門家用のセグメント
+                        if (seg.classList.contains('recruit-data__age-segment--expert-1')) return 1;
+                        if (seg.classList.contains('recruit-data__age-segment--expert-2')) return 2;
+                        if (seg.classList.contains('recruit-data__age-segment--expert-3')) return 3;
+                        if (seg.classList.contains('recruit-data__age-segment--expert-4')) return 4;
+                        if (seg.classList.contains('recruit-data__age-segment--expert-5')) return 5;
+                        return 6;
+                    };
+                    return getSegmentOrder(a) - getSegmentOrder(b);
+                });
+                
+                // 各セグメントに個別のアニメーションを適用
+                sortedSegments.forEach((segment, index) => {
+                    console.log(`セグメント ${index + 1} のアニメーション準備中`, segment.className);
+                    
+                    // 初期状態：透明度0に設定（スケールは使用せず）
+                    segment.style.opacity = '0';
+                    segment.style.transition = 'all 0.8s ease-out';
+                    
+                    // 段階的にアニメーション開始（各セグメントを200msずつ遅延）
+                    setTimeout(() => {
+                        console.log(`セグメント ${index + 1} のアニメーション開始`);
+                        // フェードインアニメーション
+                        segment.style.opacity = '1';
+                        
+                        // エフェクト追加
+                        setTimeout(() => {
+                            segment.style.filter = 'brightness(1.3)';
+                            setTimeout(() => {
+                                segment.style.filter = 'brightness(1)';
+                            }, 300);
+                        }, 100);
+                        
+                        // ホバーエフェクトは削除（不要）
+                        
+                        // パルスエフェクトは削除（不要）
+                        
+                    }, index * 200 + 300); // 初期遅延300ms + インデックス別遅延
+                });
+                
+                // グローバルアニメーション（削除済み）
+                // SVG全体の回転・スケールアニメーションは不要のため削除
+                
+                observer.unobserve(svg);
+            }
+        });
+    }, {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    ageDonutCharts.forEach(chart => {
+        observer.observe(chart);
+    });
+}
+
+
+// パルスエフェクト（削除済み）
+// function addPulseEffect(segment) {
+//     // パルスエフェクトは不要のため削除
+// }
+
+// メンバー数カウントアップアニメーション
+function initMemberCountAnimation() {
+    const memberCountElement = document.querySelector('.recruit-data__member-number');
+    
+    if (!memberCountElement) {
+        console.log('メンバー数要素が見つかりません');
+        return;
+    }
+    
+    // 現在の数値を取得
+    const targetNumber = parseInt(memberCountElement.textContent) || 195;
+    console.log('カウントアップ対象数値:', targetNumber);
+    
+    // IntersectionObserverでスクロール検知
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                console.log('メンバー数カウントアップ開始');
+                animateCountUp(memberCountElement, targetNumber);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.5,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    // メンバー数セクション全体を監視
+    const memberCountSection = document.querySelector('.recruit-data__item--member-count');
+    if (memberCountSection) {
+        observer.observe(memberCountSection);
+    }
+}
+
+// カウントアップアニメーション実行
+function animateCountUp(element, targetNumber) {
+    const startNumber = 0;
+    const duration = 2000; // 2秒間
+    const startTime = performance.now();
+    
+    // 初期値を0に設定
+    element.textContent = '0';
+    
+    function updateCount(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // イージング関数（ease-out）
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        
+        // 現在の数値を計算
+        const currentNumber = Math.floor(startNumber + (targetNumber - startNumber) * easedProgress);
+        
+        // 数値を更新
+        element.textContent = currentNumber.toString();
+        
+        // アニメーション継続
+        if (progress < 1) {
+            requestAnimationFrame(updateCount);
+        } else {
+            // 最終値を確実に設定
+            element.textContent = targetNumber.toString();
+            console.log('メンバー数カウントアップ完了:', targetNumber);
+        }
+    }
+    
+    requestAnimationFrame(updateCount);
+}
+
 // DOMContentLoaded時に初期化
 document.addEventListener('DOMContentLoaded', function() {
     // 円グラフアニメーションを初期化
     initPieChartAnimation();
     // 男女比円グラフアニメーションを初期化
     initGenderChartAnimation();
-    // 年齢構成棒グラフのアニメーションを初期化
-    initBarCharts();
+    // 年齢構成ドーナツチャートアニメーションを初期化
+    initAgeDonutChartAnimation();
+    // メンバー数カウントアップアニメーションを初期化
+    initMemberCountAnimation();
     // メンバーポップアップを初期化
     initMemberPopup();
 });

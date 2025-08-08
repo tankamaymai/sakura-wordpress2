@@ -2114,15 +2114,29 @@ background-color: #0A5877;
   width: 100%;
   height: 100%;
   transform: rotate(0deg);
+  transition: transform 0.3s ease;
+  
+  // モーショングラフィック用のアニメーション準備
+  &.motion-ready {
+    .recruit-data__age-segment {
+      transform-origin: 50% 50%;
+      transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+  }
 }
 
 .recruit-data__age-segment {
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
   
-  &:hover {
-    opacity: 0.8;
-  }
+  // 初期状態（JavaScriptで制御されるためコメントアウト）
+  // opacity: 0;
+  // transform: scale(0);
+  
+  // ホバーエフェクトは削除（不要）
 }
+
+// モーショングラフィック用のアニメーションキーフレーム（削除済み）
+// パルスエフェクトとグローエフェクトは不要のため削除
 
 // 年代別セグメントの色設定（20-34歳から右回りの順）
 .recruit-data__age-segment--1 {

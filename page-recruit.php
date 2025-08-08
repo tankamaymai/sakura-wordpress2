@@ -9,9 +9,9 @@
     </div>
 </div>
 
-<main class="recruit">
+<main class="recruit" >
     <!-- ヒーローセクション -->
-    <section class="recruit-hero">
+    <section class="recruit-hero" data-midnight="white">
         <video class="recruit-hero-video" id="hero-video" autoplay muted loop playsinline>
             <source src="<?php echo esc_url(get_theme_file_uri('/video/recruit-mv.mp4')); ?>" type="video/mp4">
         </video>
@@ -37,7 +37,7 @@
         </div>
     </section>
 
-    <section class="recruit-history">
+    <section class="recruit-history" data-midnight="default">
         <div class="recruit-history__inner container">
             <div class="recruit-history__content">
                 <h2 class="recruit-history__title">さくら事務所グループ　<br class="md-show">第一章〜第四章
@@ -76,7 +76,7 @@
     </section>
 
     <!-- 経営チームセクション -->
-    <section class="recruit-team md-none">
+    <section class="recruit-team md-none" data-midnight="white">
         <div class="recruit-team-bg">
             <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-team-new.webp" alt="チーム背景">
         </div>
@@ -163,7 +163,7 @@
 
 
     <!-- 組織構造（船団）セクション -->
-    <section class="recruit-fleet md-none">
+    <section class="recruit-fleet md-none" data-midnight="white">
         <div class="recruit-fleet__inner container">
             <h2 class="recruit-fleet__title">さくら事務所グループ"船団"</h2>
             <div class="recruit-fleet__diagram">
@@ -452,7 +452,7 @@
 
 
     <!-- データセクション -->
-    <section class="recruit-data">
+    <section class="recruit-data" data-midnight="white">
         <div class="recruit-data-container">
             <h2 class="recruit-data__title">男女比・平均年齢</h2>
 
@@ -688,7 +688,7 @@
     </section>
 
     <!-- 多様な働き方 -->
-    <section class="recruit-workstyle">
+    <section class="recruit-workstyle" data-midnight="default">
 
             <h2 class="recruit-workstyle__title">さくら事務所グループの働き方</h2>
             <div class="recruit-workstyle__cases">
@@ -743,7 +743,7 @@
     </section>
 
     <!-- 募集職種一覧 -->
-    <section class="recruit-positions" id="positions">
+    <section class="recruit-positions" id="positions" data-midnight="default">
         <div class="container">
             <h2 class="recruit-positions__title">募集職種一覧</h2>
             

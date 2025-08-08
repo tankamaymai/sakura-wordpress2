@@ -8467,13 +8467,15 @@ body.no-scroll {
   width: 100%;
   height: 100%;
   transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+.recruit-data__age-donut-svg.motion-ready .recruit-data__age-segment {
+  transform-origin: 50% 50%;
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .recruit-data__age-segment {
-  transition: opacity 0.3s ease;
-}
-.recruit-data__age-segment:hover {
-  opacity: 0.8;
+  transition: all 0.3s ease;
 }
 
 .recruit-data__age-segment--1 {
