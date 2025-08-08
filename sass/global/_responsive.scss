@@ -4,6 +4,7 @@
 $breakpoints: (
   ssp: 325,
   sp: 375,
+  sp1: 500,
   sp2: 550,
   sp3: 675,
   md3: 920,
@@ -18,6 +19,7 @@ $breakpoints: (
 $mediaqueries: (
   ssp: "screen and (max-width: #{map.get($breakpoints,'ssp')}px)",
   sp: "screen and (max-width: #{map.get($breakpoints,'sp')}px)",
+  sp1: "screen and (max-width: #{map.get($breakpoints,'sp1')}px)",
   sp2: "screen and (max-width: #{map.get($breakpoints,'sp2')}px)",
   sp3: "screen and (max-width: #{map.get($breakpoints,'sp3')}px)",
   md3: "screen and (max-width: #{map.get($breakpoints,'md3')}px)",

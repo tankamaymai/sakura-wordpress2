@@ -78,7 +78,7 @@
     <!-- 経営チームセクション -->
     <section class="recruit-team md-none">
         <div class="recruit-team-bg">
-            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-all-img.webp" alt="チーム背景">
+            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-team-new.webp" alt="チーム背景">
         </div>
         <div class="recruit-team__inner">
         </div>
@@ -89,17 +89,74 @@
 
             <div class="recruit-team-sp__swiper swiper">
                 <div class="swiper-wrapper">
+                    <!-- 大西倫加スライド -->
                     <div class="swiper-slide">
                         <div class="recruit-team-sp__content-item">
                             <div class="recruit-team-sp__content-img">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-team-sp.webp" alt="経営チーム">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-oonishi-sp.png" alt="大西 倫加">
                             </div>
                             <div class="recruit-team-sp__content-text">
-                                <p class="recruit-team-sp__content-text-title">船長：大西 倫加</p>
-                                <p class="recruit-team-sp__content-text-text">船長：大西 倫加</p>
+                                <div class="recruit-team-sp__content-role">
+                                    <p class="recruit-team-sp__content-role-en">Chief Executive Officer</p>
+                                    <p class="recruit-team-sp__content-role-jp">（最高経営責任者）</p>
+                                    <p class="recruit-team-sp__content-role-en">Chief Empowerment Officer</p>
+                                    <p class="recruit-team-sp__content-role-jp">（最高エンパワーメント責任者）</p>
+                                </div>
+                                <h3 class="recruit-team-sp__content-name">大西 倫加</h3>
+                                <div class="recruit-team-sp__content-company">
+                                    <p>さくら事務所・らくだ不動産</p>
+                                    <p>CEO 代表取締役社長</p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- 他の経営メンバーのスライドをここに追加可能 -->
+                    <!-- 現在は大西さんのみのデザインが提供されているため、1枚のみ実装 -->
+                    <div class="swiper-slide">
+                        <div class="recruit-team-sp__content-item">
+                            <div class="recruit-team-sp__content-img">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-tamura-sp.webp" alt="田村 啓">
+                            </div>
+                            <div class="recruit-team-sp__content-text">
+                                <div class="recruit-team-sp__content-role">
+                                  
+                                    <p class="recruit-team-sp__content-role-en">Chief Resource Officer</p>
+                                    <p class="recruit-team-sp__content-role-jp">（最高資源責任者）</p>
+                                    <p class="recruit-team-sp__content-role-en">Chief Resilience Officer</p>
+                                    <p class="recruit-team-sp__content-role-jp">（最高レジリエンス責任者）</p>
+                                </div>
+                                <h3 class="recruit-team-sp__content-name">田村 啓</h3>
+                                <div class="recruit-team-sp__content-company">
+                                    <p>さくら事務所</p>
+                                    <p>CRO 執行役員</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="recruit-team-sp__content-item">
+                            <div class="recruit-team-sp__content-img">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-oonishi-sp.png" alt="大西 倫加">
+                            </div>
+                            <div class="recruit-team-sp__content-text">
+                                <div class="recruit-team-sp__content-role">
+                                    <p class="recruit-team-sp__content-role-en">Chief Executive Officer</p>
+                                    <p class="recruit-team-sp__content-role-jp">（最高経営責任者）</p>
+                                    <p class="recruit-team-sp__content-role-en">Chief Empowerment Officer</p>
+                                    <p class="recruit-team-sp__content-role-jp">（最高エンパワーメント責任者）</p>
+                                </div>
+                                <h3 class="recruit-team-sp__content-name">大西 倫加</h3>
+                                <div class="recruit-team-sp__content-company">
+                                    <p>さくら事務所・らくだ不動産</p>
+                                    <p>CEO 代表取締役社長</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            
             </div>
         </div>
     </section>
@@ -209,7 +266,7 @@
     <!-- 船団スマホ -->
     <section class="recruit-fleet-sp md-show">
         <div class="recruit-fleet-sp__inner">
-            <h2 class="recruit-fleet-sp__title">さくら事務所グループ"船団"</h2>
+            <h2 class="recruit-fleet-sp__title">さくら事務所<br class="sp2-show">グループ"船団"</h2>
             
             <div class="recruit-fleet-sp__grid">
                 <!-- 第1行 -->
@@ -231,7 +288,7 @@
                     </div>
                     
                     <!-- AIタスクフォース -->
-                    <div class="recruit-fleet-sp__ship" data-member="tamura-ai">
+                    <div class="recruit-fleet-sp__ship-even" data-member="tamura-ai">
                         <div class="recruit-fleet-sp__ship-icon">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
                         </div>
@@ -266,7 +323,7 @@
                     </div>
                     
                     <!-- H&R Co-creation -->
-                    <div class="recruit-fleet-sp__ship" data-member="tamura">
+                    <div class="recruit-fleet-sp__ship-even" data-member="tamura">
                         <div class="recruit-fleet-sp__ship-icon">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
                         </div>
@@ -301,7 +358,7 @@
                     </div>
                     
                     <!-- マーケティング・コミュニケーション部 -->
-                    <div class="recruit-fleet-sp__ship" data-member="tomoda">
+                    <div class="recruit-fleet-sp__ship-even" data-member="tomoda">
                         <div class="recruit-fleet-sp__ship-icon">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
                         </div>
@@ -336,7 +393,7 @@
                     </div>
                     
                     <!-- 経営チーム -->
-                    <div class="recruit-fleet-sp__ship" data-member="oonishi">
+                    <div class="recruit-fleet-sp__ship-even" data-member="oonishi">
                         <div class="recruit-fleet-sp__ship-icon">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
                         </div>
@@ -355,11 +412,11 @@
                 <!-- 第5行 -->
                 <div class="recruit-fleet-sp__row">
                     <!-- 住まいと暮らし事業部（マンション管理コンサルティング） -->
-                    <div class="recruit-fleet-sp__ship recruit-fleet-sp__ship--large" data-member="yamamoto">
+                    <div class="recruit-fleet-sp__ship " data-member="yamamoto">
                         <div class="recruit-fleet-sp__ship-icon">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
                         </div>
-                        <div class="recruit-fleet-sp__ship-card recruit-fleet-sp__ship-card--large">
+                        <div class="recruit-fleet-sp__ship-card ">
                             <div class="recruit-fleet-sp__ship-image">
                                 <img src="<?php echo get_template_directory_uri(); ?>/images/yamamoto.webp" alt="山本 直彌">
                             </div>
@@ -372,11 +429,11 @@
                     </div>
                     
                     <!-- 住まいと暮らし事業部（ホームインスペクション） -->
-                    <div class="recruit-fleet-sp__ship recruit-fleet-sp__ship--large" data-member="tomoda-home">
+                    <div class=" recruit-fleet-sp__ship-even" data-member="tomoda-home">
                         <div class="recruit-fleet-sp__ship-icon">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-ship-sp.webp" alt="船アイコン">
                         </div>
-                        <div class="recruit-fleet-sp__ship-card recruit-fleet-sp__ship-card--large">
+                        <div class="recruit-fleet-sp__ship-card ">
                             <div class="recruit-fleet-sp__ship-image">
                                 <img src="<?php echo get_template_directory_uri(); ?>/images/tomoda.webp" alt="友田 雄俊">
                             </div>
@@ -446,11 +503,11 @@
                                 <circle class="recruit-data__pie-progress recruit-data__pie-progress--workstyle" cx="50%" cy="50%" r="15.9154"/>
                             </svg>
                             <div class="recruit-data__pie-labels">
-                                <div class="recruit-data__pie-label-left">
+                                <div class="recruit-data__pie-label-left--workstyle">
                                     <span class="recruit-data__pie-label-text">ハイブリッド</span>
                                     <span class="recruit-data__pie-percentage">10%</span>
                                 </div>
-                                <div class="recruit-data__pie-label-right">
+                                <div class="recruit-data__pie-label-right--workstyle">
                                     <span class="recruit-data__pie-label-text">フルリモート</span>
                                     <span class="recruit-data__pie-percentage">90%</span>
                                 </div>

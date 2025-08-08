@@ -80,6 +80,29 @@ document.addEventListener('DOMContentLoaded', function() {
             },
           });
 
+    // 経営チームスライダーの初期化（採用ページ）
+    const recruitTeamSwiper = new Swiper('.recruit-team-sp__swiper', {
+        loop: true, // 単一スライドの場合はループ無効
+        slidesPerView: 1,
+        spaceBetween: 20,
+        centeredSlides: true,
+        
+      
+        
+        // 自動再生は無効（静的コンテンツのため）
+        autoplay: {
+            delay: 3000,
+        
+        },
+        
+        breakpoints: {
+            768: {
+                slidesPerView: 1,
+                spaceBetween: 30,
+            }
+        }
+    });
+
     // ギャラリースライダーの初期化
     const gallerySwiperA = new Swiper('.gallery-swiper-a', {
       loop: true,
