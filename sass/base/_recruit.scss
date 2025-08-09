@@ -978,22 +978,22 @@ line-height: 58px;
 
 .recruit-fleet-sp__row:nth-child(2) .recruit-fleet-sp__ship-icon {
   margin-left: 20px;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .recruit-fleet-sp__row:nth-child(3) .recruit-fleet-sp__ship-icon {
   margin-left: 30px;
-  margin-right: 20px;
+  margin-right: 30px;
 }
 
 .recruit-fleet-sp__row:nth-child(4) .recruit-fleet-sp__ship-icon {
   margin-left: 40px;
-  margin-right: 30px;
+  margin-right: 40px;
 }
 
 .recruit-fleet-sp__row:nth-child(5) .recruit-fleet-sp__ship-icon {
   margin-left: 50px;
-  margin-right: 40px;
+  margin-right: 50px;
 }
 
 .recruit-fleet-sp__ship-card {
@@ -2403,9 +2403,11 @@ background-color: #0A5877;
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 60px;
+  padding: 0 30px;
   @include mq(md) {
     font-size: 40px;
     margin-bottom: 50px;
+    padding: 0 15px;
   }
   @include mq(sp1) {
     font-size: 30px;
@@ -2425,12 +2427,35 @@ background-color: #0A5877;
 
 .recruit-workstyle__case {
   position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  
+  // リンクありの場合のスタイル
+  &.recruit-workstyle__case--link {
+    cursor: pointer;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      
+      .recruit-workstyle__case-image img {
+        transform: scale(1.05);
+      }
+    }
+    
+    &:active {
+      transform: translateY(-2px);
+    }
+  }
 }
 
 .recruit-workstyle__case-image {
 width: 100%;
 height: auto;
 aspect-ratio: 768/350;
+overflow: hidden;
 @include mq(md) {
   aspect-ratio: 394/260;
 }
@@ -2438,8 +2463,11 @@ aspect-ratio: 768/350;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
   }
 }
+
+
 
 .recruit-workstyle__case-text {
   position: absolute;

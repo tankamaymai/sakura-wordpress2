@@ -3801,3 +3801,146 @@ function recruit_page_sns_items_callback() {
     <?php
 }
 
+// 採用ページ 多様な働き方セクション用カスタムフィールド
+function add_workstyle_cases_meta_box($post_type, $post) {
+    if ($post_type === 'page' && $post && $post->post_name === 'recruit') {
+        add_meta_box(
+            'workstyle_cases_meta_box',
+            '多様な働き方リンク設定',
+            'workstyle_cases_meta_box_callback',
+            'page',
+            'normal',
+            'high'
+        );
+    }
+}
+add_action('add_meta_boxes', 'add_workstyle_cases_meta_box', 10, 2);
+
+function workstyle_cases_meta_box_callback($post) {
+    wp_nonce_field('workstyle_cases_meta_box', 'workstyle_cases_meta_box_nonce');
+    
+    // メタデータから現在のリンク情報を取得
+    $workstyle_case_1_url = get_post_meta($post->ID, '_workstyle_case_1_url', true);
+    $workstyle_case_2_url = get_post_meta($post->ID, '_workstyle_case_2_url', true);
+    $workstyle_case_3_url = get_post_meta($post->ID, '_workstyle_case_3_url', true);
+    $workstyle_case_4_url = get_post_meta($post->ID, '_workstyle_case_4_url', true);
+    ?>
+    <div class="workstyle-cases-meta-box">
+        <p><strong>多様な働き方セクションの各ケースにリンクを設定できます。</strong></p>
+        <p>URLを入力しない場合は、その項目はリンクされません。</p>
+        
+        <table class="form-table">
+            <tr>
+                <th scope="row">
+                    <label for="workstyle_case_1_url">ケース1：業務委託でコアメンバーに</label>
+                </th>
+                <td>
+                    <input type="url" 
+                           id="workstyle_case_1_url" 
+                           name="workstyle_case_1_url" 
+                           value="<?php echo esc_url($workstyle_case_1_url); ?>" 
+                           class="regular-text" 
+                           placeholder="https://example.com" />
+                    <p class="description">このケースのリンク先URLを入力してください</p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="workstyle_case_2_url">ケース2：いまの私に必要なことを、想いのままに</label>
+                </th>
+                <td>
+                    <input type="url" 
+                           id="workstyle_case_2_url" 
+                           name="workstyle_case_2_url" 
+                           value="<?php echo esc_url($workstyle_case_2_url); ?>" 
+                           class="regular-text" 
+                           placeholder="https://example.com" />
+                    <p class="description">このケースのリンク先URLを入力してください</p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="workstyle_case_3_url">ケース3：自分の会社とホームインスペクター、両方の経験が相互に活きる</label>
+                </th>
+                <td>
+                    <input type="url" 
+                           id="workstyle_case_3_url" 
+                           name="workstyle_case_3_url" 
+                           value="<?php echo esc_url($workstyle_case_3_url); ?>" 
+                           class="regular-text" 
+                           placeholder="https://example.com" />
+                    <p class="description">このケースのリンク先URLを入力してください</p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="workstyle_case_4_url">ケース4：独立して、本音で顧客と向き合えるマンションの専門家へ</label>
+                </th>
+                <td>
+                    <input type="url" 
+                           id="workstyle_case_4_url" 
+                           name="workstyle_case_4_url" 
+                           value="<?php echo esc_url($workstyle_case_4_url); ?>" 
+                           class="regular-text" 
+                           placeholder="https://example.com" />
+                    <p class="description">このケースのリンク先URLを入力してください</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <?php
+}
+
+// 多様な働き方メタデータを保存する関数
+function save_workstyle_cases_meta($post_id) {
+    // nonce確認
+    if (!isset($_POST['workstyle_cases_meta_box_nonce']) || 
+        !wp_verify_nonce($_POST['workstyle_cases_meta_box_nonce'], 'workstyle_cases_meta_box')) {
+        return;
+    }
+
+    // 自動保存の場合はスキップ
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    // 権限チェック
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    // 各ケースのURLを保存
+    $case_urls = array(
+        '_workstyle_case_1_url' => 'workstyle_case_1_url',
+        '_workstyle_case_2_url' => 'workstyle_case_2_url',
+        '_workstyle_case_3_url' => 'workstyle_case_3_url',
+        '_workstyle_case_4_url' => 'workstyle_case_4_url',
+    );
+
+    foreach ($case_urls as $meta_key => $form_field) {
+        if (isset($_POST[$form_field])) {
+            $url = esc_url_raw($_POST[$form_field]);
+            update_post_meta($post_id, $meta_key, $url);
+        } else {
+            delete_post_meta($post_id, $meta_key);
+        }
+    }
+}
+add_action('save_post', 'save_workstyle_cases_meta');
+
+// 多様な働き方のリンクURLを取得する関数
+function get_workstyle_case_urls() {
+    // 採用ページのIDを取得
+    $recruit_page = get_page_by_path('recruit');
+    if (!$recruit_page) {
+        return array();
+    }
+
+    return array(
+        1 => get_post_meta($recruit_page->ID, '_workstyle_case_1_url', true),
+        2 => get_post_meta($recruit_page->ID, '_workstyle_case_2_url', true),
+        3 => get_post_meta($recruit_page->ID, '_workstyle_case_3_url', true),
+        4 => get_post_meta($recruit_page->ID, '_workstyle_case_4_url', true),
+    );
+}
+

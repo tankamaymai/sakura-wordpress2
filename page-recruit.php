@@ -110,9 +110,7 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- 他の経営メンバーのスライドをここに追加可能 -->
-                    <!-- 現在は大西さんのみのデザインが提供されているため、1枚のみ実装 -->
+<!-- 田村 啓 -->
                     <div class="swiper-slide">
                         <div class="recruit-team-sp__content-item">
                             <div class="recruit-team-sp__content-img">
@@ -134,7 +132,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide">
+
+                <!-- 長嶋 修 -->
+                <div class="swiper-slide">
                         <div class="recruit-team-sp__content-item">
                             <div class="recruit-team-sp__content-img">
                                 <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-oonishi-sp.png" alt="大西 倫加">
@@ -146,17 +146,81 @@
                                     <p class="recruit-team-sp__content-role-en">Chief Empowerment Officer</p>
                                     <p class="recruit-team-sp__content-role-jp">（最高エンパワーメント責任者）</p>
                                 </div>
-                                <h3 class="recruit-team-sp__content-name">大西 倫加</h3>
+                                <h3 class="recruit-team-sp__content-name">長嶋 修</h3>
                                 <div class="recruit-team-sp__content-company">
-                                    <p>さくら事務所・らくだ不動産</p>
-                                    <p>CEO 代表取締役社長</p>
+                                    <p>さくら事務所創業者・会長</p>
+                                    <p>らくだ不動産顧問</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+               
+                <!-- 友田 雄俊 -->
+                <div class="swiper-slide">
+                        <div class="recruit-team-sp__content-item">
+                            <div class="recruit-team-sp__content-img">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-oonishi-sp.png" alt="大西 倫加">
+                            </div>
+                            <div class="recruit-team-sp__content-text">
+                                <div class="recruit-team-sp__content-role">
+                                    <p class="recruit-team-sp__content-role-en">Chief Customer Office</p>
+                                    <p class="recruit-team-sp__content-role-jp">（最高顧客責任者）</p>
+                                    <p class="recruit-team-sp__content-role-en">Chief Catalyst Officer</p>
+                                    <p class="recruit-team-sp__content-role-jp">（最高触媒責任者）</p>
+                                </div>
+                                <h3 class="recruit-team-sp__content-name">友田 雄俊</h3>
+                                <div class="recruit-team-sp__content-company">
+                                    <p>さくら事務所</p>
+                                    <p>CCO 執行役員</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 
-            
+                <!-- 辻 優子 -->
+                <div class="swiper-slide">
+                        <div class="recruit-team-sp__content-item">
+                            <div class="recruit-team-sp__content-img">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-oonishi-sp.png" alt="大西 倫加">
+                            </div>
+                            <div class="recruit-team-sp__content-text">
+                                <div class="recruit-team-sp__content-role">
+                                    <p class="recruit-team-sp__content-role-en">Chief Administrative Officer</p>
+                                    <p class="recruit-team-sp__content-role-jp">（最高管理責任者）</p>
+                                    <p class="recruit-team-sp__content-role-en">Chief Autonomy Officer</p>
+                                    <p class="recruit-team-sp__content-role-jp">（最高自律性支援責任者）</p>
+                                </div>
+                                <h3 class="recruit-team-sp__content-name">辻 優子</h3>
+                                <div class="recruit-team-sp__content-company">
+                                    <p>さくら事務所</p>
+                                    <p>CAO 執行役員</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               
+                <!-- 山本 直彌 -->
+                <div class="swiper-slide">
+                        <div class="recruit-team-sp__content-item">
+                            <div class="recruit-team-sp__content-img">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-oonishi-sp.png" alt="大西 倫加">
+                            </div>
+                            <div class="recruit-team-sp__content-text">
+                                <div class="recruit-team-sp__content-role">
+                                    <p class="recruit-team-sp__content-role-en">Chief Operating Officer</p>
+                                    <p class="recruit-team-sp__content-role-jp">（最高執行責任者） </p>
+                                    <p class="recruit-team-sp__content-role-en">Chief Opportunity Officer</p>
+                                    <p class="recruit-team-sp__content-role-jp">（最高創出責任者）</p>
+                                </div>
+                                <h3 class="recruit-team-sp__content-name">山本 直彌</h3>
+                                <div class="recruit-team-sp__content-company">
+                                    <p>さくら事務所・らくだ不動産</p>
+                                    <p>COO 取締役副社長 </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
             </div>
         </div>
     </section>
@@ -692,8 +756,16 @@
 
             <h2 class="recruit-workstyle__title">さくら事務所グループの働き方</h2>
             <div class="recruit-workstyle__cases">
+                <?php 
+                // 多様な働き方のリンクURLを取得
+                $workstyle_urls = get_workstyle_case_urls();
+                ?>
                 <!-- 1 -->
+                <?php if (!empty($workstyle_urls[1])) : ?>
+                <a href="<?php echo esc_url($workstyle_urls[1]); ?>" class="recruit-workstyle__case recruit-workstyle__case--link" target="_blank" rel="noopener noreferrer">
+                <?php else : ?>
                 <div class="recruit-workstyle__case">
+                <?php endif; ?>
                     <div class="recruit-workstyle__case-image">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-sakura-img1.webp" alt="多様な働き方">
                     </div>
@@ -701,10 +773,19 @@
                         <p>【業務委託】</p>
                         <p>業務委託でコアメンバーに</p>
                     </div>
-                  
+
+                <?php if (!empty($workstyle_urls[1])) : ?>
+                </a>
+                <?php else : ?>
                 </div>
+                <?php endif; ?>
+                
                 <!-- 2 -->
+                <?php if (!empty($workstyle_urls[2])) : ?>
+                <a href="<?php echo esc_url($workstyle_urls[2]); ?>" class="recruit-workstyle__case recruit-workstyle__case--link" target="_blank" rel="noopener noreferrer">
+                <?php else : ?>
                 <div class="recruit-workstyle__case">
+                <?php endif; ?>
                     <div class="recruit-workstyle__case-image">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-sakura-img2.webp" alt="多様な働き方">
                     </div>
@@ -713,10 +794,19 @@
                         <p>いまの私に必要なことを、</p>
                         <p>想いのままに</p>
                     </div>
-                  
+
+                <?php if (!empty($workstyle_urls[2])) : ?>
+                </a>
+                <?php else : ?>
                 </div>
+                <?php endif; ?>
+                
                 <!-- 3 -->
+                <?php if (!empty($workstyle_urls[3])) : ?>
+                <a href="<?php echo esc_url($workstyle_urls[3]); ?>" class="recruit-workstyle__case recruit-workstyle__case--link" target="_blank" rel="noopener noreferrer">
+                <?php else : ?>
                 <div class="recruit-workstyle__case">
+                <?php endif; ?>
                     <div class="recruit-workstyle__case-image">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-sakura-img3.webp" alt="多様な働き方">
                     </div>
@@ -725,20 +815,33 @@
                         <p>自分の会社とホームインスペクター、</p>
                         <p>両方の経験が相互に活きる</p>
                     </div>
-                  
+
+                <?php if (!empty($workstyle_urls[3])) : ?>
+                </a>
+                <?php else : ?>
                 </div>
+                <?php endif; ?>
+                
                 <!-- 4 -->
+                <?php if (!empty($workstyle_urls[4])) : ?>
+                <a href="<?php echo esc_url($workstyle_urls[4]); ?>" class="recruit-workstyle__case recruit-workstyle__case--link" target="_blank" rel="noopener noreferrer">
+                <?php else : ?>
                 <div class="recruit-workstyle__case">
+                <?php endif; ?>
                     <div class="recruit-workstyle__case-image">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-sakura-img4.webp" alt="多様な働き方">
                     </div>
-                            <div class="recruit-workstyle__case-text-top">
-                                <p>【業務委託】独立して、</p>
-                                <p>本音で顧客と向き合える</p>
-                                <p>マンションの専門家へ</p>
-                            </div>
-                  
+                    <div class="recruit-workstyle__case-text-top">
+                        <p>【業務委託】独立して、</p>
+                        <p>本音で顧客と向き合える</p>
+                        <p>マンションの専門家へ</p>
+                    </div>
+
+                <?php if (!empty($workstyle_urls[4])) : ?>
+                </a>
+                <?php else : ?>
                 </div>
+                <?php endif; ?>
             </div>
     </section>
 
