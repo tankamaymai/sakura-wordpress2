@@ -42,6 +42,12 @@ function my_script_init()
     wp_localize_script('script-js', 'themeData', array(
         'themeUrl' => get_template_directory_uri()
     ));
+    
+    // 船カードメンバーデータをJavaScriptに渡す
+    if (is_page_template('page-recruit.php') || is_page('recruit')) {
+        $member_data = get_ship_member_data();
+        wp_localize_script('script-js', 'shipMemberData', $member_data);
+    }
 }
 add_action('wp_enqueue_scripts', 'my_script_init');
 
@@ -3943,4 +3949,335 @@ function get_workstyle_case_urls() {
         4 => get_post_meta($recruit_page->ID, '_workstyle_case_4_url', true),
     );
 }
+
+/**
+ * 船カードメンバーデータを取得
+ */
+function get_ship_member_data() {
+    $recruit_page = get_page_by_path('recruit');
+    if (!$recruit_page) {
+        return array();
+    }
+    
+    $member_data = array();
+    
+    // 固定データ（変更されない項目）
+    $fixed_data = array(
+        'oonishi' => array(
+            'department' => '経営チーム',
+            'section' => '',
+            'image' => 'recruit-oonishi-pc-pop.webp',
+            'captain' => array(
+                'name' => '大西 倫加'
+            )
+        ),
+        'tamura' => array(
+            'department' => 'H＆R Co-creation：',
+            'section' => '人と資源の共創部',
+            'image' => 'recruit-tamura-pc-pop.webp',
+            'captain' => array(
+                'name' => '田村 啓',
+
+            )
+        ),
+        'tamura-ai' => array(
+            'department' => 'AIタスクフォース：',
+            'section' => 'AI:BOU',
+            'image' => 'recruit-tamura-pc-pop.webp',
+            'captain' => array(
+                'name' => '田村 啓',
+
+            )
+        ),
+        'tomoda' => array(
+            'department' => 'マーケティング・',
+            'section' => 'コミュニケーション部',
+            'image' => 'recruit-tomoda-pc-pop.webp',
+            'captain' => array(
+                'name' => '友田 雄俊',
+
+            )
+        ),
+        'tsuji' => array(
+            'department' => 'バックオフィス',
+            'section' => '',
+            'image' => 'recruit-tsuji-pc-pop.webp',
+            'captain' => array(
+                'name' => '辻 優子',
+
+            )
+        ),
+        'nakayama' => array(
+            'department' => 'YouTube・SNS',
+            'section' => 'マーケティング',
+            'image' => 'recruit-nakayama-pc-pop.webp',
+            'captain' => array(
+                'name' => '中山 夏美',
+
+            )
+        ),
+        'yokoyama' => array(
+            'department' => 'だいち災害リスク',
+            'section' => '研究所',
+            'image' => 'recruit-yokoyama-pc-pop.webp',
+            'captain' => array(
+                'name' => '横山 芳春',
+
+            )
+        ),
+        'yamamoto' => array(
+            'department' => '住まいと暮らし事業部',
+            'section' => 'マンション管理コンサルティング',
+            'image' => 'recruit-yamamoto-pc-pop.webp',
+            'captain' => array(
+                'name' => '山本 直彌',
+
+            )
+        ),
+        'yamamoto-rakuda' => array(
+            'department' => 'らくだ不動産',
+            'section' => '',
+            'image' => 'recruit-yamamoto-pc-pop.webp',
+            'captain' => array(
+                'name' => '山本 直彌',
+
+            )
+        ),
+        'tomoda-home' => array(
+            'department' => '住まいと暮らし事業部',
+            'section' => 'ホームインスペクション',
+            'image' => 'recruit-tomoda-pc-pop.webp',
+            'captain' => array(
+                'name' => '友田 雄俊',
+
+            )
+        )
+    );
+    
+    // 各船カードのデータを構築
+    foreach ($fixed_data as $ship_id => $ship_data) {
+        $member_data[$ship_id] = $ship_data;
+        $member_data[$ship_id]['subcaptain'] = null;
+        $member_data[$ship_id]['crew'] = array();
+        
+        // 船長のプロフィールURLを追加（カスタムフィールドから取得）
+        $captain_profile_url = get_post_meta($recruit_page->ID, "_ship_{$ship_id}_captain_profile_url", true);
+        $member_data[$ship_id]['captain']['profileUrl'] = !empty($captain_profile_url) ? $captain_profile_url : '#';
+        
+        // 副船長データを取得（設定されている場合）
+        $subcaptain_name = get_post_meta($recruit_page->ID, "_ship_{$ship_id}_subcaptain_name", true);
+        if (!empty($subcaptain_name)) {
+            $member_data[$ship_id]['subcaptain'] = array(
+                'name' => $subcaptain_name,
+
+            );
+        }
+        
+        // 乗組員データを取得（配列から）
+        $crew_members = get_post_meta($recruit_page->ID, "_ship_{$ship_id}_crew", true);
+        if (is_array($crew_members) && !empty($crew_members)) {
+            foreach ($crew_members as $crew_name) {
+                if (!empty($crew_name)) {
+                    $member_data[$ship_id]['crew'][] = array(
+                        'name' => $crew_name,
+         // プロフィールURLは不要のため固定
+                    );
+                }
+            }
+        }
+    }
+    
+    return $member_data;
+}
+
+/**
+ * 船カードメンバー情報のカスタムフィールド（WordPress標準meta_box使用）
+ * 副船長・乗組員のみ編集可能
+ */
+
+// meta_boxを追加
+function add_ship_member_meta_box() {
+    $recruit_page = get_page_by_path('recruit');
+    if ($recruit_page) {
+        add_meta_box(
+            'ship_member_meta_box',
+            '船カードメンバー情報',
+            'ship_member_meta_box_callback',
+            'page',
+            'normal',
+            'high'
+        );
+    }
+}
+add_action('add_meta_boxes', 'add_ship_member_meta_box');
+
+// meta_boxのコンテンツを表示
+function ship_member_meta_box_callback($post) {
+    // 採用ページでのみ表示
+    $recruit_page = get_page_by_path('recruit');
+    if (!$recruit_page || $post->ID !== $recruit_page->ID) {
+        echo '<p>この機能は採用ページでのみ利用できます。</p>';
+        return;
+    }
+    
+    // nonceフィールドを追加
+    wp_nonce_field('ship_member_meta_box', 'ship_member_meta_box_nonce');
+    
+    // 船カードリスト
+    $ship_cards = array(
+        'oonishi' => '大西船（経営チーム）',
+        'tamura' => '田村船（H&R Co-creation）',
+        'tamura-ai' => '田村船（AIタスクフォース）',
+        'tomoda' => '友田船（マーケティング・コミュニケーション）',
+        'tsuji' => '辻船（バックオフィス）',
+        'nakayama' => '中山船（YouTube・SNS）',
+        'yokoyama' => '横山船（だいち災害リスク研究所）',
+        'yamamoto' => '山本船（住まいと暮らし事業部）',
+        'yamamoto-rakuda' => '山本船（らくだ不動産）',
+        'tomoda-home' => '友田船（ホームインスペクション）'
+    );
+    
+    echo '<div class="ship-member-admin-wrapper">';
+    echo '<p><strong>部署名・船長名・画像は固定です。</strong><br>船長プロフィールURL・副船長・乗組員が編集可能です。</p>';
+    
+    foreach ($ship_cards as $ship_id => $ship_name) {
+        $subcaptain_name = get_post_meta($post->ID, "_ship_{$ship_id}_subcaptain_name", true);
+        $crew_members = get_post_meta($post->ID, "_ship_{$ship_id}_crew", true);
+        if (!is_array($crew_members)) {
+            $crew_members = array();
+        }
+        
+        echo '<div class="ship-member-section" data-ship="' . esc_attr($ship_id) . '">';
+        echo '<h3>' . esc_html($ship_name) . '</h3>';
+        
+        // 船長プロフィールURLフィールド
+        $captain_profile_url = get_post_meta($post->ID, "_ship_{$ship_id}_captain_profile_url", true);
+        echo '<div class="field-group">';
+        echo '<label for="ship_' . esc_attr($ship_id) . '_captain_profile_url">船長プロフィールURL:</label>';
+        echo '<input type="url" id="ship_' . esc_attr($ship_id) . '_captain_profile_url" name="ship_' . esc_attr($ship_id) . '_captain_profile_url" value="' . esc_attr($captain_profile_url) . '" placeholder="https://example.com/profile" />';
+        echo '<p class="description">船長のプロフィールページのURLを入力してください。</p>';
+        echo '</div>';
+        
+        // 副船長フィールド
+        echo '<div class="field-group">';
+        echo '<label for="ship_' . esc_attr($ship_id) . '_subcaptain_name">副船長名:</label>';
+        echo '<input type="text" id="ship_' . esc_attr($ship_id) . '_subcaptain_name" name="ship_' . esc_attr($ship_id) . '_subcaptain_name" value="' . esc_attr($subcaptain_name) . '" placeholder="例：副船長 太郎" />';
+        echo '<p class="description">副船長がいない場合は空白にしてください。</p>';
+        echo '</div>';
+        
+        // 乗組員フィールド
+        echo '<div class="field-group">';
+        echo '<label>乗組員:</label>';
+        echo '<div class="crew-members" id="crew_' . esc_attr($ship_id) . '">';
+        
+        if (!empty($crew_members)) {
+            foreach ($crew_members as $index => $crew_name) {
+                if (!empty($crew_name)) {
+                    echo '<div class="crew-member-row">';
+                    echo '<input type="text" name="ship_' . esc_attr($ship_id) . '_crew[]" value="' . esc_attr($crew_name) . '" placeholder="乗組員名" />';
+                    echo '<button type="button" class="remove-crew">削除</button>';
+                    echo '</div>';
+                }
+            }
+        }
+        
+        echo '</div>';
+        echo '<button type="button" class="add-crew" data-ship="' . esc_attr($ship_id) . '">乗組員を追加</button>';
+        echo '</div>';
+        
+        echo '</div>';
+    }
+    echo '</div>';
+    
+    // CSS
+    echo '<style>
+    .ship-member-admin-wrapper { margin: 20px 0; }
+    .ship-member-section { margin-bottom: 30px; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+    .ship-member-section h3 { margin-top: 0; color: #0073aa; }
+    .field-group { margin-bottom: 20px; }
+    .field-group label { display: block; font-weight: bold; margin-bottom: 5px; }
+    .field-group input[type="text"] { width: 100%; max-width: 400px; }
+    .crew-members { margin-bottom: 10px; }
+    .crew-member-row { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+    .crew-member-row input { flex: 1; max-width: 300px; }
+    .add-crew, .remove-crew { background: #0073aa; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+    .remove-crew { background: #dc3545; }
+    .add-crew:hover, .remove-crew:hover { opacity: 0.8; }
+    .description { font-style: italic; color: #666; margin: 5px 0 0 0; }
+    </style>';
+    
+    // JavaScript
+    echo '<script>
+    jQuery(document).ready(function($) {
+        // 乗組員追加
+        $(".add-crew").on("click", function() {
+            var shipId = $(this).data("ship");
+            var crewContainer = $("#crew_" + shipId);
+            var newRow = "<div class=\"crew-member-row\">" +
+                        "<input type=\"text\" name=\"ship_" + shipId + "_crew[]\" value=\"\" placeholder=\"乗組員名\" />" +
+                        "<button type=\"button\" class=\"remove-crew\">削除</button>" +
+                        "</div>";
+            crewContainer.append(newRow);
+        });
+        
+        // 乗組員削除
+        $(document).on("click", ".remove-crew", function() {
+            $(this).closest(".crew-member-row").remove();
+        });
+    });
+    </script>';
+}
+
+// meta_boxデータの保存
+function save_ship_member_meta_box_data($post_id) {
+    // nonce確認
+    if (!isset($_POST['ship_member_meta_box_nonce']) || !wp_verify_nonce($_POST['ship_member_meta_box_nonce'], 'ship_member_meta_box')) {
+        return;
+    }
+    
+    // 自動保存の場合は処理しない
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+    
+    // 権限確認
+    if (!current_user_can('edit_page', $post_id)) {
+        return;
+    }
+    
+    // 採用ページのみ処理
+    $recruit_page = get_page_by_path('recruit');
+    if (!$recruit_page || $post_id !== $recruit_page->ID) {
+        return;
+    }
+    
+    // 船カードリスト
+    $ship_cards = array(
+        'oonishi', 'tamura', 'tamura-ai', 'tomoda', 'tsuji', 
+        'nakayama', 'yokoyama', 'yamamoto', 'yamamoto-rakuda', 'tomoda-home'
+    );
+    
+    foreach ($ship_cards as $ship_id) {
+        // 船長プロフィールURLを保存
+        $captain_profile_url = isset($_POST["ship_{$ship_id}_captain_profile_url"]) ? esc_url_raw($_POST["ship_{$ship_id}_captain_profile_url"]) : '';
+        update_post_meta($post_id, "_ship_{$ship_id}_captain_profile_url", $captain_profile_url);
+        
+        // 副船長名を保存
+        $subcaptain_name = isset($_POST["ship_{$ship_id}_subcaptain_name"]) ? sanitize_text_field($_POST["ship_{$ship_id}_subcaptain_name"]) : '';
+        update_post_meta($post_id, "_ship_{$ship_id}_subcaptain_name", $subcaptain_name);
+        
+        // 乗組員を保存
+        $crew_members = array();
+        if (isset($_POST["ship_{$ship_id}_crew"]) && is_array($_POST["ship_{$ship_id}_crew"])) {
+            foreach ($_POST["ship_{$ship_id}_crew"] as $crew_name) {
+                $crew_name = sanitize_text_field($crew_name);
+                if (!empty($crew_name)) {
+                    $crew_members[] = $crew_name;
+                }
+            }
+        }
+        update_post_meta($post_id, "_ship_{$ship_id}_crew", $crew_members);
+    }
+}
+add_action('save_post', 'save_ship_member_meta_box_data');
 

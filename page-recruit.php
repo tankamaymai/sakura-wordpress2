@@ -159,7 +159,7 @@
                 <div class="swiper-slide">
                         <div class="recruit-team-sp__content-item">
                             <div class="recruit-team-sp__content-img">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-oonishi-sp.png" alt="大西 倫加">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-tomoda-sp.webp" alt="友田 雄俊">
                             </div>
                             <div class="recruit-team-sp__content-text">
                                 <div class="recruit-team-sp__content-role">
@@ -181,7 +181,7 @@
                 <div class="swiper-slide">
                         <div class="recruit-team-sp__content-item">
                             <div class="recruit-team-sp__content-img">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-oonishi-sp.png" alt="大西 倫加">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-tsuji-sp.webp" alt="辻 優子">
                             </div>
                             <div class="recruit-team-sp__content-text">
                                 <div class="recruit-team-sp__content-role">
@@ -203,7 +203,7 @@
                 <div class="swiper-slide">
                         <div class="recruit-team-sp__content-item">
                             <div class="recruit-team-sp__content-img">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-oonishi-sp.png" alt="大西 倫加">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-yamamoto-sp.webp" alt="山本 直彌">
                             </div>
                             <div class="recruit-team-sp__content-text">
                                 <div class="recruit-team-sp__content-role">
@@ -232,95 +232,99 @@
             <h2 class="recruit-fleet__title">さくら事務所グループ"船団"</h2>
             <div class="recruit-fleet__diagram">
                 <div class="recruit-fleet__ship recruit-fleet__ship--management" data-member="oonishi">
+                <h3 class="recruit-fleet__ship-title">経営チーム</h3>
+                
+                    <div class="recruit-fleet__ship-content">
                     <div class="recruit-fleet__ship-image">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/oonishi.webp" alt="大西 倫加">
                     </div>
-                    <div class="recruit-fleet__ship-content">
-                        <h3>経営チーム</h3>
                         <p>船長：大西 倫加</p>
                     </div>
                 </div>
                 <div class="recruit-fleet__ship recruit-fleet__ship--hr" data-member="tamura">
+                <h3 class="recruit-fleet__ship-title">H＆R Co-creation：<br>人と資源の共創部</h3>
+                  
+                    <div class="recruit-fleet__ship-content">
                     <div class="recruit-fleet__ship-image">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/tamura.webp" alt="田村 啓">
                     </div>
-                    <div class="recruit-fleet__ship-content">
-                        <h3>H＆R Co-creation：<br>人と資源の共創部</h3>
                         <p>船長：田村 啓</p>
                     </div>
                 </div>
                 <div class="recruit-fleet__ship recruit-fleet__ship--marketing" data-member="tomoda">
+                <h3 class="recruit-fleet__ship-title">マーケティング・<br>コミュニケーション部</h3>
+                
+                    <div class="recruit-fleet__ship-content">
                     <div class="recruit-fleet__ship-image">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/tomoda.webp" alt="友田 雄俊">
                     </div>
-                    <div class="recruit-fleet__ship-content">
-                        <h3>マーケティング・<br>コミュニケーション部</h3>
                         <p>船長：友田 雄俊</p>
                     </div>
                 </div>
                 <div class="recruit-fleet__ship recruit-fleet__ship--backoffice" data-member="tsuji">
+                <h3 class="recruit-fleet__ship-title">バックオフィス</h3>
+              
+                    <div class="recruit-fleet__ship-content">
                     <div class="recruit-fleet__ship-image">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/tsuji.webp" alt="辻 優子">
                     </div>
-                    <div class="recruit-fleet__ship-content">
-                        <h3>バックオフィス</h3>
                         <p>船長：辻 優子</p>
                     </div>
                 </div>
                 <div class="recruit-fleet__ship recruit-fleet__ship--ai" data-member="tamura-ai">
+                <h3 class="recruit-fleet__ship-title">AIタスクフォース：AI:BOU</h3>
+                 
+                    <div class="recruit-fleet__ship-content">
                     <div class="recruit-fleet__ship-image">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/tamura.webp" alt="田村 啓">
                     </div>
-                    <div class="recruit-fleet__ship-content">
-                        <h3>AIタスクフォース：AI:BOU</h3>
                         <p>船長：田村 啓</p>
                     </div>
                 </div>
                 <div class="recruit-fleet__ship recruit-fleet__ship--youtube" data-member="nakayama">
-                    <div class="recruit-fleet__ship-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/nakayama.webp" alt="中山 夏美">
-                    </div>
-                    <div class="recruit-fleet__ship-content">
-                        <h3>YouTube・SNSマーケティング</h3>
+                <h3 class="recruit-fleet__ship-title">YouTube・SNSマーケティング</h3>
+                    <div class="recruit-fleet__ship-content ">
+                        <div class="recruit-fleet__ship-image">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/nakayama.webp" alt="中山 夏美">
+                        </div>
                         <p>船長：中山 夏美</p>
                     </div>
                 </div>
                 <div class="recruit-fleet__ship recruit-fleet__ship--daichi" data-member="yokoyama">
-                    <div class="recruit-fleet__ship-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/yokoyama.webp" alt="横山 芳春">
-                    </div>
+                <h3 class="recruit-fleet__ship-title">だいち災害リスク研究所</h3>
                     <div class="recruit-fleet__ship-content">
-                        <h3>だいち災害リスク研究所</h3>
+                        <div class="recruit-fleet__ship-image">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/yokoyama.webp" alt="横山 芳春">
+                        </div>
                         <p>船長：横山 芳春</p>
                     </div>
                 </div>
                 <div class="recruit-fleet__ship recruit-fleet__ship--rakuda" data-member="yamamoto-rakuda">
-                    <div class="recruit-fleet__ship-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/yamamoto.webp" alt="山本 直彌">
-                    </div>
+                <h3 class="recruit-fleet__ship-title">らくだ不動産</h3>
                     <div class="recruit-fleet__ship-content">
-                        <h3>らくだ不動産</h3>
+                        <div class="recruit-fleet__ship-image">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/yamamoto.webp" alt="山本 直彌">
+                        </div>
+                        
                         <p>船長：山本 直彌</p>
                     </div>
                 </div>
                 <div class="recruit-fleet__ship recruit-fleet__ship--home" data-member="tomoda-home">
-                    <div class="recruit-fleet__ship-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/tomoda.webp" alt="友田 雄俊">
-                    </div>
+                <h3 class="recruit-fleet__ship-title">住まいと暮らし事業部</h3>
                     <div class="recruit-fleet__ship-content">
-                        <h3>住まいと暮らし事業部</h3>
-                        <p>ホームインスペクション</p>
-                        <p>船長：友田 雄俊</p>
+                        <div class="recruit-fleet__ship-image">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/tomoda.webp" alt="友田 雄俊">
+                        </div>
+                        <p><span class="recruit-fleet__ship-subtitle-small">ホームインスペクション</span><br>船長：友田 雄俊</p>
                     </div>
                 </div>
                 <div class="recruit-fleet__ship recruit-fleet__ship--mansion" data-member="yamamoto">
-                    <div class="recruit-fleet__ship-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/yamamoto.webp" alt="山本 直彌">
-                    </div>
+                <h3 class="recruit-fleet__ship-title">住まいと暮らし事業部</h3>
                     <div class="recruit-fleet__ship-content">
-                        <h3>住まいと暮らし事業部</h3>
-                        <p>マンション管理コンサルティング</p>
-                        <p>船長：山本 直彌</p>
+                        <div class="recruit-fleet__ship-image">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/yamamoto.webp" alt="山本 直彌">
+                        </div>
+                        <p>マンション管理コンサルティング<br>船長：山本 直彌</p>
                     </div>
                 </div>
             </div>
@@ -523,7 +527,7 @@
             <div class="recruit-data__grid">
                 <!-- メンバー構成 -->
                 <div class="recruit-data__item recruit-data__item--member-count">
-                    <h3>さくら事務所グループ所属メンバー</h3>
+                    <h3>さくら事務所グループ<br class="sp2-show">所属メンバー</h3>
                     <div class="recruit-data__member-display">
                         <div class="recruit-data__member-number">195</div>
                         <div class="recruit-data__member-unit">名</div>
@@ -1169,10 +1173,40 @@
                 <img id="member-popup-image" src="" alt="">
             </div>
             <div class="member-popup__info">
+                <div class="member-popup__info-wrapper">
                 <h2 id="member-popup-department" class="member-popup__department"></h2>
                 <h3 id="member-popup-section" class="member-popup__section"></h3>
-                <p id="member-popup-captain" class="member-popup__captain"></p>
-                <a href="#" class="member-popup__profile-btn" id="member-popup-profile-btn" target="_blank" rel="noopener noreferrer" aria-label="船長プロフィールを新しいタブで開く"><span class="member-popup__profile-btn-icon" aria-hidden="true"></span>船長プロフィールはこちら</a>
+                
+                <!-- 船長情報 -->
+                <div id="member-popup-captain-wrapper" class="member-popup__member-wrapper">
+                    <div class="member-popup__role-title-wrapper">
+                    <h4 class="member-popup__role-title">船長：</h4>
+                    <p id="member-popup-captain" class="member-popup__member-name"></p>
+                    </div>
+                  
+                </div>
+                
+                <!-- 副船長情報 -->
+                <div id="member-popup-subcaptain-wrapper" class="member-popup__member-wrapper">
+                    <div class="member-popup__role-title-wrapper">
+                    <h4 class="member-popup__role-title">副船長：</h4>
+                    <p id="member-popup-subcaptain" class="member-popup__member-name"></p>
+                    </div>
+                  
+                </div>
+                
+                <!-- 乗組員情報 -->
+                <div id="member-popup-crew-wrapper" class="member-popup__member-wrapper">
+                    <div class="member-popup__role-title-wrapper">
+                    <h4 class="member-popup__role-title">乗組員：</h4>
+                    
+                    <div id="member-popup-crew-list" class="member-popup__crew-list"></div>
+                    </div>
+                </div>
+                </div>
+                <a href="#" class="member-popup__profile-btn" id="member-popup-captain-profile-btn" target="_blank" rel="noopener noreferrer" aria-label="船長プロフィールを新しいタブで開く">
+                        <span class="member-popup__profile-btn-icon" aria-hidden="true"></span>船長プロフィールはこちら
+                    </a>
             </div>
         </div>
     </div>

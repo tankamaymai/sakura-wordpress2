@@ -970,79 +970,158 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // メンバー詳細ポップアップ機能
 function initMemberPopup() {
-    // メンバーデータの定義
-    const memberData = {
-        'oonishi': {
-            name: '大西 倫加',
-            department: '経営チーム',
-            section: '',
-            image: 'oonishi.webp',
-            profileUrl: '#'
-        },
-        'tamura': {
-            name: '田村 啓',
-            department: 'H＆R Co-creation：',
-            section: '人と資源の共創部',
-            image: 'tamura.webp',
-            profileUrl: '#'
-        },
-        'tamura-ai': {
-            name: '田村 啓',
-            department: 'AIタスクフォース：',
-            section: 'AI:BOU',
-            image: 'tamura.webp',
-            profileUrl: '#'
-        },
-        'tomoda': {
-            name: '友田 雄俊',
-            department: 'マーケティング・',
-            section: 'コミュニケーション部',
-            image: 'tomoda.webp',
-            profileUrl: '#'
-        },
-        'tsuji': {
-            name: '辻 優子',
-            department: 'バックオフィス',
-            section: '',
-            image: 'tsuji.webp',
-            profileUrl: '#'
-        },
-        'nakayama': {
-            name: '中山 夏美',
-            department: 'YouTube・SNS',
-            section: 'マーケティング',
-            image: 'nakayama.webp',
-            profileUrl: '#'
-        },
-        'yokoyama': {
-            name: '横山 芳春',
-            department: 'だいち災害リスク',
-            section: '研究所',
-            image: 'yokoyama.webp',
-            profileUrl: '#'
-        },
-        'yamamoto': {
-            name: '山本 直彌',
-            department: '住まいと暮らし事業部',
-            section: 'マンション管理コンサルティング',
-            image: 'yamamoto.webp',
-            profileUrl: '#'
-        },
-        'yamamoto-rakuda': {
-            name: '山本 直彌',
-            department: 'らくだ不動産',
-            section: '',
-            image: 'yamamoto.webp',
-            profileUrl: '#'
-        },
-        'tomoda-home': {
-            name: '友田 雄俊',
-            department: '住まいと暮らし事業部',
-            section: 'ホームインスペクション',
-            image: 'tomoda.webp',
-            profileUrl: '#'
-        }
-    };
+    // カスタムフィールドからメンバーデータを取得（フォールバック付き）
+    let memberData = {};
+    
+    // WordPress から渡されたデータがあるかチェック
+    if (typeof window.shipMemberData !== 'undefined' && window.shipMemberData) {
+        memberData = window.shipMemberData;
+        console.log('カスタムフィールドからメンバーデータを取得しました:', memberData);
+    } else {
+        // フォールバックデータ（従来のハードコードされたデータ）
+        console.log('カスタムフィールドが見つからないため、フォールバックデータを使用します');
+        memberData = {
+            'oonishi': {
+                department: '経営チーム',
+                section: '',
+                image: 'recruit-oonishi-pc-pop.webp',
+                captain: {
+                    name: '大西 倫加',
+                    profileUrl: '#'
+                },
+                subcaptain: null,
+                crew: []
+            },
+            'tamura': {
+                department: 'H＆R Co-creation：',
+                section: '人と資源の共創部',
+                image: 'recruit-tamura-pc-pop.webp',
+                captain: {
+                    name: '田村 啓',
+                    profileUrl: '#'
+                },
+                subcaptain: null,
+                crew: [
+                    {
+                        name: '乗組員 太郎',
+                        profileUrl: '#'
+                    },
+                    {
+                        name: '乗組員 花子',
+                        profileUrl: '#'
+                    }
+                ]
+            },
+            'tamura-ai': {
+                department: 'AIタスクフォース：',
+                section: 'AI:BOU',
+                image: 'recruit-tamura-pc-pop.webp',
+                captain: {
+                    name: '田村 啓',
+                    profileUrl: '#'
+                },
+                subcaptain: {
+                    name: '副船長 次郎',
+                    profileUrl: '#'
+                },
+                crew: []
+            },
+            'tomoda': {
+                department: 'マーケティング・',
+                section: 'コミュニケーション部',
+                image: 'recruit-tomoda-pc-pop.webp',
+                captain: {
+                    name: '友田 雄俊',
+                    profileUrl: '#'
+                },
+                subcaptain: null,
+                crew: [
+                    {
+                        name: '乗組員 一郎',
+                        profileUrl: '#'
+                    }
+                ]
+            },
+            'tsuji': {
+                department: 'バックオフィス',
+                section: '',
+                image: 'recruit-tsuji-pc-pop.webp',
+                captain: {
+                    name: '辻 優子',
+                    profileUrl: '#'
+                },
+                subcaptain: null,
+                crew: []
+            },
+            'nakayama': {
+                department: 'YouTube・SNS',
+                section: 'マーケティング',
+                image: 'recruit-nakayama-pc-pop.webp',
+                captain: {
+                    name: '中山 夏美',
+                    profileUrl: '#'
+                },
+                subcaptain: {
+                    name: '副船長 三郎',
+                    profileUrl: '#'
+                },
+                crew: [
+                    {
+                        name: '乗組員 四郎',
+                        profileUrl: '#'
+                    },
+                    {
+                        name: '乗組員 五郎',
+                        profileUrl: '#'
+                    }
+                ]
+            },
+            'yokoyama': {
+                department: 'だいち災害リスク',
+                section: '研究所',
+                image: 'recruit-yokoyama-pc-pop.webp',
+                captain: {
+                    name: '横山 芳春',
+                    profileUrl: '#'
+                },
+                subcaptain: null,
+                crew: []
+            },
+            'yamamoto': {
+                department: '住まいと暮らし事業部',
+                section: 'マンション管理コンサルティング',
+                image: 'recruit-yamamoto-pc-pop.webp',
+                captain: {
+                    name: '山本 直彌',
+                    profileUrl: '#'
+                },
+                subcaptain: null,
+                crew: []
+            },
+            'yamamoto-rakuda': {
+                department: 'らくだ不動産',
+                section: '',
+                image: 'recruit-yamamoto-pc-pop.webp',
+                captain: {
+                    name: '山本 直彌',
+                    profileUrl: '#'
+                },
+                subcaptain: null,
+                crew: []
+            },
+            'tomoda-home': {
+                department: '住まいと暮らし事業部',
+                section: 'ホームインスペクション',
+                image: 'recruit-tomoda-pc-pop.webp',
+                captain: {
+                    name: '友田 雄俊',
+                    profileUrl: '#'
+                },
+                subcaptain: null,
+                crew: []
+            }
+        };
+    }
 
     // DOM要素の取得
     const popup = document.getElementById('member-popup');
@@ -1051,8 +1130,19 @@ function initMemberPopup() {
     const popupImage = document.getElementById('member-popup-image');
     const popupDepartment = document.getElementById('member-popup-department');
     const popupSection = document.getElementById('member-popup-section');
-    const popupCaptain = document.getElementById('member-popup-captain');
-    const popupProfileBtn = document.getElementById('member-popup-profile-btn');
+    
+    // 船長・副船長・乗組員の要素
+    const captainWrapper = document.getElementById('member-popup-captain-wrapper');
+    const captainName = document.getElementById('member-popup-captain');
+    const captainProfileBtn = document.getElementById('member-popup-captain-profile-btn');
+    
+    const subcaptainWrapper = document.getElementById('member-popup-subcaptain-wrapper');
+    const subcaptainName = document.getElementById('member-popup-subcaptain');
+    const subcaptainProfileBtn = document.getElementById('member-popup-subcaptain-profile-btn');
+    
+    const crewWrapper = document.getElementById('member-popup-crew-wrapper');
+    const crewList = document.getElementById('member-popup-crew-list');
+    
     const ships = document.querySelectorAll('.recruit-fleet__ship[data-member]');
 
     if (!popup || !ships.length) return;
@@ -1069,11 +1159,48 @@ function initMemberPopup() {
                                  window.location.origin + '/wp-content/themes/sakura-wordpress2';
                 
                 popupImage.src = `${templateDir}/images/${member.image}`;
-                popupImage.alt = member.name;
+                popupImage.alt = member.captain?.name || '船員';
                 popupDepartment.textContent = member.department;
-                popupSection.textContent = member.section;
-                popupCaptain.textContent = `船長：${member.name}`;
-                popupProfileBtn.href = member.profileUrl;
+                popupSection.textContent = member.section || '';
+                
+                // 船長情報の設定
+                if (member.captain && captainWrapper && captainName && captainProfileBtn) {
+                    captainName.textContent = member.captain.name;
+                    captainProfileBtn.href = member.captain.profileUrl;
+                    captainWrapper.style.display = 'block';
+                } else if (captainWrapper) {
+                    captainWrapper.style.display = 'none';
+                }
+                
+                // 副船長情報の設定
+                if (member.subcaptain && subcaptainWrapper && subcaptainName && subcaptainProfileBtn) {
+                    subcaptainName.textContent = member.subcaptain.name;
+                    subcaptainProfileBtn.href = member.subcaptain.profileUrl;
+                    subcaptainWrapper.style.display = 'block';
+                } else if (subcaptainWrapper) {
+                    subcaptainWrapper.style.display = 'none';
+                }
+                
+                // 乗組員情報の設定
+                if (member.crew && member.crew.length > 0 && crewWrapper && crewList) {
+                    crewList.innerHTML = ''; // リストをクリア
+                    
+                    member.crew.forEach(crewMember => {
+                        const crewItem = document.createElement('div');
+                        crewItem.className = 'member-popup__crew-item';
+                        
+                        const crewNameEl = document.createElement('p');
+                        crewNameEl.className = 'member-popup__member-name';
+                        crewNameEl.textContent = crewMember.name;
+                        
+                        crewItem.appendChild(crewNameEl);
+                        crewList.appendChild(crewItem);
+                    });
+                    
+                    crewWrapper.style.display = 'block';
+                } else if (crewWrapper) {
+                    crewWrapper.style.display = 'none';
+                }
                 
                 // ポップアップを表示
                 showPopup();
