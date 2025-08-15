@@ -9570,6 +9570,21 @@ body.no-scroll {
   z-index: 1;
   margin-top: 20px;
 }
+.recruit-official-sns-item-accounts.single-account {
+  grid-template-columns: 1fr;
+  justify-content: center;
+  justify-items: center;
+  max-width: 200px;
+  margin: 20px auto 0;
+}
+.recruit-official-sns-item-accounts.single-account .recruit-official-sns-item-account {
+  max-width: 150px;
+}
+@media screen and (max-width: 768px) {
+  .recruit-official-sns-item-accounts.single-account .recruit-official-sns-item-account {
+    max-width: 120px;
+  }
+}
 
 .recruit-official-sns-item-account {
   display: flex;
@@ -11002,6 +11017,37 @@ body.no-scroll {
   transform: scale(1.1);
 }
 .recruit-fleet__ship:not(.recruit-fleet__ship--management):not(.recruit-fleet__ship--hr):active {
+  transform: scale(0.98);
+}
+
+.recruit-fleet-sp__ship,
+.recruit-fleet-sp__ship-even {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.recruit-fleet-sp__ship .recruit-fleet-sp__ship-image,
+.recruit-fleet-sp__ship-even .recruit-fleet-sp__ship-image {
+  overflow: hidden;
+  border-radius: 8px;
+}
+.recruit-fleet-sp__ship .recruit-fleet-sp__ship-image img,
+.recruit-fleet-sp__ship-even .recruit-fleet-sp__ship-image img {
+  transition: transform 0.3s ease;
+}
+.recruit-fleet-sp__ship:hover,
+.recruit-fleet-sp__ship-even:hover {
+  transform: scale(1.02);
+}
+.recruit-fleet-sp__ship:hover .recruit-fleet-sp__ship-card,
+.recruit-fleet-sp__ship-even:hover .recruit-fleet-sp__ship-card {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.recruit-fleet-sp__ship:hover .recruit-fleet-sp__ship-image img,
+.recruit-fleet-sp__ship-even:hover .recruit-fleet-sp__ship-image img {
+  transform: scale(1.05);
+}
+.recruit-fleet-sp__ship:active,
+.recruit-fleet-sp__ship-even:active {
   transform: scale(0.98);
 }
 

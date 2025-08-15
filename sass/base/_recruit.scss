@@ -3175,6 +3175,23 @@ text-transform: uppercase;
   position: relative;
   z-index: 1;
   margin-top: 20px;
+  
+  // アカウントが1つの場合は中央配置
+  &.single-account {
+    grid-template-columns: 1fr;
+    justify-content: center;
+    justify-items: center;
+    max-width: 200px;
+    margin: 20px auto 0;
+    
+    .recruit-official-sns-item-account {
+      max-width: 150px;
+      
+      @include mq("md") {
+        max-width: 120px;
+      }
+    }
+  }
 }
 
 .recruit-official-sns-item-account {
@@ -4705,5 +4722,38 @@ line-height: 20px; /* 128.571% */
     &:active {
       transform: scale(0.98);
     }
+  }
+}
+
+// スマホ版船カードにもホバー効果とクリック可能表示を追加
+.recruit-fleet-sp__ship,
+.recruit-fleet-sp__ship-even {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  // 船カードの画像にホバーアニメーションを追加
+  .recruit-fleet-sp__ship-image {
+    overflow: hidden;
+    border-radius: 8px;
+    
+    img {
+      transition: transform 0.3s ease;
+    }
+  }
+  
+  &:hover {
+    transform: scale(1.02);
+    
+    .recruit-fleet-sp__ship-card {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .recruit-fleet-sp__ship-image img {
+      transform: scale(1.05);
+    }
+  }
+  
+  &:active {
+    transform: scale(0.98);
   }
 }

@@ -137,7 +137,7 @@
                 <div class="swiper-slide">
                         <div class="recruit-team-sp__content-item">
                             <div class="recruit-team-sp__content-img">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-oonishi-sp.png" alt="大西 倫加">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-nagashima-sp.webp" alt="長嶋 修">
                             </div>
                             <div class="recruit-team-sp__content-text">
                                 <div class="recruit-team-sp__content-role">
@@ -594,7 +594,7 @@
                         </div>
                         
                         <!-- 円グラフ（中央） -->
-                        <div class="recruit-data__gender-pie" data-male="40" data-female="60">
+                        <div class="recruit-data__gender-pie" data-male="35" data-female="65">
                             <svg class="recruit-data__gender-svg" viewBox="0 0 40 40">
                                 <!-- 女性60%（背景全体） -->
                                 <circle class="recruit-data__gender-bg" cx="50%" cy="50%" r="15.9154"/>
@@ -743,13 +743,7 @@
         <div class="container">
             <div class="recruit-ideal__video">
                 <div class="recruit-ideal__video-container">
-                    <iframe 
-                        src="https://www.youtube.com/embed/aBrXy9Vpyow" 
-                        title="求める人物像 - さくら事務所グループ採用動画" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/ueclmPBT6Hc?si=kJxVg2Ih2HhW5FXN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -981,7 +975,7 @@
         </div>
     </section>
 <!-- ユニークな独自採用 -->
-<section class="front-page__section recruit-unique-recruit" data-midnight="default">
+<!-- <section class="front-page__section recruit-unique-recruit" data-midnight="default">
         <div class="container">
             <h2 class="recruit-unique-recruit-title">ユニークな独自採用</h2>
 
@@ -989,11 +983,11 @@
             文字の大きさ、量、字間、行間等を確認するために入れています。
             </div>
 
-            <!-- Swiperコンテナ -->
+   
             <div class="recruit-unique-recruit-swiper swiper">
                 <div class="swiper-wrapper recruit-unique-recruit-items">
                     <?php
-                    // 最新の投稿を10件取得
+              
                     $news_query = new WP_Query(array(
                         'post_type' => 'unique-recruit',
                         'posts_per_page' => 10,
@@ -1002,10 +996,10 @@
                         'order' => 'DESC'
                     ));
                     
-                    $news_posts = array(); // 投稿データを格納する配列
+                    $news_posts = array(); 
                     
                     if ($news_query->have_posts()) :
-                        // 投稿データを配列に格納
+                     
                         while ($news_query->have_posts()) : $news_query->the_post();
                             $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'medium');
                             if (!$thumbnail_url) {
@@ -1021,23 +1015,23 @@
                         endwhile;
                         wp_reset_postdata();
                         
-                        // 投稿数が少ない場合（5件未満）は複製してSwiperが正常に動作するようにする
+                        
                         $original_count = count($news_posts);
                         if ($original_count > 0 && $original_count < 5) {
-                            // 元の投稿を2回複製して最低15件にする
+                           
                             for ($i = 0; $i < 2; $i++) {
                                 $news_posts = array_merge($news_posts, $news_posts);
                                 if (count($news_posts) >= 15) break;
                             }
                         } elseif ($original_count > 10) {
-                            // 投稿数が10件を超える場合は10件に制限
+                        
                             $news_posts = array_slice($news_posts, 0, 10);
                         }
                         
-                        // 投稿を表示
+                       
                         foreach ($news_posts as $post_data) :
                     ?>
-                    <!-- ニュースアイテム -->
+            
                     <div class="swiper-slide recruit-unique-recruit-item">
                         <div class="recruit-unique-recruit-item-image-wrapper">
                             <img src="<?php echo esc_url($post_data['thumbnail']); ?>"
@@ -1063,7 +1057,7 @@
                         endforeach;
                     else: 
                     ?>
-                    <!-- 投稿が見つからない場合のデフォルト表示（複製してSwiperが動作するように） -->
+                
                     <?php for ($i = 0; $i < 6; $i++) : ?>
                     <div class="swiper-slide recruit-unique-recruit-item">
                         <div class="recruit-unique-recruit-item-image-wrapper">
@@ -1079,14 +1073,14 @@
                     <?php endif; ?>
                         </div>
 
-                <!-- ナビゲーション -->
+         
                 <div class="swiper-button-next recruit-unique-recruit-next"></div>
                 <div class="swiper-button-prev recruit-unique-recruit-prev"></div>
             </div>
 
 
         </div>
-    </section>
+    </section> -->
 <!-- SNSセクション -->
 <section class="recruit-official-sns" data-midnight="default">
     <div class="container">
@@ -1125,7 +1119,15 @@
                 <p class="recruit-official-sns-item-text"><?php echo esc_html($item['text']); ?></p>
                 <?php endif; ?>
 
-                <div class="recruit-official-sns-item-accounts">
+                <?php 
+                // アカウント数を取得してクラス名を決定
+                $account_count = !empty($item['accounts']) ? count($item['accounts']) : 0;
+                $accounts_class = 'recruit-official-sns-item-accounts';
+                if ($account_count === 1) {
+                    $accounts_class .= ' single-account';
+                }
+                ?>
+                <div class="<?php echo esc_attr($accounts_class); ?>">
                     <?php if (!empty($item['accounts'])) : ?>
                         <?php foreach ($item['accounts'] as $account) : ?>
                             <?php 

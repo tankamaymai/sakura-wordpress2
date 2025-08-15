@@ -1143,7 +1143,7 @@ function initMemberPopup() {
     const crewWrapper = document.getElementById('member-popup-crew-wrapper');
     const crewList = document.getElementById('member-popup-crew-list');
     
-    const ships = document.querySelectorAll('.recruit-fleet__ship[data-member]');
+    const ships = document.querySelectorAll('.recruit-fleet__ship[data-member], .recruit-fleet-sp__ship[data-member], .recruit-fleet-sp__ship-even[data-member]');
 
     if (!popup || !ships.length) return;
 
