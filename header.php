@@ -16,25 +16,47 @@
     <?php wp_body_open(); ?>
 
     <div class="side-banners">
+        <?php 
+        // サイドバナー1の設定を取得
+        $banner1_settings = get_side_banner_settings(1);
+        if ($banner1_settings['enabled'] && (!empty($banner1_settings['image_pc_url']) || !empty($banner1_settings['image_sp_url']))) : 
+        ?>
         <div class="side-banners__item">
-            <a href="#" class="side-banners__link">
+            <a href="<?php echo esc_url($banner1_settings['url']); ?>" 
+               class="side-banners__link"
+               target="<?php echo esc_attr($banner1_settings['target']); ?>">
                 <picture>
-                    <source srcset="<?php echo esc_url(get_theme_file_uri('/images/banner-top-pc.webp')); ?>" media="(min-width: 768px)">
-                    <img src="<?php echo esc_url(get_theme_file_uri('/images/banner-top-sp.webp')); ?>" alt="マンション管理のバナー"
-                        class="side-banners__image" width="300" height="150" loading="lazy">
+                    <?php if (!empty($banner1_settings['image_pc_url'])) : ?>
+                        <source srcset="<?php echo esc_url($banner1_settings['image_pc_url']); ?>" media="(min-width: 768px)">
+                    <?php endif; ?>
+                    <img src="<?php echo esc_url($banner1_settings['image_sp_url'] ?: $banner1_settings['image_pc_url']); ?>" 
+                         alt="<?php echo esc_attr($banner1_settings['alt_text'] ?: 'サイドバナー1'); ?>"
+                         class="side-banners__image" width="300" height="150" loading="lazy">
                 </picture>
             </a>
         </div>
+        <?php endif; ?>
+        
+        <?php 
+        // サイドバナー2の設定を取得
+        $banner2_settings = get_side_banner_settings(2);
+        if ($banner2_settings['enabled'] && (!empty($banner2_settings['image_pc_url']) || !empty($banner2_settings['image_sp_url']))) : 
+        ?>
         <div class="side-banners__item">
-            <a href="#" class="side-banners__link">
+            <a href="<?php echo esc_url($banner2_settings['url']); ?>" 
+               class="side-banners__link"
+               target="<?php echo esc_attr($banner2_settings['target']); ?>">
                 <picture>
-                    <source srcset="<?php echo esc_url(get_theme_file_uri('/images/h-banner-top-sp.webp')); ?>" media="(max-width: 768px)">
-                    <img src="<?php echo esc_url(get_theme_file_uri('/images/h-banner-top-pc.webp')); ?>" alt="ホームインスペクションのバナー" class="side-banners__image" width="300" height="150" loading="lazy">
+                    <?php if (!empty($banner2_settings['image_pc_url'])) : ?>
+                        <source srcset="<?php echo esc_url($banner2_settings['image_pc_url']); ?>" media="(min-width: 768px)">
+                    <?php endif; ?>
+                    <img src="<?php echo esc_url($banner2_settings['image_sp_url'] ?: $banner2_settings['image_pc_url']); ?>" 
+                         alt="<?php echo esc_attr($banner2_settings['alt_text'] ?: 'サイドバナー2'); ?>"
+                         class="side-banners__image" width="300" height="150" loading="lazy">
                 </picture>
-                <img src="<?php echo esc_url(get_theme_file_uri('/images/h-banner-top-sp.webp')); ?>"
-                    alt="ホームインスペクションのバナー" class="side-banners__image" width="300" height="150" loading="lazy">
             </a>
         </div>
+        <?php endif; ?>
     </div>
 
     <!-- PC用サイドバーナビゲーション -->
@@ -80,11 +102,11 @@
                         <ul class="header-nav__submenu">
                             <li class="header-nav__submenu-item">
                                 <a href="<?php echo esc_url(home_url("about/philosophy")); ?>"
-                                    class="header-nav__submenu-link">理念、五方良し</a>
+                                    class="header-nav__submenu-link">理念・五方良し</a>
                             </li>
                             <li class="header-nav__submenu-item">
                                 <a href="<?php echo esc_url(home_url("about")); ?>"
-                                    class="header-nav__submenu-link">会社情報、沿革</a>
+                                    class="header-nav__submenu-link">会社情報・沿革</a>
                             </li>
                             <li class="header-nav__submenu-item">
                                 <a href="https://www.sakurajimusyo.com/company/story.php" target="_blank"
@@ -120,12 +142,12 @@
                     </li>
                     <li class="header-nav__item header-nav__item--has-submenu">
                         <div class="header-nav__link">
-                            <span class="header-nav__text-ja">仲間になる</span>
+                            <span class="header-nav__text-ja">コミュニティ</span>
                             <span class="header-nav__text-en">Join Sakura</span>
                         </div>
                         <ul class="header-nav__submenu">
                             <li class="header-nav__submenu-item">
-                                <a href="<?php echo esc_url(home_url("sakura-yells")); ?>"
+                                <a href="<?php echo esc_url(home_url("community")); ?>"
                                     class="header-nav__submenu-link">SJGコミュニティ</a>
                             </li>
                         </ul>
@@ -220,11 +242,11 @@
                         <ul class="header-nav__submenu">
                             <li class="header-nav__submenu-item">
                                 <a href="<?php echo esc_url(home_url("about/philosophy")); ?>"
-                                    class="header-nav__submenu-link">理念、五方良し</a>
+                                    class="header-nav__submenu-link">理念・五方良し</a>
                             </li>
                             <li class="header-nav__submenu-item">
                                 <a href="<?php echo esc_url(home_url("about")); ?>"
-                                    class="header-nav__submenu-link">会社情報、沿革</a>
+                                    class="header-nav__submenu-link">会社情報・沿革</a>
                             </li>
                             <li class="header-nav__submenu-item">
                                 <a href="https://www.sakurajimusyo.com/company/story.php" target="_blank"
@@ -259,12 +281,12 @@
                     </li>
                     <li class="header-nav__item header-nav__item--has-submenu">
                         <div class="header-nav__link">
-                            <span class="header-nav__text-ja">仲間になる</span>
+                            <span class="header-nav__text-ja">コミュニティ</span>
                             <span class="header-nav__text-en">Join Sakura</span>
                         </div>
                         <ul class="header-nav__submenu">
                             <li class="header-nav__submenu-item">
-                                <a href="<?php echo esc_url(home_url("sakura-yells")); ?>"
+                                <a href="<?php echo esc_url(home_url("community")); ?>"
                                     class="header-nav__submenu-link">SJGコミュニティ</a>
                             </li>
                         </ul>
@@ -358,11 +380,11 @@
             <ul class="header-nav__submenu">
                 <li class="header-nav__submenu-item">
                     <a href="<?php echo esc_url(home_url("about/philosophy")); ?>"
-                        class="header-nav__submenu-link">理念、五方良し</a>
+                        class="header-nav__submenu-link">理念・五方良し</a>
                 </li>
                 <li class="header-nav__submenu-item">
                     <a href="<?php echo esc_url(home_url("about")); ?>"
-                        class="header-nav__submenu-link">会社情報、沿革</a>
+                        class="header-nav__submenu-link">会社情報・沿革</a>
                 </li>
                 <li class="header-nav__submenu-item">
                     <a href="https://www.sakurajimusyo.com/company/story.php" target="_blank"
@@ -397,12 +419,12 @@
         </li>
         <li class="header-nav__item header-nav__item--has-submenu">
             <div class="header-nav__link">
-                <span class="header-nav__text-ja">仲間になる</span>
+                <span class="header-nav__text-ja">コミュニティ</span>
                 <span class="header-nav__text-en">Join Sakura</span>
             </div>
             <ul class="header-nav__submenu">
                 <li class="header-nav__submenu-item">
-                    <a href="<?php echo esc_url(home_url("sakura-yells")); ?>"
+                        <a href="<?php echo esc_url(home_url("community")); ?>"
                         class="header-nav__submenu-link">SJGコミュニティ</a>
                 </li>
             </ul>
@@ -496,11 +518,11 @@
             <ul class="header-nav__submenu">
                 <li class="header-nav__submenu-item">
                     <a href="<?php echo esc_url(home_url("about/philosophy")); ?>"
-                        class="header-nav__submenu-link">理念、五方良し</a>
+                        class="header-nav__submenu-link">理念・五方良し</a>
                 </li>
                 <li class="header-nav__submenu-item">
                     <a href="<?php echo esc_url(home_url("about")); ?>"
-                        class="header-nav__submenu-link">会社情報、沿革</a>
+                        class="header-nav__submenu-link">会社情報・沿革</a>
                 </li>
                 <li class="header-nav__submenu-item">
                     <a href="https://www.sakurajimusyo.com/company/story.php" target="_blank"
@@ -535,12 +557,12 @@
         </li>
         <li class="header-nav__item header-nav__item--has-submenu">
             <div class="header-nav__link">
-                <span class="header-nav__text-ja">仲間になる</span>
+                <span class="header-nav__text-ja">コミュニティ</span>
                 <span class="header-nav__text-en">Join Sakura</span>
             </div>
             <ul class="header-nav__submenu">
                 <li class="header-nav__submenu-item">
-                    <a href="<?php echo esc_url(home_url("sakura-yells")); ?>"
+                    <a href="<?php echo esc_url(home_url("community")); ?>"
                         class="header-nav__submenu-link">SJGコミュニティ</a>
                 </li>
             </ul>
@@ -651,11 +673,11 @@
             </li>
             <li class="global-nav__submenu-item">
               <a href="<?php echo esc_url(home_url("about/philosophy")); ?>"
-                 class="global-nav__submenu-link">理念、五方良し</a>
+                 class="global-nav__submenu-link">理念・五方良し</a>
             </li>
             <li class="global-nav__submenu-item">
               <a href="<?php echo esc_url(home_url("about")); ?>"
-                 class="global-nav__submenu-link">会社情報、沿革</a>
+                 class="global-nav__submenu-link">会社情報・沿革</a>
             </li>
             <li class="global-nav__submenu-item">
               <a href="https://www.sakurajimusyo.com/company/story.php" target="_blank"
@@ -700,7 +722,7 @@
         <li class="global-nav__item global-nav__item--has-submenu">
           <div class="global-nav__link">
             <div>
-              <span class="global-nav__text-ja">仲間になる</span>
+              <span class="global-nav__text-ja">コミュニティ</span>
             </div>
             <span class="global-nav__arrow">></span>
           </div>
@@ -709,7 +731,7 @@
               <div class="global-nav__back-button">戻る</div>
             </li>
             <li class="global-nav__submenu-item">
-              <a href="<?php echo esc_url(home_url("sakura-yells")); ?>"
+              <a href="<?php echo esc_url(home_url("community")); ?>"
                  class="global-nav__submenu-link">SJGコミュニティ</a>
             </li>
           </ul>

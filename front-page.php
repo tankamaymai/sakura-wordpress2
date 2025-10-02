@@ -123,6 +123,7 @@
                         </div>
                         <h4 class="front-page__services-item-title">だいち災害リスク研究所</h4>
                         <p class="front-page__services-item-text">
+                        自然災害が頻発する今、防災視点からの土地選びと住宅づくり、そして暮らしづくりを支援し、一人ひとりに合った具体的な対策を提案します。
                         </p>
                     </div>
     <!-- スライド1 -->
@@ -264,7 +265,7 @@
             </p>
             <h2 class="front-page__section-title front-page__achievements-title">さくら事務所グループの実績</h2>
 
-            <p class="front-page__achievements-subtitle">人と不動産の幸せな関係を築いてきた実績</p>
+            <p class="front-page__achievements-subtitle">さくら事務所グループの実績</p>
             <div class="front-page__achievements-items">
                 <!-- item -->
                 <div class="front-page__achievements-item">
@@ -329,7 +330,7 @@
                 <div class="front-page__achievements-item">
                     <div class="front-page__achievements-item-content">
                         <h4 class="front-page__achievements-item-title">さくら事務所</h4>
-                        <p class="front-page__achievements-item-text">メディア&出版実績</p>
+                        <p class="front-page__achievements-item-text">メディア露出実績</p>
                         <p class="front-page__achievements-item-value js-countUp-target" data-from="0" data-to="220">
                             220<br class="sp2-none"><span class="front-page__achievements-item-value-unit">件/年以上</span>
                         </p>
@@ -586,7 +587,7 @@
             <!-- カード -->
             <div class="site-links__cards">
                 <!-- カード1: さくら事務所グループとは -->
-                <div class="site-links__card">
+                <a href="<?php echo esc_url(home_url('about')); ?>" class="site-links__card">
                     <img src="<?php echo esc_url(get_theme_file_uri('/images/front-page/site-links-img1.webp')); ?>"
                         alt="さくら事務所グループとは" class="site-links__card-img">
                     <div class="site-links__card-overlay">
@@ -595,18 +596,18 @@
                             <p class="site-links__card-title">さくら事務所グループとは</p>
 
                         </div>
-                        <a href="<?php echo esc_url(home_url('about')); ?>" class="site-links__card-btn">
+                        <span class="site-links__card-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M5 12h14"></path>
                                 <path d="M12 5l7 7-7 7"></path>
                             </svg>
-                        </a>
+                        </span>
                     </div>
-                </div>
+                </a>
 
                 <!-- カード2: さくら事務所グループの仲間になる -->
-                <div class="site-links__card">
+                <a href="<?php echo esc_url(home_url('sakura-yells')); ?>" class="site-links__card">
                     <img src="<?php echo esc_url(get_theme_file_uri('/images/front-page/site-links-img2.webp')); ?>"
                         alt="さくら事務所グループの仲間になる" class="site-links__card-img">
                     <div class="site-links__card-overlay">
@@ -614,18 +615,18 @@
                             <h4 class="site-links__card-subtitle">RECRUIT</h4>
                             <p class="site-links__card-title">さくら事務所グループではたらく</p>
                         </div>
-                        <a href="#" class="site-links__card-btn">
+                        <span class="site-links__card-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M5 12h14"></path>
                                 <path d="M12 5l7 7-7 7"></path>
                             </svg>
-                        </a>
+                        </span>
                     </div>
-                </div>
+                </a>
 
                 <!-- カード3: さくら事務所グループではたらく -->
-                <div class="site-links__card">
+                <a href="<?php echo esc_url(home_url('recruit')); ?>" class="site-links__card">
                     <img src="<?php echo esc_url(get_theme_file_uri('/images/front-page/site-links-img3.webp')); ?>"
                         alt="さくら事務所グループではたらく" class="site-links__card-img">
                     <div class="site-links__card-overlay">
@@ -633,21 +634,21 @@
                             <h4 class="site-links__card-subtitle">JOIN OUR TEAM</h4>
                             <p class="site-links__card-title">さくら事務所グループの仲間になる</p>
                         </div>
-                        <a href="<?php echo esc_url(home_url('recruit')); ?>" class="site-links__card-btn">
+                        <span class="site-links__card-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M5 12h14"></path>
                                 <path d="M12 5l7 7-7 7"></path>
                             </svg>
-                        </a>
+                        </span>
                     </div>
-                </div>
+                </a>
             </div>
 
             <!-- リンクリスト -->
             <div class="site-links__links">
-                <a href="#" class="site-links__link">
-                    ご自宅を購入・建築されるみなさま
+                <a href="https://www.sakurajimusyo.com/" target="_blank" class="site-links__link">
+                ホームインスペクション
                     <div class="site-links__link-arrow">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
                             <rect x="0.5" y="0.5" width="29" height="29" rx="14.5" stroke="#F1F3CE" />
@@ -657,8 +658,9 @@
                         </svg>
                     </div>
                 </a>
-                <a href="#" class="site-links__link">
-                    メディアのみなさま
+           
+                <a href="https://www.s-mankan.com/" target="_blank" class="site-links__link">
+                マンション管理コンサルティング
                     <div class="site-links__link-arrow">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
                             <rect x="0.5" y="0.5" width="29" height="29" rx="14.5" stroke="#F1F3CE" />
@@ -668,8 +670,8 @@
                         </svg>
                     </div>
                 </a>
-                <a href="#" class="site-links__link">
-                    マンション管理組合様向けサービス
+                <a href="https://www.sakurajimusyo.com/opinion/" target="_blank" class="site-links__link">
+                    メディアのみなさまへ
                     <div class="site-links__link-arrow">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
                             <rect x="0.5" y="0.5" width="29" height="29" rx="14.5" stroke="#F1F3CE" />

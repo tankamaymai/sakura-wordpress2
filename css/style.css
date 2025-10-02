@@ -5278,7 +5278,7 @@ body.no-scroll {
 
 .footer {
   color: #fff;
-  padding: 50px 60px 50px;
+  padding: 20px 60px 120px 60px;
   position: relative;
   overflow: hidden;
 }
@@ -5330,12 +5330,12 @@ body.no-scroll {
 
 @media screen and (max-width: 1024px) {
   .footer {
-    padding: 60px 40px 40px;
+    padding: 60px 40px 120px 40px;
   }
 }
 @media screen and (max-width: 768px) {
   .footer {
-    padding: 40px 20px 70px 20px;
+    padding: 40px 20px 120px 20px;
   }
 }
 .footer__top {
@@ -6192,8 +6192,8 @@ body.no-scroll {
 }
 
 .philosophy-rules-text-content {
-  padding-top: 120px;
-  padding-bottom: 120px;
+  padding-top: 180px;
+  padding-bottom: 180px;
 }
 @media screen and (max-width: 768px) {
   .philosophy-rules-text-content {
@@ -6468,7 +6468,7 @@ body.no-scroll {
   font-size: 52px;
   color: #032130;
   margin-bottom: 30px;
-  text-align: center;
+  text-align: left;
 }
 @media screen and (max-width: 768px) {
   .recruit-history__title {
@@ -6482,7 +6482,7 @@ body.no-scroll {
   font-weight: 600;
   font-size: 32px;
   color: #032130;
-  text-align: center;
+  text-align: left;
 }
 @media screen and (max-width: 768px) {
   .recruit-history__content-title {
@@ -6512,7 +6512,7 @@ body.no-scroll {
   font-size: 24px;
   color: #032130;
   margin-bottom: 30px;
-  text-align: center;
+  text-align: left;
 }
 @media screen and (max-width: 768px) {
   .recruit-history__content-text {
@@ -6726,12 +6726,12 @@ body.no-scroll {
 .recruit-fleet__title {
   font-family: "Barlow", "Noto Sans JP", sans-serif;
   font-weight: 700;
-  font-size: 3.9682539683vw;
+  font-size: 3.3068783069vw;
   color: #ffffff;
   text-align: center;
   width: 100%;
   position: absolute;
-  top: 0px;
+  top: 30px;
   left: 50%;
   transform: translateX(-50%);
 }

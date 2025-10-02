@@ -296,5 +296,125 @@ document.addEventListener('DOMContentLoaded', function() {
     // アニメーションの初期化
     console.log('Starting philosophy animations initialization...');
     initPhilosophyCircleAnimation(); // 画像拡大アニメーション
+    
+    // ========================================
+    // スクロール制限機能（最後の1スクロール分を防止）
+    // ========================================
+    function preventLastScrollStep() {
+        let isScrolling = false;
+        let scrollTimeout;
+        
+        // ページの実際のコンテンツ高さを取得
+        function getContentHeight() {
+            return Math.max(
+                document.body.scrollHeight,
+                document.body.offsetHeight,
+                document.documentElement.clientHeight,
+                document.documentElement.scrollHeight,
+                document.documentElement.offsetHeight
+            );
+        }
+        
+        // スクロール可能な最大位置を計算（最後の1スクロール分を除外）
+        function getMaxScrollPosition() {
+            const contentHeight = getContentHeight();
+            const windowHeight = window.innerHeight;
+            const scrollBuffer = 60; // 最後の100px分はスクロールを制限
+            return Math.max(0, contentHeight - windowHeight - scrollBuffer);
+        }
+        
+        // スクロールイベントの制御
+        function handleScroll(event) {
+            if (isScrolling) return;
+            
+            const currentScrollY = window.scrollY;
+            const maxScrollY = getMaxScrollPosition();
+            
+            // 最大スクロール位置を超えた場合は強制的に戻す
+            if (currentScrollY > maxScrollY) {
+                isScrolling = true;
+                
+                // スムーズに最大位置まで戻す
+                window.scrollTo({
+                    top: maxScrollY,
+                    behavior: 'smooth'
+                });
+                
+                // 少し待ってからスクロール制御を解除
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 300);
+                
+                // デフォルトのスクロール動作を防止
+                event.preventDefault();
+                return false;
+            }
+            
+            // スクロール終了タイマーをリセット
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+            }, 150);
+        }
+        
+        // マウスホイールイベントの制御
+        function handleWheel(event) {
+            const currentScrollY = window.scrollY;
+            const maxScrollY = getMaxScrollPosition();
+            const wheelDelta = event.deltaY;
+            
+            // 下方向のスクロールかつ最大位置に近い場合は防止
+            if (wheelDelta > 0 && currentScrollY >= maxScrollY - 50) {
+                event.preventDefault();
+                return false;
+            }
+        }
+        
+        // タッチスクロールの制御（モバイル対応）
+        let touchStartY = 0;
+        function handleTouchStart(event) {
+            touchStartY = event.touches[0].clientY;
+        }
+        
+        function handleTouchMove(event) {
+            const currentScrollY = window.scrollY;
+            const maxScrollY = getMaxScrollPosition();
+            const touchCurrentY = event.touches[0].clientY;
+            const touchDelta = touchStartY - touchCurrentY;
+            
+            // 下方向のスクロールかつ最大位置に近い場合は防止
+            if (touchDelta > 0 && currentScrollY >= maxScrollY - 50) {
+                event.preventDefault();
+                return false;
+            }
+        }
+        
+        // イベントリスナーを追加
+        window.addEventListener('scroll', handleScroll, { passive: false });
+        window.addEventListener('wheel', handleWheel, { passive: false });
+        window.addEventListener('touchstart', handleTouchStart, { passive: true });
+        window.addEventListener('touchmove', handleTouchMove, { passive: false });
+        
+        // リサイズ時に最大スクロール位置を再計算
+        window.addEventListener('resize', () => {
+            // リサイズ後、現在のスクロール位置が新しい最大値を超えていないかチェック
+            setTimeout(() => {
+                const currentScrollY = window.scrollY;
+                const maxScrollY = getMaxScrollPosition();
+                
+                if (currentScrollY > maxScrollY) {
+                    window.scrollTo({
+                        top: maxScrollY,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100);
+        });
+        
+        console.log('Scroll limitation system initialized');
+    }
+    
+    // スクロール制限機能を初期化
+    preventLastScrollStep();
 });
 

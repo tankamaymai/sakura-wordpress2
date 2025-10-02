@@ -11,8 +11,8 @@
                 <div class="philosophy-mv__title endroll-text">私たちさくら事務所グループの出番です。</div>
             </div>
             <div class="philosophy-mv-bottom">
-                <h3 class="philosophy-content-header-title">理念・北極星</h3>
-                <p class="philosophy-content-header-title-en">philosophy・North Star</p>
+                <h3 class="philosophy-content-header-title">理念</h3>
+                <p class="philosophy-content-header-title-en">philosophy</p>
            
             <div class="philosophy-content-text">
                 人と不動産のより幸せな関係を追求し<br>
@@ -53,7 +53,7 @@
             RULES
             </h3>
             <div class="philosophy-rules-title-sub">
-            掟：羅針盤&nbsp;&nbsp;五方良し
+            掟：五方良し
                 </div>
             <div class="philosophy-rules-content">
                 
@@ -72,17 +72,17 @@
         <div class="philosophy-rules-text__inner inner">
             <div class="philosophy-rules-text-content">
                 <div class="philosophy-rules-text-content-text">
-                依頼者とは、私たちのお客様のことです。お客様が良いのは当然ですし、さくら事務所グループでしか得られない体験を提供し続けることが重要です。
+                ご依頼者様とは、私たちのお客様のことです。お客様が良いのは当然ですし、さくら事務所グループでしか得られない体験を提供し続けることが重要です。
                 </div>
                 <div class="philosophy-rules-text-content-text">
-                次に、それを提供する会社も持続可能でなければなりません。適切に売り上げが上がる、利益が上がらなければ、持続可能ではありません。
+                次に、それを提供する会社も持続可能でなければなりません。適切に売上・利益が上がらなければ、持続可能ではありません。
 
                 </div>
                 <div class="philosophy-rules-text-content-text">
-                そして当然、私たち私たち一人ひとりも、その仕事をする喜びを感じられていることが大切です。私たち自身も、持続可能であり続けなければなりません。
+                そして当然、私たち一人ひとりも、その仕事をする喜びを感じられていることが大切です。私たち自身も、持続可能であり続けなければなりません。
                 </div>
                 <div class="philosophy-rules-text-content-text">
-                さらに、自分や会社だけが独りよがりでは、業界全体が良くなりませんので、私たちや会社がやっていることが業界を良くすることにつながるということが大切です
+                さらに、自分や会社だけが独りよがりでは、業界全体が良くなりませんので、私たちや会社がやっていることが業界を良くすることにつながるということが大切です。
                 </div>
                 <div class="philosophy-rules-text-content-text">
                 そうしたことを通じて、ひいては社会全体が良くなっていく、これが私たちさくら事務所グループが考える五方良しです。

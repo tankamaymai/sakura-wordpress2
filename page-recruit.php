@@ -30,8 +30,8 @@
             <p class="recruit-hero__subtitle">ここまでの<br class="md-show">あらすじ</p>
             <div class="recruit-hero__text">
                 <p>1999年、<br class="md-show">人と不動産のより幸せな関係を目指し、<br class="md-show">
-                長嶋修が中立の旗を掲げて<br class="md-show">さくら事務所を創業。<br class="md-show">国内初のホームインスペクションで<br class="md-show">業界を牽引し、仲間とともに嵐を越えてきた。<br class="md-show">バトンを受け継いだ大西倫加は、<br class="md-show">マンション管理・防災・不動産仲介へと<br class="md-show">航路を広げ、らくだ不動産やBORDER5など<br class="md-show">新たな事業を展開。
-                さらに次世代の経営チームへの継承に向け、<br class="md-show">五方良しと理念を体現する<br class="md-show"><span class="recruit-text-big">“100年企業“</span>を目指して挑戦は続く。<br class="md-show">次世代へ“豊かで美しい社会“を届けるべく、<br class="md-show">さくら事務所グループ第四章が始まる。
+                長嶋修が中立の旗を掲げて<br class="md-show">さくら事務所を創業。<br class="md-show">国内初のホームインスペクションで<br class="md-show">業界を牽引し、仲間とともに嵐を越えてきた。<br class="md-show">バトンを受け継いだ大西倫加は、<br class="md-show">マンション管理・防災・不動産仲介へと<br class="md-show">航路を広げ、BORDER5やらくだ不動産など<br class="md-show">新たな事業を展開。
+                さらに次世代の経営チームへの継承に向け、<br class="md-show">理念と五方良しを体現する<br class="md-show"><span class="recruit-text-big">“100年企業“</span>を目指して挑戦は続く。<br class="md-show">次世代へ“豊かで美しい社会“を届けるべく、<br class="md-show">さくら事務所グループ第四章が始まる。
                 </p>
             </div>
         </div>
@@ -73,12 +73,14 @@
             </div>
         </div>
         </div>
+        
+        
     </section>
 
     <!-- 経営チームセクション -->
     <section class="recruit-team md-none" data-midnight="white">
         <div class="recruit-team-bg">
-            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-team-new.webp" alt="チーム背景">
+            <img src="<?php echo get_template_directory_uri(); ?>/images/recruit-team-new2.webp" alt="チーム背景">
         </div>
         <div class="recruit-team__inner">
         </div>
@@ -975,7 +977,7 @@
         </div>
     </section>
 <!-- ユニークな独自採用 -->
-<!-- <section class="front-page__section recruit-unique-recruit" data-midnight="default">
+<section class="front-page__section recruit-unique-recruit" data-midnight="default">
         <div class="container">
             <h2 class="recruit-unique-recruit-title">ユニークな独自採用</h2>
 
@@ -1080,7 +1082,7 @@
 
 
         </div>
-    </section> -->
+    </section>
 <!-- SNSセクション -->
 <section class="recruit-official-sns" data-midnight="default">
     <div class="container">

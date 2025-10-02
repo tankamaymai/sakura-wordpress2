@@ -17,7 +17,7 @@
           <!-- 第一創業期: 1999年~2012年 -->
           <div class="business-history__content">
             <div class="business-history__content-text">
-              <p>創業者：長嶋修が国内初の個人向け不動産コンサルティングを始めました</p>
+              <p>創業者：長嶋修が国内初の個人向け不動産コンサルティングを始めました<br><br></p>
             </div>
             <div class="business-history__content-title tab-title">
               第一、二創業期: 1999年~2012年
@@ -55,7 +55,7 @@
           <!-- 第三創業期: 2013年1月~ -->
           <div class="business-history__content">
             <div class="business-history__content-text">
-              <p>長嶋からバトンを受け取った大西倫加が事業の成長を牽引、さくら事務所グループとなりました</p>
+              <p>長嶋からバトンを受け取った大西倫加が事業の成長を牽引、さくら事務所の事業は多角化しました</p>
             </div>
             <div class="business-history__content-title tab-title">
               第三創業期: 2013年1月~
@@ -108,7 +108,7 @@
           <!-- 第四創業期: 2025年4月~ -->
           <div class="business-history__content">
             <div class="business-history__content-text">
-              <p>若手経営チームによるCxO体制へ移行、次世代を見据えた新制さくら事務所グループへ</p>
+              <p>若手経営チームによるCxO体制へ移行、次世代を見据えた新制さくら事務所グループへ<br><br></p>
             </div>
             <div class="business-history__content-title tab-title">
               第四創業期:2025年4月〜
@@ -703,9 +703,9 @@
           <!-- 大西 -->
           <div class="about__board-item">
             <div class="about__board-image">
-              <img src="<?php echo get_template_directory_uri(); ?>/images/oonishi.webp" alt="大西倫加">
+              <img src="<?php echo get_template_directory_uri(); ?>/images/about-oonishi.webp" alt="大西倫加">
               <div class="about__board-info-wrapper">
-                <p class="about__board-position">株式会社さくら事務所・らくだ不動産株式会社　代表取締役社長　CEO</p>
+                <p class="about__board-position">株式会社さくら事務所・らくだ不動産株式会社　<br>代表取締役社長　CEO</p>
                 <p class="about__board-position">最高経営責任者＆最高エンパワーメント責任者</p>
                 <h3 class="about__board-name">大西 倫加</h3>
               </div>
@@ -718,9 +718,9 @@
           <!-- 山本 -->
           <div class="about__board-item">
             <div class="about__board-image">
-              <img src="<?php echo get_template_directory_uri(); ?>/images/yamamoto.webp" alt="山本直彌">
+              <img src="<?php echo get_template_directory_uri(); ?>/images/about-yamamoto.webp" alt="山本直彌">
               <div class="about__board-info-wrapper">
-                <p class="about__board-position">株式会社さくら事務所・らくだ不動産株式会社　取締役副社長　COO</p>
+                <p class="about__board-position">株式会社さくら事務所・らくだ不動産株式会社　<br>取締役副社長　COO</p>
                 <p class="about__board-position">最高執行責任者＆最高創出責任者</p>
                 <h3 class="about__board-name">山本 直彌</h3>
               </div>
@@ -733,7 +733,7 @@
           <!-- 友田 -->
           <div class="about__board-item">
             <div class="about__board-image">
-              <img src="<?php echo get_template_directory_uri(); ?>/images/tomoda.webp" alt="友田雄俊">
+              <img src="<?php echo get_template_directory_uri(); ?>/images/about-tomoda.webp" alt="友田雄俊">
               <div class="about__board-info-wrapper">
                 <p class="about__board-position">株式会社さくら事務所　執行役員　CCO</p>
                 <p class="about__board-position">最高顧客責任者＆最高触媒責任者</p>
@@ -748,7 +748,7 @@
           <!-- 田村 -->
           <div class="about__board-item">
             <div class="about__board-image">
-              <img src="<?php echo get_template_directory_uri(); ?>/images/tamura.webp" alt="田村啓">
+              <img src="<?php echo get_template_directory_uri(); ?>/images/about-tamura.webp" alt="田村啓">
               <div class="about__board-info-wrapper">
                 <p class="about__board-position">株式会社さくら事務所　執行役員　CRO</p>
                 <p class="about__board-position">最高資源責任者＆最高レジリエンス責任者</p>
@@ -763,7 +763,7 @@
           <!-- 辻 -->
           <div class="about__board-item">
             <div class="about__board-image">
-              <img src="<?php echo get_template_directory_uri(); ?>/images/tuji.webp" alt="辻 正人">
+              <img src="<?php echo get_template_directory_uri(); ?>/images/about-tuji.webp" alt="辻 正人">
               <div class="about__board-info-wrapper">
                 <p class="about__board-position">株式会社さくら事務所　執行役員　CAO</p>
                 <p class="about__board-position">最高管理責任者＆最高自律性支援責任者</p>
@@ -778,9 +778,10 @@
           <!-- 長嶋 -->
           <div class="about__board-item">
             <div class="about__board-image">
-              <img src="<?php echo get_template_directory_uri(); ?>/images/nagashima.webp" alt="長嶋修">
+              <img src="<?php echo get_template_directory_uri(); ?>/images/about-nagashima.webp" alt="長嶋修">
               <div class="about__board-info-wrapper">
-                <p class="about__board-position">株式会社さくら事務所　創業者・会長　らくだ不動産株式会社　顧問</p>
+                <p class="about__board-position">株式会社さくら事務所　創業者・会長</p>
+                <p class="about__board-position">らくだ不動産株式会社　顧問</p>
                 <h3 class="about__board-name">長嶋 修</h3>
               </div>
             </div>

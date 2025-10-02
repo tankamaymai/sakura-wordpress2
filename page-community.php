@@ -14,7 +14,7 @@
     <section class="yells-content" data-midnight="white">
         <div class="yells-content__inner inner">
             <div class="yells-what-is" data-midnight="white">
-                <h2 class="yells-what-is__title">WHAT IS "SAKURA AILES"?</h2>
+                <h2 class="yells-what-is__title">WHAT IS "SJG COMMUNITY"?</h2>
               
 
                 <div class="yells-what-is__text">
@@ -65,7 +65,7 @@
     </section>
     <section class="yells-who-can-join" data-midnight="white">
         <div class="yells-who-can-join__inner inner">
-            <h2 class="yells-who-can-join__title">WHO CAN JOIN SAKURA ALLIES?</h2>
+            <h2 class="yells-who-can-join__title">WHO CAN JOIN SJG COMMUNITY?</h2>
             <h3 class="yells-who-can-join__subtitle">どんな方が”SJGコミュニティ”メンバーに？？</h3>
             
             <div class="yells-who-can-join__cards">
@@ -125,7 +125,7 @@
                 </div>
                 
                 <div class="yells-registration__notes">
-                    <h5 class="yells-registration__notes-title">さくらエールズ備考</h5>
+                    <h5 class="yells-registration__notes-title">SJGコミュニティ備考</h5>
                     
                     <div class="yells-registration__notes-text">
                         <p>・LINE登録だけではメールが届きませんので、必ずLINE内の登録フォームより手続きをお願いします</p>

@@ -12,7 +12,7 @@ $footer-border-color: rgba(255, 255, 255, 0.2);
 // フッターのスタイル
 .footer {
   color: $footer-text-color;
-  padding: 50px 60px 50px;
+  padding: 20px 60px 120px 60px;
   position: relative;
   overflow: hidden;
 
@@ -72,13 +72,13 @@ $footer-border-color: rgba(255, 255, 255, 0.2);
 // PCファースト設計
 @include mq(lg) {
   .footer {
-    padding: 60px 40px 40px;
+    padding: 60px 40px 120px 40px;
   }
 }
 
 @include mq(md) {
   .footer {
-    padding: 40px 20px 70px 20px;
+    padding: 40px 20px 120px 20px;
   }
 }
 
