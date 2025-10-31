@@ -23,7 +23,22 @@ document.addEventListener('DOMContentLoaded', function() {
             pinSpacing: false,
             id: "recruit-hero-pin"
         });
+
     }
+   // recruit-heroセクションをピン留め（採用ページ用）
+   const philosophy = document.querySelector('.philosophy-mv-bottom');
+        if (philosophy) {
+       ScrollTrigger.create({
+           trigger: ".philosophy-mv-bottom",
+           start: "top top",
+           end: "bottom top",
+           pin: true,
+           pinSpacing: false,
+           id: "philosophy-pin"
+       });
+
+   }
+
     
     // 実績セクションのピン留め設定関数
     function setupAchievementsPin() {
@@ -162,6 +177,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // 念のため、DOMContentLoaded後にも少し遅延させてアニメーションを実行
     setTimeout(animateHeroTitle, 500);
 
+
+
     // =====================================================
     // Philosophy 画像拡大アニメーション制御
     // =====================================================
@@ -169,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function initPhilosophyCircleAnimation() {
         const circleElement = document.querySelector('.philosophy-circle-bg');
         const philosophySection = document.querySelector('.philosophy');
-        const philosophyMvBottom = document.querySelector('.philosophy-mv-bottom');
+
         const philosophyContent = document.querySelector('.philosophy-content');
         
         if (!circleElement || !philosophySection) {
@@ -187,21 +204,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // 画像の最終サイズを計算（画面の対角線の6倍で圧倒的な拡大効果）
         const maxSize = Math.max(window.innerWidth, window.innerHeight) * 6;
 
-        // philosophy-mv-bottomの初期状態を設定
-        if (philosophyMvBottom) {
-            gsap.set(philosophyMvBottom, {
-                opacity: 0,
-                y: 30
-            });
-        }
+   
 
-        // philosophy-contentの初期状態を設定
-        if (philosophyContent) {
-            gsap.set(philosophyContent, {
-                opacity: 0,
-                y: 30
-            });
-        }
+
 
         // メインタイムライン（画像拡大 + セクションpin留め）
         const mainTimeline = gsap.timeline({
@@ -211,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 end: "+=100%",
                 scrub: 1.5,
                 pin: true,
-                pinSpacing: true,
+                pinSpacing: false,
                 anticipatePin: 1,
                 onStart: function() {
                     console.log('Philosophy image expansion animation started with pin');
@@ -239,182 +244,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 width: maxSize + "px",
                 height: maxSize + "px",
                 duration: 1,
-                ease: "power2.out"
+                ease: "power2.out",
+                onStart: function() {
+                    console.log('Philosophy circle expansion started - maintaining white text color');
+                    // ヘッダーメニューのテキストカラーは常に白を保つ
+                },
+                onComplete: function() {
+                    console.log('Philosophy circle expansion completed');
+                }
             }, 0.1);
 
-        // philosophy-mv-bottomのスクラブアニメーション（別のScrollTrigger）
-        if (philosophyMvBottom) {
-            gsap.timeline({
-                scrollTrigger: {
-                    trigger: philosophySection,
-                    start: "top top",
-                    end: "+=50%", // アニメーション期間を延長してゆっくりに
-                    scrub: true, // スクロール同期アニメーション
-                    onStart: function() {
-                        console.log('Philosophy mv-bottom scrub animation started');
-                    },
-                    onUpdate: function(self) {
-                        console.log('Philosophy mv-bottom scrub progress:', self.progress);
-                    }
-                }
-            })
-            .to(philosophyMvBottom, {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: "power2.out"
-            });
-        }
 
-        // philosophy-contentのスクラブアニメーション（別のScrollTrigger）
-        if (philosophyContent) {
-            gsap.timeline({
-                scrollTrigger: {
-                    trigger: philosophySection,
-                    start: "+=10%", // 出現タイミングを早める（20%→10%）
-                    end: "+=70%", // アニメーション期間を延長してゆっくりに
-                    scrub: true, // スクロール同期アニメーション
-                    onStart: function() {
-                        console.log('Philosophy content scrub animation started');
-                    },
-                    onUpdate: function(self) {
-                        console.log('Philosophy content scrub progress:', self.progress);
-                    }
-                }
-            })
-            .to(philosophyContent, {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: "power2.out"
-            });
-        }
+
+       
+     
 
         console.log('Philosophy scrub animations initialized');
     }
 
+    // =====================================================
+    // ヘッダーテキストカラー制御
+    // =====================================================
+    // 理念ページでは、CSSの .page-philosophy .site-header で
+    // 常にテキストを白（#fff）に設定しているため、
+    // JavaScriptでの動的な色制御は不要
+
     // アニメーションの初期化
     console.log('Starting philosophy animations initialization...');
     initPhilosophyCircleAnimation(); // 画像拡大アニメーション
+
     
-    // ========================================
-    // スクロール制限機能（最後の1スクロール分を防止）
-    // ========================================
-    function preventLastScrollStep() {
-        let isScrolling = false;
-        let scrollTimeout;
-        
-        // ページの実際のコンテンツ高さを取得
-        function getContentHeight() {
-            return Math.max(
-                document.body.scrollHeight,
-                document.body.offsetHeight,
-                document.documentElement.clientHeight,
-                document.documentElement.scrollHeight,
-                document.documentElement.offsetHeight
-            );
-        }
-        
-        // スクロール可能な最大位置を計算（最後の1スクロール分を除外）
-        function getMaxScrollPosition() {
-            const contentHeight = getContentHeight();
-            const windowHeight = window.innerHeight;
-            const scrollBuffer = 60; // 最後の100px分はスクロールを制限
-            return Math.max(0, contentHeight - windowHeight - scrollBuffer);
-        }
-        
-        // スクロールイベントの制御
-        function handleScroll(event) {
-            if (isScrolling) return;
-            
-            const currentScrollY = window.scrollY;
-            const maxScrollY = getMaxScrollPosition();
-            
-            // 最大スクロール位置を超えた場合は強制的に戻す
-            if (currentScrollY > maxScrollY) {
-                isScrolling = true;
-                
-                // スムーズに最大位置まで戻す
-                window.scrollTo({
-                    top: maxScrollY,
-                    behavior: 'smooth'
-                });
-                
-                // 少し待ってからスクロール制御を解除
-                setTimeout(() => {
-                    isScrolling = false;
-                }, 300);
-                
-                // デフォルトのスクロール動作を防止
-                event.preventDefault();
-                return false;
-            }
-            
-            // スクロール終了タイマーをリセット
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                isScrolling = false;
-            }, 150);
-        }
-        
-        // マウスホイールイベントの制御
-        function handleWheel(event) {
-            const currentScrollY = window.scrollY;
-            const maxScrollY = getMaxScrollPosition();
-            const wheelDelta = event.deltaY;
-            
-            // 下方向のスクロールかつ最大位置に近い場合は防止
-            if (wheelDelta > 0 && currentScrollY >= maxScrollY - 50) {
-                event.preventDefault();
-                return false;
-            }
-        }
-        
-        // タッチスクロールの制御（モバイル対応）
-        let touchStartY = 0;
-        function handleTouchStart(event) {
-            touchStartY = event.touches[0].clientY;
-        }
-        
-        function handleTouchMove(event) {
-            const currentScrollY = window.scrollY;
-            const maxScrollY = getMaxScrollPosition();
-            const touchCurrentY = event.touches[0].clientY;
-            const touchDelta = touchStartY - touchCurrentY;
-            
-            // 下方向のスクロールかつ最大位置に近い場合は防止
-            if (touchDelta > 0 && currentScrollY >= maxScrollY - 50) {
-                event.preventDefault();
-                return false;
-            }
-        }
-        
-        // イベントリスナーを追加
-        window.addEventListener('scroll', handleScroll, { passive: false });
-        window.addEventListener('wheel', handleWheel, { passive: false });
-        window.addEventListener('touchstart', handleTouchStart, { passive: true });
-        window.addEventListener('touchmove', handleTouchMove, { passive: false });
-        
-        // リサイズ時に最大スクロール位置を再計算
-        window.addEventListener('resize', () => {
-            // リサイズ後、現在のスクロール位置が新しい最大値を超えていないかチェック
-            setTimeout(() => {
-                const currentScrollY = window.scrollY;
-                const maxScrollY = getMaxScrollPosition();
-                
-                if (currentScrollY > maxScrollY) {
-                    window.scrollTo({
-                        top: maxScrollY,
-                        behavior: 'smooth'
-                    });
-                }
-            }, 100);
-        });
-        
-        console.log('Scroll limitation system initialized');
-    }
-    
-    // スクロール制限機能を初期化
-    preventLastScrollStep();
 });
 

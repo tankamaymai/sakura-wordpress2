@@ -21,6 +21,10 @@ document.addEventListener('DOMContentLoaded', function() {
           delay: 3000,
           disableOnInteraction: false,
       },
+      navigation: {
+          nextEl: '.front-page__services-button-next',
+          prevEl: '.front-page__services-button-prev',
+      },
       breakpoints: {
         // 768px以上の場合
       }
@@ -38,6 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
           delay: 3000,
           disableOnInteraction: false,
       },
+      navigation: {
+          nextEl: '.front-page__news-button-next',
+          prevEl: '.front-page__news-button-prev',
+      },
 
     });
     // ユニーク採用スライダーの初期化
@@ -51,6 +59,10 @@ document.addEventListener('DOMContentLoaded', function() {
         autoplay: {
             delay: 3000,
             disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.recruit-unique-recruit-button-next',
+            prevEl: '.recruit-unique-recruit-button-prev',
         },
   
       });
@@ -66,6 +78,10 @@ document.addEventListener('DOMContentLoaded', function() {
           delay: 3000,
           disableOnInteraction: false,
       },
+      navigation: {
+          nextEl: '.about__contents-button-next',
+          prevEl: '.about__contents-button-prev',
+      },
     });
     // サービススライダーの初期化
     const aboutAwardsSwiper = new Swiper('.about__awards-swiper', {
@@ -77,6 +93,10 @@ document.addEventListener('DOMContentLoaded', function() {
             autoplay: {
                 delay: 3000,
                 disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: '.about__awards-button-next',
+                prevEl: '.about__awards-button-prev',
             },
           });
 
@@ -91,8 +111,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 自動再生は無効（静的コンテンツのため）
         autoplay: {
-            delay: 3000,
+                delay: 3000,
         
+        },
+        navigation: {
+            nextEl: '.recruit-team-sp__button-next',
+            prevEl: '.recruit-team-sp__button-prev',
         },
         
         breakpoints: {
@@ -463,6 +487,63 @@ document.addEventListener('DOMContentLoaded', function() {
         // デフォルトのリンク動作を許可
         // バナーが設定されていない場合はそもそもDOM要素が存在しないため、
         // この処理は実行されない
+    }
+
+    // 採用ページ専用サイドバナーの処理
+    const recruitSideBanners = document.querySelector('.recruit-side-banners');
+    const recruitMainView = document.querySelector('.recruit');
+    
+    if (recruitSideBanners && recruitMainView) {
+        let recruitLastScrollY = 0;
+        let recruitScrollDirection = 'up';
+        
+        // IntersectionObserverでメインビューの表示状態を監視
+        const recruitMainViewObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // メインビューが見えている場合、スクロール位置に応じてバナーを表示
+                    if (window.scrollY >= 30) {
+                        recruitSideBanners.classList.add('is-visible');
+                        recruitSideBanners.classList.remove('is-hidden');
+                    }
+                } else {
+                    // メインビューが見えなくなったらバナーを非表示
+                    recruitSideBanners.classList.remove('is-visible');
+                    recruitSideBanners.classList.add('is-hidden');
+                }
+            });
+        }, {
+            threshold: 0
+        });
+        
+        recruitMainViewObserver.observe(recruitMainView);
+        
+        // スクロールイベントを監視
+        window.addEventListener('scroll', function() {
+            const scrollY = window.scrollY;
+            
+            // スクロール方向を判定
+            recruitScrollDirection = scrollY > recruitLastScrollY ? 'down' : 'up';
+            recruitLastScrollY = scrollY;
+            
+            // 30px以上スクロールしたらバナーを表示
+            if (scrollY >= 30 && recruitSideBanners && recruitMainView) {
+                const recruitMainViewRect = recruitMainView.getBoundingClientRect();
+                
+                // メインビューが画面内にあるときのみバナーを表示
+                if (recruitMainViewRect.bottom > 0) {
+                    recruitSideBanners.classList.add('is-visible');
+                    recruitSideBanners.classList.remove('is-hidden');
+                } else {
+                    recruitSideBanners.classList.remove('is-visible');
+                    recruitSideBanners.classList.add('is-hidden');
+                }
+            } else if (recruitSideBanners) {
+                // 30px未満の場合はバナーを非表示
+                recruitSideBanners.classList.remove('is-visible');
+                recruitSideBanners.classList.add('is-hidden');
+            }
+        });
     }
 
     // ウィンドウリサイズ時の処理
@@ -1323,13 +1404,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // midnightjsの初期化
-    // セクションごとに異なるヘッダー色を設定
-    $('.site-header').midnight({
-      // セクションのdata属性とヘッダースタイルの対応を設定
-      headerClass: 'midnightHeader',
-      innerClass: 'midnightInner',
-      defaultClass: 'default',
-      sectionSelector: 'midnight-section', // data-midnight属性を持つ要素を選択
-    });   
+    // midnight.jsは削除し、header-scroll.jsで処理
+
+    // 理念ページのスクロールヒント制御
+    const philosophyScrollHint = document.querySelector('.philosophy-scroll-hint');
+    if (philosophyScrollHint) {
+        let hasScrolled = false;
+        
+        // スクロールイベント
+        window.addEventListener('scroll', function() {
+            if (!hasScrolled) {
+                philosophyScrollHint.classList.add('is-hidden');
+                hasScrolled = true;
+            }
+        });
+        
+        // ページ読み込み時に少し遅延して表示
+        setTimeout(() => {
+            if (!hasScrolled) {
+                philosophyScrollHint.style.opacity = '1';
+            }
+        }, 1000);
+    }
 });

@@ -6,7 +6,7 @@
   background: url(../images/philosophy-mv-img.webp) no-repeat center center / cover;
   position: relative;
   overflow: hidden; /* エンドロールのために追加 */
-  min-height: 100vh; /* 最小高さを画面高さに設定 */
+  height: 100vh; /* 高さを画面いっぱいに設定 */
   display: flex;
   align-items: center;
   justify-content: center; /* 水平中央寄せも追加 */
@@ -15,7 +15,7 @@
   @include mq(md) {
     padding: 30px 0; /* モバイルでもパディングを調整 */
     background: url(../images/philosophy-mv.webp) no-repeat center center / cover;
-    min-height: 100vh;
+    height: 100vh;
   }
 }
 
@@ -34,6 +34,7 @@
   transform: translate(-50%, -50%);
   z-index: 1; /* エンドロールテキストより下に配置 */
   opacity: 1; /* 初期状態で表示 */
+  pointer-events: none; /* ヘッダーカラー検出の邪魔にならないように */
 }
 
 .philosophy__inner {
@@ -70,12 +71,20 @@ line-height: 32px; /* 177.778% */
 /* philosophy-mv-bottom GSAPアニメーション用 */
 .philosophy-mv-bottom {
   text-align: center;
-  /* GSAPで初期状態とアニメーションを制御するため、CSS transitionは削除 */
+  position: relative;
+  background-color: #fff;
+padding-top: 50px;
+  padding-bottom: 120px;
+
 }
 
 .philosophy-content{
-  padding-top: 120px;
+  padding-top: 50px;
   padding-bottom: 120px;
+  position: relative;
+  z-index: 10; /* philosophy-mv-bottomより上に配置 */
+
+  background-color: #fff; /* 白背景を明示的に設定 */
   /* GSAPで初期状態とアニメーションを制御するため、CSS transitionは削除 */
   
   @include mq(md) {
@@ -111,16 +120,10 @@ font-size: 32px;
 font-style: normal;
 font-weight: 900;
 line-height: 42px; /* 210% */
-margin-top: 146px;
-@include mq(md) {
-  font-size: 20px;
-  line-height: 32px;
-  margin-top: 30%;
-  text-align: left;
-}
+
 }
 .philosophy-content-text{
-  font-family: #463125;
+  font-family: $second-font;
   font-weight: 800;
   font-size: 50px;
   line-height: 2;
@@ -158,7 +161,7 @@ margin-top: 146px;
   }
 }
 .philosophy-content-text-bottom{
-  margin-top: 141px;
+  margin-top:50px;
   @include mq(md) {
     margin-top: 30px;
   }
@@ -359,6 +362,145 @@ padding-top: 20px;
   @include mq(md) {
     font-size: 18px;
     margin-top: 50px;
+  }
+}
+
+/* 理念ページのメニューバー固定スタイル */
+.philosophy ~ .site-header,
+.philosophy ~ * ~ .site-header,
+main .philosophy ~ .site-header,
+body > .site-header {
+  // .philosophyセクションを含むページの場合、site-headerを選択
+  // ページロード時点では.philosophyセクションが後にあるため、
+  // より正確なセレクタを使用
+}
+
+/* より直接的なアプローチ：.site-headerにdata属性でページを識別 */
+.site-header[data-philosophy-page="true"] {
+  background-color: #000 !important;
+  border-radius: 0 150px 30px 0;
+  
+  .header-nav__text-ja,
+  .header-nav__text-en {
+    color: #fff !important;
+  }
+  
+  .header-logo__image {
+    filter: brightness(0) invert(1) !important;
+  }
+  
+  .header-nav__submenu-link {
+    color: #fff !important;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+      color: #fff !important;
+    }
+  }
+  
+  /* サブメニューがオープンしている時も白テキストを保つ */
+  &.has-submenu-open {
+    background-color: #000 !important;
+    
+    .header-nav__text-ja,
+    .header-nav__text-en {
+      color: #fff !important;
+    }
+    
+    .header-logo__image {
+      filter: brightness(0) invert(1) !important;
+    }
+  }
+}
+
+/* fallback: page-id-132 を使用（理念ページのID） */
+.page-id-132 .site-header {
+  background-color: #000 !important;
+  
+  .header-nav__text-ja,
+  .header-nav__text-en {
+    color: #fff !important;
+  }
+  
+  .header-logo__image {
+    filter: brightness(0) invert(1) !important;
+  }
+  
+  .header-nav__submenu-link {
+    color: #fff !important;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+      color: #fff !important;
+    }
+  }
+  
+  /* サブメニューがオープンしている時も白テキストを保つ */
+  &.has-submenu-open {
+    background-color: #000 !important;
+    
+    .header-nav__text-ja,
+    .header-nav__text-en {
+      color: #fff !important;
+    }
+    
+    .header-logo__image {
+      filter: brightness(0) invert(1) !important;
+    }
+  }
+}
+
+/* スクロールヒントスタイル */
+.philosophy-scroll-hint {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #FFF084;
+  z-index: 4;
+  opacity: 0.7;
+  transition: opacity 0.5s ease;
+  
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  @include mq(md) {
+    bottom: 80px;
+  }
+}
+
+.philosophy-scroll-hint-arrow {
+  width: 32px;
+  height: 32px;
+  animation: scroll-hint-bounce 2s ease-in-out infinite;
+  
+  svg {
+    width: 100%;
+    height: 100%;
+    stroke: #FFF084;
+    stroke-width: 2;
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+  }
+  
+  @include mq(md) {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@keyframes scroll-hint-bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(15px) scale(1.1);
+    opacity: 0.4;
   }
 }
 

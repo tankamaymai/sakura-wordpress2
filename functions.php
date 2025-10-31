@@ -37,6 +37,7 @@ function my_script_init()
     wp_enqueue_style('style-css', get_template_directory_uri() . '/css/style.css', array(), '1.0.0');
     wp_enqueue_script('anime-js', get_template_directory_uri() . '/js/animetions.js', array('jquery'), '1.0.0', true);
     wp_enqueue_script('script-js', get_template_directory_uri() . '/js/script.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('header-scroll-js', get_template_directory_uri() . '/js/header-scroll.js', array('jquery'), '1.0.0', true);
     
     // テーマディレクトリのURLをJavaScriptに渡す
     wp_localize_script('script-js', 'themeData', array(

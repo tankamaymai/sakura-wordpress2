@@ -61,7 +61,13 @@
             </p>
             <h2 class="services-title front-page__section-title">さくら事務所グループ事業内容</h2>
             <!-- Swiperコンテナ -->
-            <div class="front-page__services-swiper swiper">
+            <div class="front-page__services-swiper-container">
+                <!-- Swiper Navigation Buttons -->
+                <div class="front-page__services-navigation">
+                    <div class="swiper-button-prev front-page__services-button-prev"></div>
+                    <div class="swiper-button-next front-page__services-button-next"></div>
+                </div>
+                <div class="front-page__services-swiper swiper">
                 <div class="swiper-wrapper front-page__services-items">
                     <!-- スライド1 -->
                     <div class="swiper-slide front-page__services-item">

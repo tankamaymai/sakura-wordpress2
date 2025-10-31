@@ -259,8 +259,96 @@
 .front-page__services-inner {
   position: relative;
 }
+
+// Swiper Navigation Buttons for Services
+.front-page__services-swiper-container {
+  position: relative;
+  margin-top: 50px;
+  
+  @include mq("md") {
+    margin-bottom: 100px;
+  }
+}
+
+.front-page__services-navigation {
+  position: absolute;
+  top: -40px;
+  left: auto;
+  right: 40px;
+  display: flex;
+  gap: 30px;
+  z-index: 10;
+  
+  @include mq("md") {
+    top: auto;
+    bottom: -78px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    gap: 60px;
+  }
+}
+
+.front-page__services-button-prev,
+.front-page__services-button-next {
+  width: 48px;
+  height: 48px;
+  background-color: $light-beige;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid $dark-blue;
+    border-right: 2px solid $dark-blue;
+  }
+  
+  &:hover {
+    background-color: darken($light-beige, 10%);
+    transform: scale(1.1);
+  }
+  
+  &.swiper-button-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    
+    &:hover {
+      transform: scale(1);
+    }
+  }
+  
+  @include mq("md") {
+    width: 60px;
+    height: 60px;
+    
+    &::after {
+      width: 20px;
+      height: 20px;
+      border-top: 4px solid $dark-blue;
+      border-right: 4px solid $dark-blue;
+    }
+  }
+}
+
+.front-page__services-button-prev::after {
+  transform: rotate(-135deg);
+  margin-left: 3px;
+}
+
+.front-page__services-button-next::after {
+  transform: rotate(45deg);
+  margin-right: 3px;
+}
+
 .front-page__services-swiper{
-margin-top: 50px;
 overflow: unset;
     clip-path: inset(0% -50vw 0% 0%);
 }
