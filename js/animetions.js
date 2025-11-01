@@ -227,6 +227,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // ScrollTriggerのインスタンスをグローバルスコープに保存（header-scroll.jsから参照可能にする）
+        if (typeof window !== 'undefined') {
+            window.philosophyCircleScrollTrigger = mainTimeline.scrollTrigger;
+        }
+
         // 画像拡大アニメーション
         mainTimeline
             .fromTo(circleElement, 

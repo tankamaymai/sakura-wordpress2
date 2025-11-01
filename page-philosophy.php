@@ -3,7 +3,7 @@
 
     <section class="philosophy" data-midnight="white">
         <!-- 画像拡大アニメーション要素 -->
-        <div class="philosophy-circle-bg"></div>
+        <div class="philosophy-circle-bg" data-midnight="default"></div>
 
         <div class="philosophy__inner inner">
             <div class="philosophy-endroll">

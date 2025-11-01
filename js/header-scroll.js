@@ -61,33 +61,38 @@
 
                 let logoSectionType = null;
 
+                // 理念ページの星の拡大アニメーションの進行状況を確認
+                let isStarAnimationActive = false;
+                let animationProgress = 0;
+                if (typeof window !== 'undefined' && window.philosophyCircleScrollTrigger) {
+                    const scrollTrigger = window.philosophyCircleScrollTrigger;
+                    // アニメーションの進行状況を取得
+                    animationProgress = scrollTrigger.progress || 0;
+                    // アニメーションが実行中（progress > 0.05 かつ progress < 0.95）の場合
+                    // 小さな閾値を設けることで、開始・終了時のラグを軽減
+                    if (animationProgress > 0.05 && animationProgress < 0.95) {
+                        isStarAnimationActive = true;
+                    }
+                }
+
                 // 理念ページの星要素を取得
                 const starElement = document.querySelector('.philosophy-circle-bg');
                 let starRect = null;
                 let isStarVisible = false;
 
-                if (starElement) {
+                if (starElement && isStarAnimationActive) {
                     const rect = starElement.getBoundingClientRect();
-                    // 星が一定サイズ以上（1000px以上）かつ画面内に可視状態の場合のみ判定を有効にする
-                    if (rect.width >= 1000 && rect.height >= 1000) {
+                    // 星の拡大アニメーションが実行中の場合、星と重なっているかをチェック
+                    if (rect.width > 20 && rect.height > 20) {
                         starRect = rect;
-
-                        // 画面中央が「理念に込めた想い」セクション内にある場合のみ星の判定を有効にする
-                        const viewportMiddleY = window.scrollY + (window.innerHeight / 2);
-                        const philosophyContentSection = document.querySelector('.philosophy-content');
-
-                        if (philosophyContentSection) {
-                            const contentRect = philosophyContentSection.getBoundingClientRect();
-                            const contentTop = contentRect.top + window.scrollY;
-                            const contentBottom = contentTop + contentRect.height;
-
-                            // 画面中央が「理念に込めた想い」セクション内にある場合のみ星の判定を有効にする
-                            if (viewportMiddleY >= contentTop && viewportMiddleY < contentBottom) {
-                                isStarVisible = true;
-                            }
-                        }
+                        isStarVisible = true;
                     }
                 }
+
+                // 理念ページで一番上に戻った場合（アニメーションが終了した場合）の処理
+                // ScrollTriggerのprogressが非常に小さい値（0.05以下）になった時点で即座に白に戻す
+                // これにより、アニメーション終了時のラグを軽減
+                const isAtTop = isPhilosophyPage && animationProgress <= 0.05;
 
                 // 一時的にヘッダーのpointer-eventsを無効化（自分自身を検出しないようにする）
                 header.style.pointerEvents = 'none';
@@ -101,40 +106,48 @@
                     // メニュー項目の矩形を取得
                     const itemRect = item.getBoundingClientRect();
 
-                    // 星と重なっているかをチェック（星が可視状態の場合のみ）
-                    let isOverlappingWithStar = false;
-                    if (isStarVisible && starRect) {
-                        isOverlappingWithStar = checkOverlap(itemRect, starRect);
-                    }
-
-                    // 星と重なっている場合は黒色を適用
-                    if (isOverlappingWithStar) {
-                        updateItemColor(textElements, 'default');
-                        
-                        // ロゴの位置判定用（最初のメニュー項目のセクションを使用）
+                    // 一番上に戻った場合は、philosophyセクションのwhiteを適用
+                    if (isAtTop) {
+                        updateItemColor(textElements, 'white');
                         if (!logoSectionType) {
-                            logoSectionType = 'default';
+                            logoSectionType = 'white';
                         }
                     } else {
-                        // メニュー項目の中央位置を取得
-                        const centerX = itemRect.left + (itemRect.width / 2);
-                        const centerY = itemRect.top + (itemRect.height / 2);
+                        // 星と重なっているかをチェック（星が可視状態の場合のみ）
+                        let isOverlappingWithStar = false;
+                        if (isStarVisible && starRect) {
+                            isOverlappingWithStar = checkOverlap(itemRect, starRect);
+                        }
 
-                        // その位置にある要素を取得（ヘッダー自身は無視される）
-                        const elementAtPoint = document.elementFromPoint(centerX, centerY);
-                        
-                        if (!elementAtPoint) return;
-
-                        // 該当する要素が属するdata-midnight属性を持つセクションを探す
-                        const section = elementAtPoint.closest('[data-midnight]');
-                        
-                        if (section) {
-                            const midnightType = section.getAttribute('data-midnight');
-                            updateItemColor(textElements, midnightType);
+                        // 星と重なっている場合は黒色を適用
+                        if (isOverlappingWithStar) {
+                            updateItemColor(textElements, 'default');
                             
                             // ロゴの位置判定用（最初のメニュー項目のセクションを使用）
                             if (!logoSectionType) {
-                                logoSectionType = midnightType;
+                                logoSectionType = 'default';
+                            }
+                        } else {
+                            // メニュー項目の中央位置を取得
+                            const centerX = itemRect.left + (itemRect.width / 2);
+                            const centerY = itemRect.top + (itemRect.height / 2);
+
+                            // その位置にある要素を取得（ヘッダー自身は無視される）
+                            const elementAtPoint = document.elementFromPoint(centerX, centerY);
+                            
+                            if (!elementAtPoint) return;
+
+                            // 該当する要素が属するdata-midnight属性を持つセクションを探す
+                            const section = elementAtPoint.closest('[data-midnight]');
+                            
+                            if (section) {
+                                const midnightType = section.getAttribute('data-midnight');
+                                updateItemColor(textElements, midnightType);
+                                
+                                // ロゴの位置判定用（最初のメニュー項目のセクションを使用）
+                                if (!logoSectionType) {
+                                    logoSectionType = midnightType;
+                                }
                             }
                         }
                     }
