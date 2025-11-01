@@ -6378,68 +6378,6 @@ body.no-scroll {
   }
 }
 
-/* 理念ページのメニューバー固定スタイル */
-/* より直接的なアプローチ：.site-headerにdata属性でページを識別 */
-.site-header[data-philosophy-page=true] {
-  background-color: #000 !important;
-  border-radius: 0 150px 30px 0;
-  /* サブメニューがオープンしている時も白テキストを保つ */
-}
-.site-header[data-philosophy-page=true] .header-nav__text-ja,
-.site-header[data-philosophy-page=true] .header-nav__text-en {
-  color: #fff !important;
-}
-.site-header[data-philosophy-page=true] .header-logo__image {
-  filter: brightness(0) invert(1) !important;
-}
-.site-header[data-philosophy-page=true] .header-nav__submenu-link {
-  color: #fff !important;
-}
-.site-header[data-philosophy-page=true] .header-nav__submenu-link:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  color: #fff !important;
-}
-.site-header[data-philosophy-page=true].has-submenu-open {
-  background-color: #000 !important;
-}
-.site-header[data-philosophy-page=true].has-submenu-open .header-nav__text-ja,
-.site-header[data-philosophy-page=true].has-submenu-open .header-nav__text-en {
-  color: #fff !important;
-}
-.site-header[data-philosophy-page=true].has-submenu-open .header-logo__image {
-  filter: brightness(0) invert(1) !important;
-}
-
-/* fallback: page-id-132 を使用（理念ページのID） */
-.page-id-132 .site-header {
-  background-color: #000 !important;
-  /* サブメニューがオープンしている時も白テキストを保つ */
-}
-.page-id-132 .site-header .header-nav__text-ja,
-.page-id-132 .site-header .header-nav__text-en {
-  color: #fff !important;
-}
-.page-id-132 .site-header .header-logo__image {
-  filter: brightness(0) invert(1) !important;
-}
-.page-id-132 .site-header .header-nav__submenu-link {
-  color: #fff !important;
-}
-.page-id-132 .site-header .header-nav__submenu-link:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  color: #fff !important;
-}
-.page-id-132 .site-header.has-submenu-open {
-  background-color: #000 !important;
-}
-.page-id-132 .site-header.has-submenu-open .header-nav__text-ja,
-.page-id-132 .site-header.has-submenu-open .header-nav__text-en {
-  color: #fff !important;
-}
-.page-id-132 .site-header.has-submenu-open .header-logo__image {
-  filter: brightness(0) invert(1) !important;
-}
-
 /* スクロールヒントスタイル */
 .philosophy-scroll-hint {
   position: absolute;

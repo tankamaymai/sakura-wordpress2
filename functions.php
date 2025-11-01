@@ -22,14 +22,17 @@ function my_script_init()
     
     // jQueryの読み込み
     wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.7.1.js', "", "1.0.1");
-    wp_enqueue_script('midnight-js', 'https://cdn.jsdelivr.net/npm/midnight.js@1.1.1/dist/midnight.jquery.min.js', array('jquery'), '1.1.1', true);
+    
+    // GSAPの読み込み（header-scrollの前に読み込む必要がある）
+    wp_enqueue_script('gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', array(), '3.12.2', true);
+    wp_enqueue_script('gsap-scroll-trigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', array('gsap'), '3.12.2', true);
+    
+    // midnight.jsは削除し、新しいheader-scroll.jsを使用
+    wp_enqueue_script('header-scroll', get_theme_file_uri('/js/header-scroll.js'), array('jquery', 'gsap-scroll-trigger'), '1.0.0', true);
+    
     // Swiperの読み込み
     wp_enqueue_script('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', "", "1.0.1", true);
     wp_enqueue_style('swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', array(), 'false', 'all');
-    
-    // GSAPの読み込み
-    wp_enqueue_script('gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', array(), '3.12.2', true);
-    wp_enqueue_script('gsap-scroll-trigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', array('gsap'), '3.12.2', true);
     
     // Google Fontsの読み込み
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap', array(), null);
@@ -37,7 +40,6 @@ function my_script_init()
     wp_enqueue_style('style-css', get_template_directory_uri() . '/css/style.css', array(), '1.0.0');
     wp_enqueue_script('anime-js', get_template_directory_uri() . '/js/animetions.js', array('jquery'), '1.0.0', true);
     wp_enqueue_script('script-js', get_template_directory_uri() . '/js/script.js', array('jquery'), '1.0.0', true);
-    wp_enqueue_script('header-scroll-js', get_template_directory_uri() . '/js/header-scroll.js', array('jquery'), '1.0.0', true);
     
     // テーマディレクトリのURLをJavaScriptに渡す
     wp_localize_script('script-js', 'themeData', array(
@@ -4708,4 +4710,490 @@ function save_ship_member_meta_box_data($post_id) {
     }
 }
 add_action('save_post', 'save_ship_member_meta_box_data');
+
+/**
+ * 採用ページ用サイドバナー設定を取得する関数
+ */
+function get_recruit_side_banner_settings($banner_number = 1) {
+    $image_pc_id = get_option("recruit_side_banner_{$banner_number}_image_pc", '');
+    $image_sp_id = get_option("recruit_side_banner_{$banner_number}_image_sp", '');
+    $image_pc_url = '';
+    $image_sp_url = '';
+    
+    if ($image_pc_id) {
+        $image_pc_url = wp_get_attachment_image_url($image_pc_id, 'medium');
+    }
+    if ($image_sp_id) {
+        $image_sp_url = wp_get_attachment_image_url($image_sp_id, 'medium');
+    }
+    
+    return array(
+        'enabled' => get_option("recruit_side_banner_{$banner_number}_enabled", false),
+        'url' => get_option("recruit_side_banner_{$banner_number}_url", '#'),
+        'target' => get_option("recruit_side_banner_{$banner_number}_target", '_self'),
+        'image_pc_id' => $image_pc_id,
+        'image_pc_url' => $image_pc_url,
+        'image_sp_id' => $image_sp_id,
+        'image_sp_url' => $image_sp_url,
+        'alt_text' => get_option("recruit_side_banner_{$banner_number}_alt_text", '')
+    );
+}
+
+/**
+ * 採用ページ用サイドバナー設定の登録
+ */
+function register_recruit_side_banner_settings() {
+    // バナー1の設定
+    register_setting('recruit_side_banner_settings', 'recruit_side_banner_1_enabled', 'sanitize_boolean');
+    register_setting('recruit_side_banner_settings', 'recruit_side_banner_1_url', 'esc_url_raw');
+    register_setting('recruit_side_banner_settings', 'recruit_side_banner_1_image_pc', 'absint');
+    register_setting('recruit_side_banner_settings', 'recruit_side_banner_1_image_sp', 'absint');
+    register_setting('recruit_side_banner_settings', 'recruit_side_banner_1_target', 'sanitize_text_field');
+    register_setting('recruit_side_banner_settings', 'recruit_side_banner_1_alt_text', 'sanitize_text_field');
+    
+    // バナー2の設定
+    register_setting('recruit_side_banner_settings', 'recruit_side_banner_2_enabled', 'sanitize_boolean');
+    register_setting('recruit_side_banner_settings', 'recruit_side_banner_2_url', 'esc_url_raw');
+    register_setting('recruit_side_banner_settings', 'recruit_side_banner_2_image_pc', 'absint');
+    register_setting('recruit_side_banner_settings', 'recruit_side_banner_2_image_sp', 'absint');
+    register_setting('recruit_side_banner_settings', 'recruit_side_banner_2_target', 'sanitize_text_field');
+    register_setting('recruit_side_banner_settings', 'recruit_side_banner_2_alt_text', 'sanitize_text_field');
+    
+    // バナー1のセクション
+    add_settings_section(
+        'recruit_side_banner_1_section',
+        '採用ページ サイドバナー1の設定',
+        'recruit_side_banner_1_section_callback',
+        'recruit_side_banner_settings'
+    );
+    
+    // バナー2のセクション
+    add_settings_section(
+        'recruit_side_banner_2_section',
+        '採用ページ サイドバナー2の設定',
+        'recruit_side_banner_2_section_callback',
+        'recruit_side_banner_settings'
+    );
+    
+    // バナー1のフィールド
+    add_settings_field(
+        'recruit_side_banner_1_enabled_field',
+        'バナー1表示',
+        'recruit_side_banner_enabled_callback',
+        'recruit_side_banner_settings',
+        'recruit_side_banner_1_section',
+        array('banner_number' => 1)
+    );
+    
+    add_settings_field(
+        'recruit_side_banner_1_url_field',
+        'リンクURL',
+        'recruit_side_banner_url_callback',
+        'recruit_side_banner_settings',
+        'recruit_side_banner_1_section',
+        array('banner_number' => 1)
+    );
+    
+    add_settings_field(
+        'recruit_side_banner_1_target_field',
+        'リンクターゲット',
+        'recruit_side_banner_target_callback',
+        'recruit_side_banner_settings',
+        'recruit_side_banner_1_section',
+        array('banner_number' => 1)
+    );
+    
+    add_settings_field(
+        'recruit_side_banner_1_alt_text_field',
+        '代替テキスト',
+        'recruit_side_banner_alt_text_callback',
+        'recruit_side_banner_settings',
+        'recruit_side_banner_1_section',
+        array('banner_number' => 1)
+    );
+    
+    add_settings_field(
+        'recruit_side_banner_1_image_pc_field',
+        'PC用画像',
+        'recruit_side_banner_image_pc_callback',
+        'recruit_side_banner_settings',
+        'recruit_side_banner_1_section',
+        array('banner_number' => 1)
+    );
+    
+    add_settings_field(
+        'recruit_side_banner_1_image_sp_field',
+        'SP用画像',
+        'recruit_side_banner_image_sp_callback',
+        'recruit_side_banner_settings',
+        'recruit_side_banner_1_section',
+        array('banner_number' => 1)
+    );
+    
+    // バナー2のフィールド
+    add_settings_field(
+        'recruit_side_banner_2_enabled_field',
+        'バナー2表示',
+        'recruit_side_banner_enabled_callback',
+        'recruit_side_banner_settings',
+        'recruit_side_banner_2_section',
+        array('banner_number' => 2)
+    );
+    
+    add_settings_field(
+        'recruit_side_banner_2_url_field',
+        'リンクURL',
+        'recruit_side_banner_url_callback',
+        'recruit_side_banner_settings',
+        'recruit_side_banner_2_section',
+        array('banner_number' => 2)
+    );
+    
+    add_settings_field(
+        'recruit_side_banner_2_target_field',
+        'リンクターゲット',
+        'recruit_side_banner_target_callback',
+        'recruit_side_banner_settings',
+        'recruit_side_banner_2_section',
+        array('banner_number' => 2)
+    );
+    
+    add_settings_field(
+        'recruit_side_banner_2_alt_text_field',
+        '代替テキスト',
+        'recruit_side_banner_alt_text_callback',
+        'recruit_side_banner_settings',
+        'recruit_side_banner_2_section',
+        array('banner_number' => 2)
+    );
+    
+    add_settings_field(
+        'recruit_side_banner_2_image_pc_field',
+        'PC用画像',
+        'recruit_side_banner_image_pc_callback',
+        'recruit_side_banner_settings',
+        'recruit_side_banner_2_section',
+        array('banner_number' => 2)
+    );
+    
+    add_settings_field(
+        'recruit_side_banner_2_image_sp_field',
+        'SP用画像',
+        'recruit_side_banner_image_sp_callback',
+        'recruit_side_banner_settings',
+        'recruit_side_banner_2_section',
+        array('banner_number' => 2)
+    );
+}
+add_action('admin_init', 'register_recruit_side_banner_settings');
+
+/**
+ * 採用ページ用サイドバナー設定メニューを追加
+ */
+function add_recruit_side_banner_menu() {
+    add_submenu_page(
+        'sns_settings',
+        '採用ページ サイドバナー設定',
+        '採用ページ バナー設定',
+        'manage_options',
+        'recruit_side_banner_settings',
+        'recruit_side_banner_settings_page'
+    );
+}
+add_action('admin_menu', 'add_recruit_side_banner_menu');
+
+/**
+ * 採用ページ用サイドバナー設定ページの表示
+ */
+function recruit_side_banner_settings_page() {
+    ?>
+    <div class="wrap">
+        <h1>採用ページ サイドバナー設定</h1>
+        <p>採用ページ（/recruit/）専用のサイドバナー設定です。トップページのバナーとは別に管理されます。</p>
+        <form method="post" action="options.php">
+            <?php
+            settings_fields('recruit_side_banner_settings');
+            do_settings_sections('recruit_side_banner_settings');
+            submit_button();
+            ?>
+        </form>
+    </div>
+    
+    <style>
+        .banner-preview {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+            max-width: 400px;
+        }
+        .banner-preview img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .banner-preview-text {
+            font-size: 12px;
+            color: #666;
+        }
+        .media-buttons {
+            margin-top: 5px;
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+    
+    <script>
+    jQuery(document).ready(function($) {
+        // PC用画像アップロード（バナー1）
+        $('#upload-recruit-banner-1-image-pc').on('click', function(e) {
+            e.preventDefault();
+            var mediaUploader = wp.media({
+                title: 'PC用バナー画像を選択',
+                button: { text: '画像を選択' },
+                multiple: false
+            });
+            mediaUploader.on('select', function() {
+                var attachment = mediaUploader.state().get('selection').first().toJSON();
+                $('#recruit_side_banner_1_image_pc').val(attachment.id);
+                updateBannerPreview(1);
+            });
+            mediaUploader.open();
+        });
+        
+        // SP用画像アップロード（バナー1）
+        $('#upload-recruit-banner-1-image-sp').on('click', function(e) {
+            e.preventDefault();
+            var mediaUploader = wp.media({
+                title: 'SP用バナー画像を選択',
+                button: { text: '画像を選択' },
+                multiple: false
+            });
+            mediaUploader.on('select', function() {
+                var attachment = mediaUploader.state().get('selection').first().toJSON();
+                $('#recruit_side_banner_1_image_sp').val(attachment.id);
+                updateBannerPreview(1);
+            });
+            mediaUploader.open();
+        });
+        
+        // PC用画像アップロード（バナー2）
+        $('#upload-recruit-banner-2-image-pc').on('click', function(e) {
+            e.preventDefault();
+            var mediaUploader = wp.media({
+                title: 'PC用バナー画像を選択',
+                button: { text: '画像を選択' },
+                multiple: false
+            });
+            mediaUploader.on('select', function() {
+                var attachment = mediaUploader.state().get('selection').first().toJSON();
+                $('#recruit_side_banner_2_image_pc').val(attachment.id);
+                updateBannerPreview(2);
+            });
+            mediaUploader.open();
+        });
+        
+        // SP用画像アップロード（バナー2）
+        $('#upload-recruit-banner-2-image-sp').on('click', function(e) {
+            e.preventDefault();
+            var mediaUploader = wp.media({
+                title: 'SP用バナー画像を選択',
+                button: { text: '画像を選択' },
+                multiple: false
+            });
+            mediaUploader.on('select', function() {
+                var attachment = mediaUploader.state().get('selection').first().toJSON();
+                $('#recruit_side_banner_2_image_sp').val(attachment.id);
+                updateBannerPreview(2);
+            });
+            mediaUploader.open();
+        });
+        
+        // 画像削除（バナー1 PC）
+        $('#remove-recruit-banner-1-image-pc').on('click', function(e) {
+            e.preventDefault();
+            $('#recruit_side_banner_1_image_pc').val('');
+            updateBannerPreview(1);
+        });
+        
+        // 画像削除（バナー1 SP）
+        $('#remove-recruit-banner-1-image-sp').on('click', function(e) {
+            e.preventDefault();
+            $('#recruit_side_banner_1_image_sp').val('');
+            updateBannerPreview(1);
+        });
+        
+        // 画像削除（バナー2 PC）
+        $('#remove-recruit-banner-2-image-pc').on('click', function(e) {
+            e.preventDefault();
+            $('#recruit_side_banner_2_image_pc').val('');
+            updateBannerPreview(2);
+        });
+        
+        // 画像削除（バナー2 SP）
+        $('#remove-recruit-banner-2-image-sp').on('click', function(e) {
+            e.preventDefault();
+            $('#recruit_side_banner_2_image_sp').val('');
+            updateBannerPreview(2);
+        });
+        
+        // プレビュー更新関数
+        function updateBannerPreview(bannerNumber) {
+            var pcImageId = $('#recruit_side_banner_' + bannerNumber + '_image_pc').val();
+            var spImageId = $('#recruit_side_banner_' + bannerNumber + '_image_sp').val();
+            var url = $('#recruit_side_banner_' + bannerNumber + '_url').val() || '#';
+            var enabled = $('#recruit_side_banner_' + bannerNumber + '_enabled').is(':checked');
+            
+            // PC用プレビューをクリア
+            if (!pcImageId) {
+                $('#recruit-banner-' + bannerNumber + '-pc-preview').html('');
+            } else {
+                $.post(ajaxurl, {
+                    action: 'get_attachment_url',
+                    attachment_id: pcImageId
+                }, function(response) {
+                    if (response.success) {
+                        var html = '<div class="banner-preview">';
+                        html += '<p class="banner-preview-text">PC用</p>';
+                        html += '<img src="' + response.data.url + '" alt="PC用バナー">';
+                        html += '</div>';
+                        $('#recruit-banner-' + bannerNumber + '-pc-preview').html(html);
+                    }
+                });
+            }
+            
+            // SP用プレビューをクリア
+            if (!spImageId) {
+                $('#recruit-banner-' + bannerNumber + '-sp-preview').html('');
+            } else {
+                $.post(ajaxurl, {
+                    action: 'get_attachment_url',
+                    attachment_id: spImageId
+                }, function(response) {
+                    if (response.success) {
+                        var html = '<div class="banner-preview">';
+                        html += '<p class="banner-preview-text">SP用</p>';
+                        html += '<img src="' + response.data.url + '" alt="SP用バナー">';
+                        html += '</div>';
+                        $('#recruit-banner-' + bannerNumber + '-sp-preview').html(html);
+                    }
+                });
+            }
+        }
+        
+        // 初期プレビューの表示
+        updateBannerPreview(1);
+        updateBannerPreview(2);
+        
+        // URL変更時にプレビューを更新
+        $('#recruit_side_banner_1_url, #recruit_side_banner_1_enabled').on('change keyup', function() {
+            updateBannerPreview(1);
+        });
+        
+        $('#recruit_side_banner_2_url, #recruit_side_banner_2_enabled').on('change keyup', function() {
+            updateBannerPreview(2);
+        });
+    });
+    </script>
+    <?php
+}
+
+// セクションコールバック
+function recruit_side_banner_1_section_callback() {
+    echo '<p>採用ページの右下に表示される1つ目のバナーを設定します。</p>';
+    echo '<div id="recruit-banner-1-pc-preview"></div>';
+    echo '<div id="recruit-banner-1-sp-preview"></div>';
+}
+
+function recruit_side_banner_2_section_callback() {
+    echo '<p>採用ページの右下に表示される2つ目のバナーを設定します。</p>';
+    echo '<div id="recruit-banner-2-pc-preview"></div>';
+    echo '<div id="recruit-banner-2-sp-preview"></div>';
+}
+
+// フィールドコールバック
+function recruit_side_banner_enabled_callback($args) {
+    $banner_number = $args['banner_number'];
+    $enabled = get_option("recruit_side_banner_{$banner_number}_enabled", false);
+    ?>
+    <label for="recruit_side_banner_<?php echo $banner_number; ?>_enabled">
+        <input type="checkbox" id="recruit_side_banner_<?php echo $banner_number; ?>_enabled" 
+               name="recruit_side_banner_<?php echo $banner_number; ?>_enabled" value="1" <?php checked($enabled, true); ?>>
+        バナーを表示する
+    </label>
+    <?php
+}
+
+function recruit_side_banner_url_callback($args) {
+    $banner_number = $args['banner_number'];
+    $url = get_option("recruit_side_banner_{$banner_number}_url", '');
+    ?>
+    <input type="url" id="recruit_side_banner_<?php echo $banner_number; ?>_url" 
+           name="recruit_side_banner_<?php echo $banner_number; ?>_url" 
+           value="<?php echo esc_url($url); ?>" style="width: 400px;" placeholder="https://...">
+    <p class="description">バナーをクリックした際のリンク先URLを入力してください。</p>
+    <?php
+}
+
+function recruit_side_banner_target_callback($args) {
+    $banner_number = $args['banner_number'];
+    $target = get_option("recruit_side_banner_{$banner_number}_target", '_self');
+    ?>
+    <select id="recruit_side_banner_<?php echo $banner_number; ?>_target" 
+            name="recruit_side_banner_<?php echo $banner_number; ?>_target">
+        <option value="_self" <?php selected($target, '_self'); ?>>同じウィンドウで開く</option>
+        <option value="_blank" <?php selected($target, '_blank'); ?>>新しいウィンドウで開く</option>
+    </select>
+    <?php
+}
+
+function recruit_side_banner_alt_text_callback($args) {
+    $banner_number = $args['banner_number'];
+    $alt_text = get_option("recruit_side_banner_{$banner_number}_alt_text", '');
+    ?>
+    <input type="text" id="recruit_side_banner_<?php echo $banner_number; ?>_alt_text" 
+           name="recruit_side_banner_<?php echo $banner_number; ?>_alt_text" 
+           value="<?php echo esc_attr($alt_text); ?>" style="width: 400px;" placeholder="バナーの説明文">
+    <p class="description">画像の代替テキスト（alt属性）を入力してください。</p>
+    <?php
+}
+
+function recruit_side_banner_image_pc_callback($args) {
+    $banner_number = $args['banner_number'];
+    $image_id = get_option("recruit_side_banner_{$banner_number}_image_pc", '');
+    
+    wp_enqueue_media();
+    ?>
+    <input type="hidden" id="recruit_side_banner_<?php echo $banner_number; ?>_image_pc" 
+           name="recruit_side_banner_<?php echo $banner_number; ?>_image_pc" 
+           value="<?php echo esc_attr($image_id); ?>">
+    
+    <div class="media-buttons">
+        <button type="button" id="upload-recruit-banner-<?php echo $banner_number; ?>-image-pc" class="button">画像を選択</button>
+        <button type="button" id="remove-recruit-banner-<?php echo $banner_number; ?>-image-pc" class="button">画像を削除</button>
+    </div>
+    
+    <p class="description">PC用バナー画像を選択してください。推奨サイズ: 幅300px × 高さ150px</p>
+    <?php
+}
+
+function recruit_side_banner_image_sp_callback($args) {
+    $banner_number = $args['banner_number'];
+    $image_id = get_option("recruit_side_banner_{$banner_number}_image_sp", '');
+    
+    wp_enqueue_media();
+    ?>
+    <input type="hidden" id="recruit_side_banner_<?php echo $banner_number; ?>_image_sp" 
+           name="recruit_side_banner_<?php echo $banner_number; ?>_image_sp" 
+           value="<?php echo esc_attr($image_id); ?>">
+    
+    <div class="media-buttons">
+        <button type="button" id="upload-recruit-banner-<?php echo $banner_number; ?>-image-sp" class="button">画像を選択</button>
+        <button type="button" id="remove-recruit-banner-<?php echo $banner_number; ?>-image-sp" class="button">画像を削除</button>
+    </div>
+    
+    <p class="description">SP用バナー画像を選択してください。推奨サイズ: 幅200px × 高さ100px</p>
+    <?php
+}
 

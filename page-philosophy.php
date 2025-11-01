@@ -4,26 +4,40 @@
     <section class="philosophy" data-midnight="white">
         <!-- 画像拡大アニメーション要素 -->
         <div class="philosophy-circle-bg"></div>
-        
+
         <div class="philosophy__inner inner">
             <div class="philosophy-endroll">
                 <div class="philosophy-mv__title endroll-text">これから訪れる大変化の時代こそ、</div>
                 <div class="philosophy-mv__title endroll-text">私たちさくら事務所グループの出番です。</div>
             </div>
-            <div class="philosophy-mv-bottom">
-                <h3 class="philosophy-content-header-title">理念</h3>
-                <p class="philosophy-content-header-title-en">philosophy</p>
-           
-            <div class="philosophy-content-text">
-                人と不動産のより幸せな関係を追求し<br>
-                豊かで美しい社会を次世代に手渡すこと
+            
+            <!-- スクロールヒント -->
+            <div class="philosophy-scroll-hint">
+                <div class="philosophy-scroll-hint-arrow">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 13l3 3 3-3"></path>
+                        <path d="M7 6l3 3 3-3"></path>
+                    </svg>
+                </div>
             </div>
-            </div>
+          
         </div>
     </section>
+    <section class="philosophy-mv-bottom" data-midnight="default">
+    <div class="philosophy-mv-bottom__inner inner">
+                <h3 class="philosophy-content-header-title">理念</h3>
+                <p class="philosophy-content-header-title-en">philosophy</p>
+
+                <div class="philosophy-content-text">
+                    人と不動産のより幸せな関係を追求し<br>
+                    豊かで美しい社会を次世代に手渡すこと
+                </div>
+            </div>
+    </section>
+
     <section class="philosophy-content" data-midnight="default">
         <div class="philosophy-content__inner inner">
-    
+
 
             <div class="philosophy-content-text-bottom">
                 <div class="philosophy-content-text-bottom-title">
@@ -50,16 +64,16 @@
     <section class="philosophy-rules" data-midnight="white">
         <div class="philosophy-rules__inner inner">
             <h3 class="philosophy-rules__title">
-            RULES
+                RULES
             </h3>
             <div class="philosophy-rules-title-sub">
-            掟：五方良し
-                </div>
+                掟：五方良し
+            </div>
             <div class="philosophy-rules-content">
-                
+
                 <div class="philosophy-rules-content-text">
-                ご依頼者様・自分・会社・業界・社会<br>
-                五方すべてが良くなる仕事をする
+                    ご依頼者様・自分・会社・業界・社会<br>
+                    五方すべてが良くなる仕事をする
                 </div>
                 <div class="philosophy-rules-content-image">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/rules-icon-img.webp" alt="掟：羅針盤&nbsp;&nbsp;五方良し">
@@ -72,20 +86,20 @@
         <div class="philosophy-rules-text__inner inner">
             <div class="philosophy-rules-text-content">
                 <div class="philosophy-rules-text-content-text">
-                ご依頼者様とは、私たちのお客様のことです。お客様が良いのは当然ですし、さくら事務所グループでしか得られない体験を提供し続けることが重要です。
+                    ご依頼者様とは、私たちのお客様のことです。お客様が良いのは当然ですし、さくら事務所グループでしか得られない体験を提供し続けることが重要です。
                 </div>
                 <div class="philosophy-rules-text-content-text">
-                次に、それを提供する会社も持続可能でなければなりません。適切に売上・利益が上がらなければ、持続可能ではありません。
+                    次に、それを提供する会社も持続可能でなければなりません。適切に売上・利益が上がらなければ、持続可能ではありません。
 
                 </div>
                 <div class="philosophy-rules-text-content-text">
-                そして当然、私たち一人ひとりも、その仕事をする喜びを感じられていることが大切です。私たち自身も、持続可能であり続けなければなりません。
+                    そして当然、私たち一人ひとりも、その仕事をする喜びを感じられていることが大切です。私たち自身も、持続可能であり続けなければなりません。
                 </div>
                 <div class="philosophy-rules-text-content-text">
-                さらに、自分や会社だけが独りよがりでは、業界全体が良くなりませんので、私たちや会社がやっていることが業界を良くすることにつながるということが大切です。
+                    さらに、自分や会社だけが独りよがりでは、業界全体が良くなりませんので、私たちや会社がやっていることが業界を良くすることにつながるということが大切です。
                 </div>
                 <div class="philosophy-rules-text-content-text">
-                そうしたことを通じて、ひいては社会全体が良くなっていく、これが私たちさくら事務所グループが考える五方良しです。
+                    そうしたことを通じて、ひいては社会全体が良くなっていく、これが私たちさくら事務所グループが考える五方良しです。
                 </div>
             </div>
         </div>

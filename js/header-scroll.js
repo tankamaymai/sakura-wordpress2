@@ -25,29 +25,13 @@
         const navItems = header.querySelectorAll('.header-nav__item');
         const logo = header.querySelector('.header-logo__image');
         
-        // 理念ページの場合、ヘッダーの背景色を黒に固定
+        // 理念ページの場合の設定
         const isPhilosophyPage = document.body.classList.contains('page-philosophy') || document.querySelector('.philosophy') !== null;
         if (isPhilosophyPage) {
-            header.style.backgroundColor = '#000';
             header.style.top = '0';
             header.style.paddingTop = 'clamp(20px, 4.17vw, 60px)';
-            // 強制カラー制御を有効にして、通常のカラー切り替えを無効化
-            header.setAttribute('data-force-color', 'true');
             
-            // すべてのナビゲーションテキストを白に設定
-            navItems.forEach((item) => {
-                const textElements = item.querySelectorAll('.header-nav__text-ja, .header-nav__text-en');
-                textElements.forEach(el => {
-                    el.style.color = '#ffffff';
-                });
-            });
-            
-            // ロゴを白に設定
-            if (logo) {
-                logo.style.filter = 'brightness(0) invert(1)';
-            }
-            
-            console.log('理念ページのヘッダー背景色を黒に固定し、テキストを白に設定し、topを0に設定し、padding-topを追加しました');
+            console.log('理念ページの設定を適用しました（topを0に設定し、padding-topを追加）');
         }
         
         if (!header || navItems.length === 0) {
